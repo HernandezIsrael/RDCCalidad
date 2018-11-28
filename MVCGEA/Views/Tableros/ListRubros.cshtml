@@ -1,0 +1,130 @@
+﻿
+<div class="card ps-child" id="card">
+    <div class="card-header card-header-icon" data-background-color="green">
+        <i class="material-icons">&#xE894;</i>
+    </div>
+    <div class="card-content ps-child" id="cardcontent">
+        <h4 class="card-title">
+            Movimientos
+        </h4>
+        <div class="toolbar">
+
+
+        </div>
+        <div id="mate" class="material-datatables ps-child">
+
+            <table id="datatables3" class="table ps-child table-hover">
+                <thead class="text-danger">
+                    <tr>
+                        <th style="width:50px;">#</th>
+                        <th style="width:80px;">Codigo</th>
+                        <th style="width:250px;">Rubro</th>
+                        <th style="width:150px;">Financiamiento</th>
+                        <th style="width:100px;">Ejercido</th>
+                        <th style="width:100px;">Diferencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.ListRu)
+                    {
+                        <tr>
+                            <td>#</td>
+                            <td>@item.Codigo_Rubro</td>
+                            <td>@item.Rubro</td>
+                            <td>@string.Format("{0:c}",item.Total)</td>
+                            <td>@string.Format("{0:c}",item.Gastado)</td>
+                            <td>@string.Format("{0:c}",item.DIF)</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th style="text-align:right">Total:</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#datatables3').DataTable({
+            "order": [[1, "desc"]],
+            "scrollY": 350,
+            "scrollX": true,
+            "pagingType": "full_numbers",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "Todos"]
+            ],
+
+            responsive: false,
+            language: {
+                search: "_INPUT_",
+                searchPlaceholder: "Buscar ...",
+                "paginate": {
+                    "previous": "Anterior",
+                    "next": "Siguiente",
+                    "first": "Inicial",
+                    "last": "Ultimo",
+
+                },
+                "lengthMenu": "Mostrando _MENU_ registros",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+            },
+            "footerCallback": function (row, data, start, end, display) {
+                var api = this.api(), data;
+
+                // Remove the formatting to get integer data for summation
+                var intVal = function (i) {
+                    return typeof i === 'string' ?
+                        i.replace(/[\$,]/g, '') * 1 :
+                        typeof i === 'number' ?
+                        i : 0;
+                };
+
+                // Total over all pages
+                total = api
+                    .column(3)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+              
+
+                // Update footer
+                $(api.column(3).footer()).html(
+                    '$' + total.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+                );
+               
+            }
+
+        });
+
+
+        var table3 = $('#datatables3').DataTable();
+
+
+        $('.card .material-datatables label').addClass('form-group');
+
+
+
+    });
+
+
+
+</script>
+
+

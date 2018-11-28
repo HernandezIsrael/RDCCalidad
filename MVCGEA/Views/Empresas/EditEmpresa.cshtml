@@ -1,0 +1,475 @@
+﻿@model Model.Empresas
+@{
+    ViewBag.Title = "EditEmpresa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts{
+    <script src="~/scripts/jquery.unobtrusive-ajax.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#datatables').DataTable({
+                "order": [[1, "asc"]],
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "Todos"]
+                ],
+                responsive: false,
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Buscar ...",
+                    "paginate": {
+                        "previous": "Anterior",
+                        "next": "Siguiente",
+                        "first": "Inicial",
+                        "last": "Ultimo",
+
+                    },
+                    "lengthMenu": "Mostrando _MENU_ registros",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                }
+
+            });
+
+
+            var table = $('#datatables').DataTable();
+
+
+
+
+
+            $('#datatables1').DataTable({
+                "order": [[1, "asc"]],
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "Todos"]
+                ],
+                responsive: false,
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Buscar ...",
+                    "paginate": {
+                        "previous": "Anterior",
+                        "next": "Siguiente",
+                        "first": "Inicial",
+                        "last": "Ultimo",
+
+                    },
+                    "lengthMenu": "Mostrando _MENU_ registros",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                }
+
+            });
+
+
+            var table1 = $('#datatables1').DataTable();
+
+
+
+
+            $('.card .material-datatables label').addClass('form-group');
+
+
+            $("#Id_Pais").change(function () {
+                $("#Id_Estado").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetState")',
+
+                    dataType: 'json',
+
+                    data: { id: $("#Id_Pais").val() },
+                    success: function (states) {
+                        $.each(states, function (i, state) {
+
+
+                            $("#Id_Estado").append('<option value="' + state.Value + '">' +
+                                 state.Text + '</option>');
+
+
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve country states.' + ex);
+                    }
+                });
+                return false;
+            });
+
+            var bol = '@ViewBag.showError';
+            if (bol != 'False') {
+                swal({
+
+                    type: 'success',
+                    title: 'Información Guardada',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+
+        });
+
+
+
+
+        function LlamrC(v,b) {
+
+            var laURLDeLaVista = '@Url.Action("EditCuenta", "Empresas")';
+            $.ajax({
+                cache: false,
+                async: true,
+                type: "GET",
+                url: laURLDeLaVista,
+                data: { id: v,idempresa:b },
+                success: function (response) {
+                    $('#resultado').html('');
+                    $('#resultado').html(response);
+                }
+            });
+        }
+        function LlamrCb(v,b) {
+
+            var laURLDeLaVista = '@Url.Action("EditClabe", "Empresas")';
+            $.ajax({
+                cache: false,
+                async: true,
+                type: "GET",
+                url: laURLDeLaVista,
+                data: { id: v,idempresa:b },
+                success: function (response) {
+                    $('#resultado').html('');
+                    $('#resultado').html(response);
+                }
+            });
+        }
+        function PopupOnClosed() {
+
+            $('#myModal').modal('hide');
+            
+            setTimeout(function () { window.location.href = '@Url.Action("EditEmpresa", "Empresas")'; }, 400);
+
+        }
+
+        function onBegin(respuesta) {
+            console.log(respuesta + 'Bg');
+        }
+        function onSuccess(respuesta) {
+            console.log(respuesta + 'Sc');
+        }
+        function onComplete(respuesta) {
+            console.log(respuesta + 'Cm');
+        }
+        function onFailure(respuesta) {
+            console.log(respuesta + 'Fl');
+        }
+        function OnChangeValue(s, e) {
+            alert(s.Value)
+        }
+    </script>
+}
+
+<div class="col-sm-10 col-md-offset-1">
+    <div class="card">
+        <div class="card-header card-header-icon" data-background-color="rose" style="background:#159D93">
+            <i class="material-icons">receipt</i>
+        </div>
+        <div class="card-content">
+            <h4 class="card-title">Empresa:</h4>
+
+            @using (Html.BeginForm("Save", "Empresas", FormMethod.Post, new { id = "frm-Empresa" }))
+            {
+                @Html.HiddenFor(x => x.Id_Empresa)
+
+
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">business</i>
+                    </span>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for=@Model.Razon_Social>Razón Social:</label>
+                        @Html.TextBoxFor(x => x.Razon_Social, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Razon_Social, null, new { @class = "badge badge-danger" })
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">code</i>
+                    </span>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for=@Model.RFC>R.F.C:</label>
+                        @Html.TextBoxFor(x => x.RFC, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.RFC, null, new { @class = "badge badge-danger" })
+                    </div>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">place</i>
+                    </span>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for=@Model.CP>C.P:</label>
+                        @Html.TextBoxFor(x => x.CP, new { @class = "form-control"})
+                        @Html.ValidationMessageFor(x => x.CP, null, new { @class = "badge badge-danger" })
+                    </div>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">streetview</i>
+                    </span>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for=@Model.Calle>Calle:</label>
+                        @Html.TextBoxFor(x => x.Calle, new { @class = "form-control"})
+                        @Html.ValidationMessageFor(x => x.Calle, null, new { @class = "badge badge-danger" })
+                    </div>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">zoom_out_map</i>
+                    </span>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for=@Model.Municipio>Municipio:</label>
+                        @Html.TextBoxFor(x => x.Municipio, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Municipio, null, new { @class = "badge badge-danger" })
+                    </div>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">home</i>
+                    </span>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for=@Model.NoInterior>No Interior:</label>
+                        @Html.TextBoxFor(x => x.NoInterior, new { @class = "form-control"})
+                    </div>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">home</i>
+                    </span>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for=@Model.NoExterior>No Exterior:</label>
+                        @Html.TextBoxFor(x => x.NoExterior, new { @class = "form-control"})
+                        @Html.ValidationMessageFor(x => x.NoExterior, null, new { @class = "badge badge-danger" })
+                    </div>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">landscape</i>
+                    </span>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for=@Model.Colonia>Colonia:</label>
+                        @Html.TextBoxFor(x => x.Colonia, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Colonia, null, new { @class = "badge badge-danger" })
+                    </div>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">map</i>
+                    </span>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for=@Model.Id_Pais>País:</label>
+                        @if (Model.Id_Empresa > 0)
+                        {
+                            @Html.DropDownListFor(x => x.Id_Pais, new SelectList(ViewBag.ListPais, "Id_Pais", "Pais", Model.Id_Pais), new { @class = "form-control" })
+                        }
+                        else
+                        {
+                            @Html.DropDownListFor(x => x.Id_Pais, new SelectList(ViewBag.ListPais, "Id_Pais", "Pais", -1), new { @class = "form-control" })
+                        }
+                        @Html.ValidationMessageFor(x => x.Id_Pais, null, new { @class = "badge badge-danger" })
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">location_city</i>
+                    </span>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for=@Model.Id_Estado>Estado:</label>
+                        @if (Model.Id_Empresa > 0)
+                        {
+                            @Html.DropDownListFor(x => x.Id_Estado, new SelectList(ViewBag.ListEstados, "Id_Estado", "Estado", Model.Id_Estado), new { @class = "form-control" })
+                        }
+                        else
+                        {
+                            @Html.DropDownListFor(x => x.Id_Estado, new SelectList(string.Empty, "Id_Estado", "Estado", -1), new { @class = "form-control" })
+                        }
+                        @Html.ValidationMessageFor(x => x.Id_Estado, null, new { @class = "badge badge-danger" })
+                    </div>
+                </div>
+
+
+
+
+
+
+              
+
+                
+                <button type="submit" class="btn btn-info btn-round" style="background:#159D93">
+                    <i class="material-icons">save</i> Guardar
+                </button>
+
+
+            }
+            <div>
+                @Html.ActionLink("Regresar", "LibEmpresas")
+            </div>
+
+        </div>
+    </div>
+    <br />
+    @if (Model.Id_Empresa > 0) { 
+    <div class="card">
+        <div class="card-header card-header-icon" data-background-color="rose" style="background:#159D93">
+            <i class="material-icons">list</i>
+
+        </div>
+        <div class="card-content">
+            <h4 class="card-title">
+                No Cuentas
+            </h4>
+            <div class="toolbar">
+                <!--        Here you can write extra buttons/actions for the toolbar              -->
+            </div>
+            <div class="material-datatables">
+                <table id="datatables" class="table">
+                    <thead class="text-danger">
+                        <tr>
+                            <td>
+                                <a href="#" onclick="LlamrC(0,@Model.Id_Empresa)" class="btn btn-simple btn-success btn-icon new" data-toggle="modal" data-target="#myModal">
+                                   Nuevo
+                                </a>
+                            </td>
+                            <td>Banco</td>
+                            <td>Proyecto</td>
+                            <td>No Cuenta</td>
+                            <td>Moneda</td>
+                            <td>Activo</td>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.ListCuentas)
+                        {
+                            <tr>
+                                <td class="text-primary">
+
+                                    <a href="#" onclick="LlamrC(0,@Model.Id_Empresa)" class="btn btn-simple btn-success btn-icon new" data-toggle="modal" data-target="#myModal">
+                                        <i class="material-icons" rel="tooltip" data-placement="right" title="Agregar">add</i>
+                                    </a>
+                                    <a href="#" onclick="LlamrC(@item.Id_N_Cuenta,@Model.Id_Empresa)" class="btn btn-simple btn-warning btn-icon edit" data-toggle="modal" data-target="#myModal">
+                                        <i class="material-icons" rel="tooltip" data-placement="right" title="Modificar">create</i>
+
+                                    </a>
+                                </td>
+                                <td>@item.Ca_Bancos.Banco</td>
+                                <td>@item.Proyectos.Proyecto</td>
+                                <td>@item.N_Cuenta</td>
+                                <td>@item.Ca_Moneda.Moneda</td>
+                                <td>
+
+                                    <div class="togglebutton">
+                                        <label>
+                                            <input type="checkbox" checked=@item.Activo disabled="disabled">
+                                        </label>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="card">
+        <div class="card-header card-header-icon" data-background-color="rose" style="background:#159D93">
+            <i class="material-icons">list</i>
+
+        </div>
+        <div class="card-content">
+            <h4 class="card-title">
+                No Clabes
+            </h4>
+            <div class="toolbar">
+                <!--        Here you can write extra buttons/actions for the toolbar              -->
+            </div>
+            <div class="material-datatables">
+                <table id="datatables1" class="table">
+                    <thead class="text-danger">
+                        <tr>
+                            <td>
+                                <a href="#" onclick="LlamrCb(0,@Model.Id_Empresa)" class="btn btn-simple btn-success btn-icon new" data-toggle="modal" data-target="#myModal">
+                                   Nuevo
+                                </a>
+                            </td>
+                            <td>Banco</td>
+                            <td>Proyecto</td>
+                            <td>No Clabe</td>
+                            <td>Moneda</td>
+                            <td>Activo</td>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.ListClabes)
+                        {
+                            <tr>
+                                <td class="text-primary">
+
+                                    <a href="#" onclick="LlamrCb(0,@Model.Id_Empresa)" class="btn btn-simple btn-success btn-icon new" data-toggle="modal" data-target="#myModal">
+                                        <i class="material-icons" rel="tooltip" data-placement="right" title="Agregar">add</i>
+                                    </a>
+                                    <a href="#" onclick="LlamrCb(@item.Id_Clabe,@Model.Id_Empresa)" class="btn btn-simple btn-warning btn-icon edit" data-toggle="modal" data-target="#myModal">
+                                        <i class="material-icons" rel="tooltip" data-placement="right" title="Modificar">create</i>
+
+                                    </a>
+                                </td>
+                                <td>@item.Ca_Bancos.Banco</td>
+                                <td>@item.Proyectos.Proyecto</td>
+                                <td>@item.N_Clabe</td>
+                                <td>@item.Ca_Moneda.Moneda</td>
+                                <td>
+
+                                    <div class="togglebutton">
+                                        <label>
+                                            <input type="checkbox" checked=@item.Activo disabled="disabled">
+                                        </label>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    }
+</div>
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="card " role="dialog">
+            <div class="card-header card-header-icon" data-background-color="rose" style="background:#159D93">
+                <i class="material-icons">monetization_on</i>
+            </div>
+
+            <div class="card-content" id="resultado">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+

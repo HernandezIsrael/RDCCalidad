@@ -1,0 +1,99 @@
+﻿@model Model.Menu
+
+@using (Ajax.BeginForm("Save", "Menu", new AjaxOptions()
+{
+    HttpMethod = "POST",
+    UpdateTargetId = "resultado",
+    InsertionMode = InsertionMode.Replace,
+    OnBegin = "onBegin",
+    OnComplete = "onComplete",
+    OnSuccess = "onSuccess",
+    OnFailure = "onFailure" 
+
+
+}))
+{
+    @Html.HiddenFor(x => x.Id_Menu)
+    @Html.HiddenFor(x=> x.Id_Usuario)
+    @Html.HiddenFor(x => x.Id_Tipo_Usuario)
+    <h4 class="card-title">Menu</h4>    
+        <div class="input-group">
+            <span class="input-group-addon">
+                <i class="material-icons">group_work</i>
+            </span>
+            <div class="form-group">
+                <label for=@Model.Id_Menu_Grupo>Grupo</label>
+                @*@Html.TextBoxFor(x => x.Id_Menu_Grupo, new { @class = "form-control", @placeholder = "Grupo" })
+                @Html.ValidationMessageFor(x => x.Id_Menu_Grupo, null, new { @class = "badge badge-danger" })*@
+                @if (Model.Id_Menu > 0)
+                {  @Html.DropDownListFor(x => x.Id_Menu_Grupo, new SelectList(ViewBag.ListaGrupo, "Id_Menu_Grupo", "Grupo", Model.Id_Menu_Grupo), new { @class = "form-control" })
+                }
+                else
+                {
+                    @Html.DropDownListFor(x => x.Id_Menu_Grupo, new SelectList(ViewBag.ListaGrupo, "Id_Menu_Grupo", "Grupo", -1), new { @class = "form-control" })
+                }
+            </div>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">
+                <i class="material-icons">language</i>
+            </span>
+            <div class="form-group">
+
+                @Html.TextBoxFor(x => x.Controlador, new { @class = "form-control", @placeholder = "Controlador" })
+                @Html.ValidationMessageFor(x => x.Controlador, null, new { @class = "badge badge-danger" })
+
+            </div>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">
+                <i class="material-icons">settings_system_daydream</i>
+            </span>
+            <div class="form-group">
+
+                @Html.TextBoxFor(x => x.Menu1, new { @class = "form-control", @placeholder = "Menu" })
+                @Html.ValidationMessageFor(x => x.Menu1, null, new { @class = "badge badge-danger" })
+
+            </div>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">
+                <i class="material-icons">dns</i>
+            </span>
+            <div class="form-group">
+
+                @Html.TextBoxFor(x => x.URL, new { @class = "form-control", @placeholder = "Url" })
+                @Html.ValidationMessageFor(x => x.URL, null, new { @class = "badge badge-danger" })
+
+            </div>
+        </div>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    Activo:
+                </span>
+                <div class="form-group">
+
+                    <div class="togglebutton">
+                        <label>
+                            @Html.CheckBoxFor(x => x.Activo)
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="material-icons">clear_all</i>
+                </span>
+                <div class="form-group">
+
+                    @Html.TextBoxFor(x => x.Orden, new { @class = "form-control", @placeholder = "Orden" })
+                    @Html.ValidationMessageFor(x => x.Orden, null, new { @class = "badge badge-danger" })
+
+                </div>
+            </div>
+            <button type="submit" class="btn btn-fill btn-rose">Guardar</button>
+        
+        
+}
+    

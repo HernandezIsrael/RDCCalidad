@@ -1,0 +1,21 @@
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" Version="3.3" Fecha="2017-10-05T12:27:07" Sello="gRmPh/I+EWzhxGchpumZF+5hiUe9mCBNHNdisnJVVQ+J9YppLFkPFtgBBpuATkbNdXF88FqYnnmDc6xNK6yD9hZFraQZgmHqRQ8OV/pipHNn2cXlTvrmny8yVhnj1dg9SpK0FDCccff5NKrBBezF6kZZNu2Nja/XFU8+S4G2aXE=" FormaPago="03" NoCertificado="00001000000305138860" Certificado="MIIEbzCCA1egAwIBAgIUMDAwMDEwMDAwMDAzMDUxMzg4NjAwDQYJKoZIhvcNAQEFBQAwggGKMTgwNgYDVQQDDC9BLkMuIGRlbCBTZXJ2aWNpbyBkZSBBZG1pbmlzdHJhY2nDs24gVHJpYnV0YXJpYTEvMC0GA1UECgwmU2VydmljaW8gZGUgQWRtaW5pc3RyYWNpw7NuIFRyaWJ1dGFyaWExODA2BgNVBAsML0FkbWluaXN0cmFjacOzbiBkZSBTZWd1cmlkYWQgZGUgbGEgSW5mb3JtYWNpw7NuMR8wHQYJKoZIhvcNAQkBFhBhY29kc0BzYXQuZ29iLm14MSYwJAYDVQQJDB1Bdi4gSGlkYWxnbyA3NywgQ29sLiBHdWVycmVybzEOMAwGA1UEEQwFMDYzMDAxCzAJBgNVBAYTAk1YMRkwFwYDVQQIDBBEaXN0cml0byBGZWRlcmFsMRQwEgYDVQQHDAtDdWF1aHTDqW1vYzEVMBMGA1UELRMMU0FUOTcwNzAxTk4zMTUwMwYJKoZIhvcNAQkCDCZSZXNwb25zYWJsZTogQ2xhdWRpYSBDb3ZhcnJ1YmlhcyBPY2hvYTAeFw0xNDA5MTkxOTAzMjJaFw0xODA5MTkxOTAzMjJaMIG7MRswGQYDVQQDExJBSVNZU1RFTVMgU0EgREUgQ1YxGzAZBgNVBCkTEkFJU1lTVEVNUyBTQSBERSBDVjEbMBkGA1UEChMSQUlTWVNURU1TIFNBIERFIENWMSUwIwYDVQQtExxBSVMxMzAyMDRTNzMgLyBQRU1BODQwOTIzQkc3MR4wHAYDVQQFExUgLyBQRU1BODQwOTIzSERGUlJSMDkxGzAZBgNVBAsTEkFJU1lTVEVNUyBTQSBERSBDVjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAofcS9HYDPbfe9y72/QAnzcKWz/ndxCBenCY9LmjpMRdYroROJSLgYxsNK3IduHem7GRvcrq0ow5hoD9BGJX7I9gcS2rBUXL5pXUNmjYcsDtffhcpbiEPw9zRqeyOmKaOiDw2eXBOoea+6BXynAHssRLttTrCwmocAq92knXp7tsCAwEAAaMdMBswDAYDVR0TAQH/BAIwADALBgNVHQ8EBAMCBsAwDQYJKoZIhvcNAQEFBQADggEBAFWASFpCaPiLsEG37HsW1SZN0G29QAKHlgVATkTXU5TL6WsWSGXcWA/+X8JD6OPSicAcXiLJ6+ymZwCQuCQ7L9OyaLQAquL9+Kg1RZXCCyrPQQtGOPBm64ciXbWWmG1TB/tKopITI68j47zI/FOhzO35CxLiKhekfXcaOJS+KcJXO/a3o0dqTRttLdh9VNLEy0LHllsJ7ecpXFyYXXqkSujAA7A22OtJ6u4aZRt7GIF02wIqBZl4cIL6jHA4e8boRFqsDspN2+1XhF3QFIAFOB04QRLff33o3TGDp4Y4yLkERJtiCOIfvaeq7XOO5JCr2JcxoozPAXxSzXoi8OaHpSg=" SubTotal="176897.00" Moneda="MXN" TipoCambio="1" Total="205200.52" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="31350">
+  <cfdi:Emisor Rfc="AIS130204S73" Nombre="AISYSTEMS, S.A. DE C.V." RegimenFiscal="601" />
+  <cfdi:Receptor Rfc="DCR040113VE4" Nombre="DISTRIBUIDORA Y COMERCIALIZADORA ROTMA, S.A. DE C.V." UsoCFDI="G01" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ="92121704" Cantidad="1.000000" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion="PAGO DE SERVICIOS CORRESPONDIENTES AL MONITOREO Y DETECCION DE FALLAS DEL PROYECTO DE CAMARAS DE VIDEO VIGILANCIA DEL ESTADO DE TAMAULIPAS, PROYECTO MTTO. TAMAULIPAS, FT" ValorUnitario="176897.00" Importe="176897.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="176897.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="28303.52" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="28303.52">
+    <cfdi:Traslados>
+      <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="28303.52" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="9c503da8-75d0-44c0-8966-ceda4b168787" FechaTimbrado="2017-10-05T12:28:19" RfcProvCertif="FID080111867" SelloCFD="gRmPh/I+EWzhxGchpumZF+5hiUe9mCBNHNdisnJVVQ+J9YppLFkPFtgBBpuATkbNdXF88FqYnnmDc6xNK6yD9hZFraQZgmHqRQ8OV/pipHNn2cXlTvrmny8yVhnj1dg9SpK0FDCccff5NKrBBezF6kZZNu2Nja/XFU8+S4G2aXE=" NoCertificadoSAT="00001000000405112669" SelloSAT="T8dytWdLemtlg1Bt8kcvhRAlsvdHfvJw1MzeJsXTwdvDUwEKXBQlBbf6nyDlTxhZxfSkyYDBm1qylLstEXGHKIDUOUui/OzIHkLcyRfvmgyJJJJqJfc4eUI5EvjfoqC5NIGkmWmTUPBvuw1dH+UTtKWJXQLuuqEA57xMv+zp/4bVCprjf3ekTK9RBSBH47kh4LPgE7cCzjHRnj8endYYUehOAdMtns3OEoTCqbLVwdiME8v4rS2lBZOmYZ7Xg6OiiYpkFTapRUpBHaAHlOENWEa5VbzINErd8b36ZjGeGPEYgI5SOlwgrtqZtGIrcuOzIiP9m+mXSNOo5lJVBR6niw==" />
+  </cfdi:Complemento>
+</cfdi:Comprobante>

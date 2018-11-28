@@ -1,0 +1,1037 @@
+﻿@model Model.Pagos
+@{
+    ViewBag.Title = "EditNurc";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-sm-10 col-md-offset-1">
+    <div class="card">
+        <div class="card-header card-header-icon" data-background-color="rose" style="background:#159D93">
+            <i class="material-icons">receipt</i>
+        </div>
+        <div class="card-content">
+            <h4 class="card-title">N.U.R.C @(Model.Id_Pago > 0 ? ":" + Model.Id_Pago.ToString() : "")</h4>
+
+          
+            @using (Html.BeginForm("Save", "NIngresos", FormMethod.Post, new { id = "frm-nurc" }))
+            {
+                @Html.HiddenFor(x => x.Id_Pago)
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">card_giftcard</i>
+                    </span>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for=@Model.N_Cotizacion>No.Orden de compra:</label>
+                        @Html.TextBoxFor(x => x.N_Cotizacion, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.N_Cotizacion, null, new { @class = "badge badge-danger" })
+                    </div>
+                </div>
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">business</i>
+                    </span>
+                    <div class="form-group">
+                        <label class="control-label" for=@Model.Id_Empresa>Empresa (Emisor):</label>
+                        @Html.DropDownListFor(x => x.Id_Empresa, new SelectList(ViewBag.Empresa, "Id", "Texto", -1), new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">build</i>
+                    </span>
+                    <div class="form-group">
+                        <label class="control-label" for=@Model.Id_Proyecto>Proyecto:</label>
+
+                        @Html.DropDownListFor(x => x.Id_Proyecto, new SelectList(ViewBag.Proyectos, "Id", "Texto", Model.Id_Proyecto), new { @class = "form-control" })
+
+                        @Html.ValidationMessageFor(x => x.Id_Proyecto, null, new { @class = "badge badge-danger" })
+
+                    </div>
+                </div>
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">list</i>
+                    </span>
+                    <div class="form-group">
+                        <label class="control-label" for=@Model.Id_Rubro>Rubro:</label>
+
+                        @Html.DropDownListFor(x => x.Id_Rubro, new SelectList(ViewBag.Rubros, "Id", "Texto", Model.Id_Rubro), new { @class = "form-control" })
+
+                        @Html.ValidationMessageFor(x => x.Id_Rubro, null, new { @class = "badge badge-danger" })
+
+                    </div>
+                </div>
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">assignment_ind</i>
+                    </span>
+                    <div class="form-group">
+                        <label class="control-label" for=@Model.Id_Solicitado_por>Solicitado por</label>
+                        @Html.DropDownListFor(x => x.Id_Solicitado_por, new SelectList(ViewBag.Solicitantes, "Id", "Texto", Model.Id_Solicitado_por), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Id_Solicitado_por, null, new { @class = "badge badge-danger" })
+                    </div>
+                </div>
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">store</i>
+                    </span>
+                    <div class="form-group">
+                        <label class="control-label" for=@Model.Id_Proveedor>Proveedor (Receptor):</label>
+                        @Html.DropDownListFor(x => x.Id_Proveedor, new SelectList(ViewBag.Proveedores, "Id", "Texto", Model.Id_Proveedor), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Id_Proveedor, null, new { @class = "badge badge-danger" })
+                    </div>
+                </div>
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">view_list</i>
+                    </span>
+                    <div class="form-group">
+                        <label class="control-label" for=@Model.Id_Tipo_Pago>Tipo de pago</label>
+                        @Html.DropDownListFor(x => x.Id_Tipo_Pago, new SelectList(ViewBag.TipoPago, "Id", "Texto", Model.Id_Tipo_Pago), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Id_Tipo_Pago, null, new { @class = "badge badge-danger" })
+                    </div>
+                </div>
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">attach_money</i>
+                    </span>
+                    <div class="form-group">
+                        <label class="control-label" for=@Model.Importe_Total>Importe bruto:</label>
+                        @Html.TextBoxFor(x => x.Importe_Total, "{0:0.00}", new { @class = "form-control", @type = "number", @step = 0.01 })
+                        @Html.ValidationMessageFor(x => x.Importe_Total, null, new { @class = "badge badge-danger" })
+                    </div>
+                </div>
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">attach_money</i>
+                    </span>
+                    <div class="form-group">
+                        <label class="control-label" for=@Model.IVA>I.V.A:</label>
+                        @Html.TextBoxFor(x => x.IVA, "{0:0.00}", new { @class = "form-control", @type = "number", @step = 0.01 })
+                        @Html.ValidationMessageFor(x => x.IVA, null, new { @class = "badge badge-danger" })
+                    </div>
+                </div>
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">attach_money</i>
+                    </span>
+                    <div class="form-group ">
+                        <label class="control-label" for=@Model.Retenciones>Rent. I.V.A:</label>
+                        @Html.TextBoxFor(x => x.Retenciones, "{0:0.00}", new { @class = "form-control", @type = "number", @step = 0.01 })
+                        @Html.ValidationMessageFor(x => x.Retenciones, null, new { @class = "badge badge-danger" })
+                    </div>
+                </div>
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">attach_money</i>
+                    </span>
+                    <div class="form-group ">
+                        <label class="control-label" for=@Model.ISR>I.S.R:</label>
+                        @Html.TextBoxFor(x => x.ISR, "{0:0.00}", new { @class = "form-control", @type = "number", @step = 0.01 })
+                        @Html.ValidationMessageFor(x => x.ISR, null, new { @class = "badge badge-danger" })
+                    </div>
+                </div>
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">attach_money</i>
+                    </span>
+                    <div class="form-group ">
+                        <label class="control-label" for=@Model.Otros>Otros:</label>
+                        @Html.TextBoxFor(x => x.Otros, "{0:0.00}", new { @class = "form-control", @type = "number", @step = 0.01 })
+                        @Html.ValidationMessageFor(x => x.Otros, null, new { @class = "badge badge-danger" })
+                    </div>
+                </div>
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">attach_money</i>
+                    </span>
+                    <div class="form-group ">
+                        <label class="control-label">Total:</label>
+                        <input id="Total" class="form-control" name="Total" type="number" step="0.01" disabled="disabled" />
+                    </div>
+                </div>
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">money</i>
+                    </span>
+                    <div class="form-group ">
+                        <label class="control-label" for=@Model.Id_Moneda>Moneda:</label>
+                        @Html.DropDownListFor(x => x.Id_Moneda, new SelectList(ViewBag.Moneda, "Id", "Texto", 1), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Id_Moneda, null, new { @class = "badge badge-danger" })
+                    </div>
+                </div>
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">local_atm</i>
+                    </span>
+                    <div class="form-group ">
+                        <label class="control-label" for=@Model.Id_Banco>Banco de Proveedor (Receptor):</label>
+                        @Html.DropDownListFor(x => x.Id_Banco, new SelectList(ViewBag.BancoP, "Id", "Texto", Model.Id_Banco), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Id_Banco, null, new { @class = "badge badge-danger" })
+                    </div>
+                </div>
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">code</i>
+                    </span>
+                    <div class="form-group ">
+                        <label class="control-label" for=@Model.Id_Clabe>Clabe de Proveedor (Receptor):</label>
+                        @Html.DropDownListFor(x => x.Id_Clabe, new SelectList(ViewBag.ClabeP, "Id", "Texto", Model.Id_Clabe), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Id_Clabe, null, new { @class = "badge badge-danger" })
+                    </div>
+                </div>
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">payment</i>
+                    </span>
+                    <div class="form-group ">
+                        <label class="control-label" for=@Model.Id_N_Cuenta>No Cuenta de Proveedor (Receptor):</label>
+                        @Html.DropDownListFor(x => x.Id_N_Cuenta, new SelectList(ViewBag.CuentaP, "Id", "Texto", Model.Id_N_Cuenta), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Id_N_Cuenta, null, new { @class = "badge badge-danger" })
+                    </div>
+                </div>
+
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">local_atm</i>
+                    </span>
+                    <div class="form-group ">
+                        <label class="control-label" for=@Model.Id_Banco>Banco de Empresa (Emisor):</label>
+                        @Html.DropDownListFor(x => x.Id_Banco_Empresa, new SelectList(ViewBag.BancosE, "Id", "Texto", Model.Id_Banco_Empresa), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Id_Banco_Empresa, null, new { @class = "badge badge-danger" })
+                    </div>
+                </div>
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">code</i>
+                    </span>
+                    <div class="form-group ">
+                        <label class="control-label" for=@Model.Id_Clabe>Clabe de Empresa (Emisor):</label>
+                        @Html.DropDownListFor(x => x.Id_Clabe_Empresa, new SelectList(ViewBag.ClabeE, "Id", "Texto", Model.Id_Clabe_Empresa), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Id_Clabe_Empresa, null, new { @class = "badge badge-danger" })
+                    </div>
+                </div>
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">payment</i>
+                    </span>
+                    <div class="form-group ">
+                        <label class="control-label" for=@Model.Id_N_Cuenta>No Cuenta de Empresa (Emisor):</label>
+                        @Html.DropDownListFor(x => x.Id_N_Cuenta_Empresa, new SelectList(ViewBag.CuentaE, "Id", "Texto", Model.Id_N_Cuenta_Empresa), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Id_N_Cuenta_Empresa, null, new { @class = "badge badge-danger" })
+                    </div>
+                </div>
+
+
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">date_range</i>
+                    </span>
+                    <div class="form-group">
+                        <label class="control-label" for=@Model.F_Compromiso_Pago>Fecha compromiso de pago:</label>
+                        @Html.TextBoxFor(x => x.F_Compromiso_Pago, new { @class = "form-control ", @type = "date", @Value = Model.F_Compromiso_Pago.HasValue ? Model.F_Compromiso_Pago.Value.ToString("yyyy-MM-dd") : "" })
+                    </div>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">vpn_key</i>
+                    </span>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for=@Model.Folio_Fiscal>Folio Fiscal:</label>
+                        @Html.TextBoxFor(x => x.Folio_Fiscal, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">date_range</i>
+                    </span>
+                    <div class="form-group">
+                        <label class="control-label" for=@Model.F_Emision_Factura>Fecha de emision de la factura:</label>
+                        @Html.TextBoxFor(x => x.F_Emision_Factura, new { @class = "form-control ", @type = "date", @Value = Model.F_Emision_Factura.HasValue ? Model.F_Emision_Factura.Value.ToString("yyyy-MM-dd") : "" })
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        Anticipo:
+                    </span>
+                    <div class="form-group">
+
+                        <div class="togglebutton">
+                            <label>
+                                @Html.CheckBoxFor(x => x.Anticipo)
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">date_range</i>
+                    </span>
+                    <div class="form-group">
+                        <label class="control-label" for=@Model.Fecha_Anticipo_Factura>Fecha de entrega de factura por anticipo:</label>
+                        @Html.TextBoxFor(x => x.Fecha_Anticipo_Factura, new { @class = "form-control ", @type = "date", @Value = Model.Fecha_Anticipo_Factura.HasValue ? Model.Fecha_Anticipo_Factura.Value.ToString("yyyy-MM-dd") : "" })
+                    </div>
+                </div>
+                @*<div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">folder_shared</i>
+                    </span>
+                    <div class="form-group">
+                        <label class="control-label" for=@Model.Id_Contrato>Contrato:</label>
+                        @Html.DropDownListFor(x => x.Id_Contrato, new SelectList(string.Empty, "Id", "Contrato", Model.Id_Contrato), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Id_Contrato, null, new { @class = "badge badge-danger" })
+                    </div>
+                </div>*@
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">book</i>
+                    </span>
+                    <div class="form-group ">
+                        <label class="control-label" for="Id_Tipo_Documento">Tipo de documento:</label>
+                        @Html.DropDownList("Id_Tipo_Documento", new SelectList(ViewBag.Tipo, "Id", "Texto", -1), new { @class = "form-control" })
+                    </div>
+                </div>
+                <br />
+                <div>
+                    <input type="file" name="UploadFile" id="txtUploadFile" class="fileinput" />
+                </div>
+
+                <br />
+                <div id="Tdocos">
+
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">date_range</i>
+                    </span>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="Conceptos1">Concepto</label>
+
+                        <input type="text" id="Conceptos1" name="Conceptos1" class="form-control" />
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-info btn-round" id="btnconceptos" style="background:#159D93">
+                    <i class="material-icons">save</i> Agregar
+                </button>
+                <div id="GVConceptos">
+
+                </div>
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">book</i>
+                    </span>
+                    <div class="form-group ">
+                        <label class="control-label" for="Comentarios">COMENTARIOS:</label>
+                        @Html.TextAreaFor(x => x.Comentarios, new { @class = "form-control" })
+                    </div>
+                </div>
+
+
+
+
+                <button type="submit" class="btn btn-info btn-round" id="btnSave" name="btnSave" value="Save" style="background:#159D93">
+                    <i class="material-icons">save</i> Guardar
+                </button>
+                <button type="submit" class="btn btn-info btn-round" id="btnSave" name="btnSave" value="Send" style="background:#159D93">
+                    <i class="material-icons">save</i> Enviar
+                </button>
+                <br />
+                @Html.ActionLink("Regresar", "LibNIngresos")
+            }
+
+
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/scripts/EditNurc.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            LlamarConceptos();
+            LlamarDoctos();
+            Url = '@Url.Action("UploadHomeReport")' + '/' + '@Model.Id_Pago';
+            Subir(Url);
+            Url = '@Url.Action("GetProyectos")';
+            CallProjects(Url);
+            Url = '@Url.Action("GetRubros")';
+            CallRubros(Url);
+            Url = '@Url.Action("GetProveedores")';
+            CallProveedores(Url);
+            Url = '@Url.Action("GetBancos")';
+            CallBankP(Url);
+            Url = '@Url.Action("GetClabe")';
+            CallClabeP(Url);
+            Url = '@Url.Action("GetCuenta")';
+            CallCuentaP(Url);
+            Url = '@Url.Action("GetBancos")';
+            CallBankE(Url);
+            Url = '@Url.Action("GetClabe")';
+            CallClabeE(Url);
+            Url = '@Url.Action("GetCuenta")';
+            CallCuentaE(Url);
+            Url = '@Url.Action("SaveConcepto", "NIngresos")';
+            SendConptos(Url);
+            Sumatoria();
+            var bol = '@ViewBag.ShowError';
+            if (bol != 'False') {
+                var val = JSON.parse($.parseHTML('@ViewBag.Listmsj')[0].data);
+                $.each(val, function (i, state) {
+                    $.notify({
+                        icon: "warning",
+                        message: state.Mnj
+
+                    }, {
+                        type: 'danger',
+                        timer: 5000,
+                        placement: {
+                            from: 'top',
+                            align: 'center'
+                        }
+                    });
+
+                });
+
+            }
+        });
+
+        function LlamarConceptos() {
+            var Url = '@Url.Action("EditConceptos", "NIngresos")';
+            $.ajax({
+                cache: false,
+                async: true,
+                type: "GET",
+                url: Url,
+                data: { id: '@Model.Id_Pago' },
+                success: function (response) {
+                    $('#GVConceptos').html('');
+                    try {
+                        $('#GVConceptos').html(response);
+                    } catch (err) { }
+                }
+            });
+            return false;
+        }
+        function LlamarDoctos() {
+            var Url = '@Url.Action("FileUpload", "NIngresos")';
+            $.ajax({
+                cache: false,
+                async: true,
+                type: "GET",
+                url: Url,
+                data: { id: '@Model.Id_Pago' },
+                success: function (response) {
+                    $('#Tdocos').html('');
+                    try {
+                        $('#Tdocos').html(response);
+                    } catch (err) { }
+                }
+            });
+            return false;
+        }
+        function CallDel(V, P) {
+            Url = '@Url.Action("BorrarDocumento", "NIngresos")';
+            $.ajax({
+                cache: false,
+                async: true,
+                type: "GET",
+                url: Url,
+                data: { id: V, idPago: P },
+                success: function (response) {
+
+                    LlamarDoctos();
+
+                    location.href = '#Id_Tipo_Documento';
+                }
+            });
+            return false;
+        }
+        function DelConptos(c) {
+            Url = '@Url.Action("DelConcepto", "NIngresos")';
+            $.ajax({
+                cache: false,
+                async: true,
+                type: "GET",
+                url: Url,
+                data: { id: c },
+                success: function (response) {
+                    LlamarConceptos();
+                }
+            });
+            return false;
+        }
+        function downloadFile(v, s) {
+
+            window.location = "@Url.Action("Download", "NIngresos")" + "?name=" + v + "&name2=" + s;
+            return false;
+        }
+        function CallBankP(Url) {
+            $("#Id_Proveedor").change(function () {
+                $("#Id_Banco").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: Url,
+
+                    dataType: 'json',
+
+                    data: { id: $("#Id_Proveedor").val(), idmoneda: $("#Id_Moneda").val() },
+                    success: function (states) {
+
+                        $.each(states, function (i, state) {
+
+
+                            if (state.Value == -1) {
+                                $("#Id_Banco").append('<option selected = "selected" value="' + state.Value + '">' +
+                                 state.Text + '</option>');
+
+
+                            } else {
+                                $("#Id_Banco").append('<option value="' + state.Value + '">' +
+                                     state.Text + '</option>');
+                            }
+
+
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve .' + ex);
+                    }
+                });
+
+                return false;
+            });
+
+            $("#Id_Moneda").change(function () {
+                $("#Id_Banco").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: Url,
+
+                    dataType: 'json',
+
+                    data: { id: $("#Id_Proveedor").val(), idmoneda: $("#Id_Moneda").val() },
+                    success: function (states) {
+
+                        $.each(states, function (i, state) {
+
+
+                            if (state.Value == -1) {
+                                $("#Id_Banco").append('<option selected = "selected" value="' + state.Value + '">' +
+                                 state.Text + '</option>');
+
+
+                            } else {
+                                $("#Id_Banco").append('<option value="' + state.Value + '">' +
+                                     state.Text + '</option>');
+                            }
+
+
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve .' + ex);
+                    }
+                });
+
+                return false;
+            });
+
+        }
+        function CallClabeP(Url) {
+            $("#Id_Proveedor").change(function () {
+                $("#Id_Clabe").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: Url,
+
+                    dataType: 'json',
+
+                    data: { idbanco: $("#Id_Banco").val(), idproveedor: $("#Id_Proveedor").val(), idmoneda: $("#Id_Moneda").val() },
+                    success: function (states) {
+
+                        $.each(states, function (i, state) {
+
+
+                            if (state.Value == -1) {
+                                $("#Id_Clabe").append('<option selected = "selected" value="' + state.Value + '">' +
+                                 state.Text + '</option>');
+
+
+                            } else {
+                                $("#Id_Clabe").append('<option value="' + state.Value + '">' +
+                                     state.Text + '</option>');
+                            }
+
+
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve .' + ex);
+                    }
+                });
+
+                return false;
+            });
+            $("#Id_Banco").change(function () {
+                $("#Id_Clabe").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: Url,
+
+                    dataType: 'json',
+
+                    data: { idbanco: $("#Id_Banco").val(), idproveedor: $("#Id_Proveedor").val(), idmoneda: $("#Id_Moneda").val() },
+                    success: function (states) {
+
+                        $.each(states, function (i, state) {
+
+
+                            if (state.Value == -1) {
+                                $("#Id_Clabe").append('<option selected = "selected" value="' + state.Value + '">' +
+                                 state.Text + '</option>');
+
+
+                            } else {
+                                $("#Id_Clabe").append('<option value="' + state.Value + '">' +
+                                     state.Text + '</option>');
+                            }
+
+
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve .' + ex);
+                    }
+                });
+
+                return false;
+            });
+            $("#Id_Moneda").change(function () {
+                $("#Id_Clabe").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: Url,
+
+                    dataType: 'json',
+
+                    data: { idbanco: $("#Id_Banco").val(), idproveedor: $("#Id_Proveedor").val(), idmoneda: $("#Id_Moneda").val() },
+                    success: function (states) {
+
+                        $.each(states, function (i, state) {
+
+
+                            if (state.Value == -1) {
+                                $("#Id_Clabe").append('<option selected = "selected" value="' + state.Value + '">' +
+                                 state.Text + '</option>');
+
+
+                            } else {
+                                $("#Id_Clabe").append('<option value="' + state.Value + '">' +
+                                     state.Text + '</option>');
+                            }
+
+
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve .' + ex);
+                    }
+                });
+
+                return false;
+            });
+
+        }
+        function CallCuentaP(Url) {
+            $("#Id_Proveedor").change(function () {
+                $("#Id_N_Cuenta").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: Url,
+
+                    dataType: 'json',
+
+                    data: { idbanco: $("#Id_Banco").val(), idproveedor: $("#Id_Proveedor").val(), idmoneda: $("#Id_Moneda").val() },
+                    success: function (states) {
+
+                        $.each(states, function (i, state) {
+
+
+                            if (state.Value == -1) {
+                                $("#Id_N_Cuenta").append('<option selected = "selected" value="' + state.Value + '">' +
+                                 state.Text + '</option>');
+
+
+                            } else {
+                                $("#Id_N_Cuenta").append('<option value="' + state.Value + '">' +
+                                     state.Text + '</option>');
+                            }
+
+
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve .' + ex);
+                    }
+                });
+
+                return false;
+            });
+            $("#Id_Banco").change(function () {
+                $("#Id_N_Cuenta").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: Url,
+
+                    dataType: 'json',
+
+                    data: { idbanco: $("#Id_Banco").val(), idproveedor: $("#Id_Proveedor").val(), idmoneda: $("#Id_Moneda").val() },
+                    success: function (states) {
+
+                        $.each(states, function (i, state) {
+
+
+                            if (state.Value == -1) {
+                                $("#Id_N_Cuenta").append('<option selected = "selected" value="' + state.Value + '">' +
+                                 state.Text + '</option>');
+
+
+                            } else {
+                                $("#Id_N_Cuenta").append('<option value="' + state.Value + '">' +
+                                     state.Text + '</option>');
+                            }
+
+
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve .' + ex);
+                    }
+                });
+
+                return false;
+            });
+            $("#Id_Moneda").change(function () {
+                $("#Id_N_Cuenta").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: Url,
+
+                    dataType: 'json',
+
+                    data: { idbanco: $("#Id_Banco").val(), idproveedor: $("#Id_Proveedor").val(), idmoneda: $("#Id_Moneda").val() },
+                    success: function (states) {
+
+                        $.each(states, function (i, state) {
+
+
+                            if (state.Value == -1) {
+                                $("#Id_N_Cuenta").append('<option selected = "selected" value="' + state.Value + '">' +
+                                 state.Text + '</option>');
+
+
+                            } else {
+                                $("#Id_N_Cuenta").append('<option value="' + state.Value + '">' +
+                                     state.Text + '</option>');
+                            }
+
+
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve .' + ex);
+                    }
+                });
+
+                return false;
+            });
+
+        }
+        function CallBankE(Url) {
+            $("#Id_Empresa").change(function () {
+                $("#Id_Banco_Empresa").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: Url,
+
+                    dataType: 'json',
+
+                    data: { id: $("#Id_Empresa").val(), idmoneda: $("#Id_Moneda").val() },
+                    success: function (states) {
+
+                        $.each(states, function (i, state) {
+
+
+                            if (state.Value == -1) {
+                                $("#Id_Banco_Empresa").append('<option selected = "selected" value="' + state.Value + '">' +
+                                 state.Text + '</option>');
+
+
+                            } else {
+                                $("#Id_Banco_Empresa").append('<option value="' + state.Value + '">' +
+                                     state.Text + '</option>');
+                            }
+
+
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve .' + ex);
+                    }
+                });
+
+                return false;
+            });
+
+            $("#Id_Moneda").change(function () {
+                $("#Id_Banco_Empresa").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: Url,
+
+                    dataType: 'json',
+
+                    data: { id: $("#Id_Empresa").val(), idmoneda: $("#Id_Moneda").val() },
+                    success: function (states) {
+
+                        $.each(states, function (i, state) {
+
+
+                            if (state.Value == -1) {
+                                $("#Id_Banco_Empresa").append('<option selected = "selected" value="' + state.Value + '">' +
+                                 state.Text + '</option>');
+
+
+                            } else {
+                                $("#Id_Banco_Empresa").append('<option value="' + state.Value + '">' +
+                                     state.Text + '</option>');
+                            }
+
+
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve .' + ex);
+                    }
+                });
+
+                return false;
+            });
+
+        }
+        function CallClabeE(Url) {
+            $("#Id_Empresa").change(function () {
+                $("#Id_Clabe_Empresa").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: Url,
+
+                    dataType: 'json',
+
+                    data: { idbanco: $("#Id_Banco_Empresa").val(), idproveedor: $("#Id_Empresa").val(), idmoneda: $("#Id_Moneda").val() },
+                    success: function (states) {
+
+                        $.each(states, function (i, state) {
+
+
+                            if (state.Value == -1) {
+                                $("#Id_Clabe_Empresa").append('<option selected = "selected" value="' + state.Value + '">' +
+                                 state.Text + '</option>');
+
+
+                            } else {
+                                $("#Id_Clabe_Empresa").append('<option value="' + state.Value + '">' +
+                                     state.Text + '</option>');
+                            }
+
+
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve .' + ex);
+                    }
+                });
+
+                return false;
+            });
+            $("#Id_Banco_Empresa").change(function () {
+                $("#Id_Clabe_Empresa").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: Url,
+
+                    dataType: 'json',
+
+                    data: { idbanco: $("#Id_Banco_Empresa").val(), idproveedor: $("#Id_Empresa").val(), idmoneda: $("#Id_Moneda").val() },
+                    success: function (states) {
+
+                        $.each(states, function (i, state) {
+
+
+                            if (state.Value == -1) {
+                                $("#Id_Clabe_Empresa").append('<option selected = "selected" value="' + state.Value + '">' +
+                                 state.Text + '</option>');
+
+
+                            } else {
+                                $("#Id_Clabe_Empresa").append('<option value="' + state.Value + '">' +
+                                     state.Text + '</option>');
+                            }
+
+
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve .' + ex);
+                    }
+                });
+
+                return false;
+            });
+            $("#Id_Moneda").change(function () {
+                $("#Id_Clabe_Empresa").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: Url,
+
+                    dataType: 'json',
+
+                    data: { idbanco: $("#Id_Banco_Empresa").val(), idproveedor: $("#Id_Empresa").val(), idmoneda: $("#Id_Moneda").val() },
+                    success: function (states) {
+
+                        $.each(states, function (i, state) {
+
+
+                            if (state.Value == -1) {
+                                $("#Id_Clabe_Empresa").append('<option selected = "selected" value="' + state.Value + '">' +
+                                 state.Text + '</option>');
+
+
+                            } else {
+                                $("#Id_Clabe_Empresa").append('<option value="' + state.Value + '">' +
+                                     state.Text + '</option>');
+                            }
+
+
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve .' + ex);
+                    }
+                });
+
+                return false;
+            });
+
+        }
+        function CallCuentaE(Url) {
+            $("#Id_Empresa").change(function () {
+                $("#Id_N_Cuenta_Empresa").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: Url,
+
+                    dataType: 'json',
+
+                    data: { idbanco: $("#Id_Banco_Empresa").val(), idproveedor: $("#Id_Empresa").val(), idmoneda: $("#Id_Moneda").val() },
+                    success: function (states) {
+
+                        $.each(states, function (i, state) {
+
+
+                            if (state.Value == -1) {
+                                $("#Id_N_Cuenta_Empresa").append('<option selected = "selected" value="' + state.Value + '">' +
+                                 state.Text + '</option>');
+
+
+                            } else {
+                                $("#Id_N_Cuenta_Empresa").append('<option value="' + state.Value + '">' +
+                                     state.Text + '</option>');
+                            }
+
+
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve .' + ex);
+                    }
+                });
+
+                return false;
+            });
+            $("#Id_Banco_Empresa").change(function () {
+                $("#Id_N_Cuenta_Empresa").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: Url,
+
+                    dataType: 'json',
+
+                    data: { idbanco: $("#Id_Banco_Empresa").val(), idproveedor: $("#Id_Empresa").val(), idmoneda: $("#Id_Moneda").val() },
+                    success: function (states) {
+
+                        $.each(states, function (i, state) {
+
+
+                            if (state.Value == -1) {
+                                $("#Id_N_Cuenta_Empresa").append('<option selected = "selected" value="' + state.Value + '">' +
+                                 state.Text + '</option>');
+
+
+                            } else {
+                                $("#Id_N_Cuenta_Empresa").append('<option value="' + state.Value + '">' +
+                                     state.Text + '</option>');
+                            }
+
+
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve .' + ex);
+                    }
+                });
+
+                return false;
+            });
+            $("#Id_Moneda").change(function () {
+                $("#Id_N_Cuenta_Empresa").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: Url,
+
+                    dataType: 'json',
+
+                    data: { idbanco: $("#Id_Banco_Empresa").val(), idproveedor: $("#Id_Empresa").val(), idmoneda: $("#Id_Moneda").val() },
+                    success: function (states) {
+
+                        $.each(states, function (i, state) {
+
+
+                            if (state.Value == -1) {
+                                $("#Id_N_Cuenta_Empresa").append('<option selected = "selected" value="' + state.Value + '">' +
+                                 state.Text + '</option>');
+
+
+                            } else {
+                                $("#Id_N_Cuenta_Empresa").append('<option value="' + state.Value + '">' +
+                                     state.Text + '</option>');
+                            }
+
+
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve .' + ex);
+                    }
+                });
+
+                return false;
+            });
+
+        }
+    </script>
+}
+

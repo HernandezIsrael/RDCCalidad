@@ -1,0 +1,47 @@
+﻿@model Model.Ca_Tipo_Codole
+
+
+@using (Ajax.BeginForm("Save", "TipoCodole", new AjaxOptions()
+{
+    HttpMethod = "POST",
+    UpdateTargetId = "resultado",
+    InsertionMode = InsertionMode.Replace,
+    OnBegin = "onBegin",
+    OnComplete = "onComplete",
+    OnSuccess = "onSuccess",
+    OnFailure = "onFailure"
+
+
+}))
+{
+    @Html.HiddenFor(x => x.Id_Tipo_Codole)
+    <h4 class="card-title">Tipo C.O.D.O.L.E</h4>
+    <div class="input-group">
+        <span class="input-group-addon">
+            <i class="material-icons">format_color_text</i>
+        </span>
+        <div class="form-group">
+
+            @Html.TextBoxFor(x => x.Tipo_Codole, new { @class = "form-control", @placeholder = "Tipo" })
+            @Html.ValidationMessageFor(x => x.Tipo_Codole, null, new { @class = "badge badge-danger" })
+
+        </div>
+    </div>
+   
+    <div class="input-group">
+        <span class="input-group-addon">
+            Activo:
+        </span>
+        <div class="form-group">
+
+            <div class="togglebutton">
+                <label>
+                    @Html.CheckBoxFor(x => x.Activo)
+                </label>
+            </div>
+
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-fill btn-rose">Guardar</button>
+}

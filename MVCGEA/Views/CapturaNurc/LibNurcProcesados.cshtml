@@ -1,0 +1,306 @@
+﻿@model PagedList.IPagedList<Model.spSelPagos_Procesados_Usuario_Result>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+
+        <div class="toolbar">
+            <div class="row">
+                  
+                        <div class="col-sm-6 col-lg-3">
+                            <input type="text" id="search" name="search" class="form-control" placeholder="Buscar ..." value=@ViewBag.CurrentFilter />
+                          
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <button type="button" style="background:#159D93" onclick="SearchGV(); return false" class="btn btn-info btn-round">Buscar</button>
+                        </div>
+                 
+                    <div class="col-sm-6 col-lg-3">
+
+                    </div>
+                    <div class="col-sm-6 col-lg-3">
+                       
+                    </div>
+
+                </div>
+
+        </div>
+        <div id="mate" class="material-datatables ps-child">
+
+            <table id="datatables" class="table ps-child">
+                <thead class="text-danger">
+                    <tr>
+                        <th style="width:30px;">#</th>
+                        <th style="width:100px;">N.U.R.C.</th>
+                        <th style="width:150px;">Solicitado por</th>
+                        <th style="width:150px;">Autorizaciones</th>
+                        <th style="width:100px;">Estatus</th>
+                        <th style="width:150px;">Fecha de Pago</th>
+                        <th style="width:100px;">Folio Fiscal</th>
+                        <th style="width:100px;">Empresa</th>
+                        <th style="width:100px;">Proveedor</th>
+                        <th style="width:100px;">Proyecto</th>
+                        <th style="width:100px;">Rubro</th>
+                        <th style="width:100px;">Acticipo</th>
+                        <th style="width:100px;">Descargar</th>
+                        <th style="width:100px;">Importe</th>
+                        <th style="width:100px;">I.V.A</th>
+                        <th style="width:100px;">Rent. I.V.A</th>
+                        <th style="width:100px;">Rent. Otros</th>
+                        <th style="width:100px;">Rent. I.S.R</th>
+                        <th style="width:100px;">Total</th>
+                        <th style="width:100px;">Moneda</th>
+                        <th style="width:150px;">Fecha de Alta</th>
+                        <th style="width:100px;">Creado por</th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int i = 0;
+                        foreach (var item in Model)
+                        {
+
+                            if (i == 1)
+                            {
+                                i = 0;
+                                <tr style="background-color:#f7f4fd;">
+                                    <td>
+                                        <a href=@Url.Action("LibViewPagos", "CapturaNurc",new {id=item.Id_Pago }) class="btn btn-simple btn-info btn-icon view">
+                                            <i class="material-icons" rel="tooltip" data-placement="right" title="Ver">visibility</i>
+
+                                        </a>
+                                    </td>
+                                    <td>@item.Id_Pago</td>
+                                    <td>@item.Solicitado_por</td>
+                                    <td>
+                                        <a href='#' class="btn btn-info btn-just-icon btn-round">
+                                            @item.Autorizaciones
+                                        </a>
+                                    </td>
+                                    <td>
+                                        @item.Estatus_Pago
+                                    </td>
+                                    <td>
+                                        @if (!item.F_Pago.HasValue)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            @item.F_Pago.Value.ToShortDateString();
+                                        }
+                                    <td>
+                                        @item.Folio_Fiscal
+                                    </td>
+                                    <td>
+                                        @item.Razon_Social
+                                    </td>
+                                    <td>
+                                        @item.Proveedor
+                                    </td>
+                                    <td>
+                                        @item.Nombre_Proyecto
+                                    </td>
+                                    <td>@item.Codigo</td>
+                                    <td>
+
+                                        @*<div class="togglebutton">
+                                                <label>
+                                                    <input type="checkbox" disabled="disabled">
+
+                                                </label>
+                                            </div>*@
+                                        <div class="togglebutton">
+                                            <label>
+                                                <input type="checkbox" checked=@item.Anticipo disabled="disabled">
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        #
+                                    </td>
+                                    <td>
+                                        @item.Importe_Total.Value.ToString("C")
+                                    </td>
+                                    <td>
+                                        @item.Calculo_IVA.ToString("C")
+                                    </td>
+                                    <td>
+                                        @item.Retenciones.Value.ToString("C")
+                                    </td>
+                                    <td>
+                                        @item.Otros.Value.ToString("C")
+                                    </td>
+                                    <td>
+                                        @item.ISR.Value.ToString("C")
+                                    </td>
+                                    <td>
+                                        @item.Total.Value.ToString("C")
+                                    </td>
+                                    <td>
+                                        @item.Moneda
+                                    </td>
+                                    <td>
+                                        @if (!item.F_Alta.HasValue)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            @item.F_Alta.Value.ToShortDateString();
+                                        }
+
+                                    </td>
+                                    <td>@item.Usuario</td>
+
+                                </tr>
+                            }
+                            else
+                            {
+                                i = 1;
+                                <tr>
+                                    <td>
+                                        <a href=@Url.Action("LibViewPagos", "CapturaNurc",new {id=item.Id_Pago }) class="btn btn-simple btn-info btn-icon view">
+                                            <i class="material-icons" rel="tooltip" data-placement="right" title="Ver">visibility</i>
+
+                                        </a>
+                                    </td>
+                                    <td>@item.Id_Pago</td>
+                                    <td>@item.Solicitado_por</td>
+                                    <td>@item.Autorizaciones</td>
+                                    <td>
+                                        @item.Estatus_Pago
+                                    </td>
+                                    <td>
+                                        @if (!item.F_Pago.HasValue)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            @item.F_Pago.Value.ToShortDateString();
+                                        }
+                                    </td>
+                                    <td>
+                                        @item.Folio_Fiscal
+                                    </td>
+                                    <td>
+                                        @item.Razon_Social
+                                    </td>
+                                    <td>
+                                        @item.Proveedor
+                                    </td>
+                                    <td>
+                                        @item.Nombre_Proyecto
+                                    </td>
+                                    <td>@item.Codigo</td>
+                                    <td>
+                                        @*<div class="togglebutton">
+                                                <label>
+                                                    <input type="checkbox" disabled="disabled">
+
+                                                </label>
+                                            </div>*@
+                                        <div class="togglebutton">
+                                            <label>
+                                                <input type="checkbox" checked=@item.Anticipo disabled="disabled">
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        #
+                                    </td>
+                                    <td>
+                                        @item.Importe_Total.Value.ToString("C")
+                                    </td>
+                                    <td>
+                                        @item.Calculo_IVA.ToString("C")
+                                    </td>
+                                    <td>
+                                        @item.Retenciones.Value.ToString("C")
+                                    </td>
+                                    <td>
+                                        @item.Otros.Value.ToString("C")
+                                    </td>
+                                    <td>
+                                        @item.ISR.Value.ToString("C")
+                                    </td>
+                                    <td>
+                                        @item.Total.Value.ToString("C")
+                                    </td>
+                                    <td>
+                                        @item.Moneda
+                                    </td>
+                                    <td>
+                                        @if (!item.F_Alta.HasValue)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            @item.F_Alta.Value.ToShortDateString();
+                                        }
+
+                                    </td>
+                                    <td>@item.Usuario</td>
+
+                                </tr>
+                            }
+
+
+
+
+
+                        }
+                        
+                    }
+                   
+                </tbody>
+            </table>
+            @Html.PagedListPager(Model, page => "#" )
+            Pagina @(Model.PageCount< Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+                        </div>
+              
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        
+            $('#datatables').DataTable({
+                "order": [[0, "desc"]],
+                "paging": false,
+                "scrollY": 550,
+                "scrollX": true,
+                "searching": false,
+                "info":false,
+                responsive: false
+                //language: {
+                //    search: "_INPUT_",
+                //    searchPlaceholder: "Buscar ...",
+                //    "paginate": {
+                //        "previous": "Anterior",
+                //        "next": "Siguiente",
+                //        "first": "Inicial",
+                //        "last": "Ultimo",
+
+                //    },
+                //    "lengthMenu": "Mostrando _MENU_ registros",
+                //    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                //}
+
+            });
+
+
+            var table = $('#datatables').DataTable();
+
+
+            $('.card .material-datatables label').addClass('form-group');
+
+            $('.pagination').click(function (s, e) {
+                LlamrGV(s.target.innerText);
+            });
+
+        });
+
+
+</script>

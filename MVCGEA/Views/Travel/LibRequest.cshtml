@@ -1,0 +1,138 @@
+﻿@model List<Model.TrvReq>
+
+@{
+    ViewBag.Title = "Solicitud de Viaje";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-icon" data-background-color="gray" style="background:#159D93;">
+                <i class="material-icons">directions_car</i>
+            </div>
+            <div class="card-content">
+                <h4 class="card-title">Solicitudes de viáticos</h4>
+                <div class="toolbar">
+                    <!--        Here you can write extra buttons/actions for the toolbar              -->
+                </div>
+                <div class="material-datatables">
+
+                    <a href="@Url.Action("NewTravelRequest","Travel")" class="btn btn-primary btn-round">Crear <i class="material-icons">add</i></a>
+                    @if (int.Parse(Session["IdUser"].ToString()) == 1 || int.Parse(Session["IdUser"].ToString()) == 3045 || int.Parse(Session["IdUser"].ToString()) == 3030 || int.Parse(Session["IdUser"].ToString()) == 1 || int.Parse(Session["IdUser"].ToString()) == 14 || int.Parse(Session["IdUser"].ToString()) == 3066)
+                    {
+                        <a href="@Url.Action("Calendar","Travel")" class="btn btn-primary btn-round">Ver calendario de viajes</a>
+                    }
+
+                    <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100" style="width:100%">
+                        <thead class="text-info">
+                            <tr>
+                                <th class="disabled-sorting text-center">Modificar</th>
+                                <th class="disabled-sorting text-center">Ver conceptos</th>
+                                <th class="text-center">No. de Solicitud</th>
+                                <th class="text-center">Empresa que solicita</th>
+                                <th class="text-center">Solicitado por</th>
+                                <th class="text-center">Estatus</th>
+                                <th class="text-center">Destino</th>
+                                <th class="text-center">Fecha de partida</th>
+                                <th class="text-center">Fecha de retorno</th>
+                                <th class="text-center">Medio de transporte</th>
+                                <th class="text-center">Fecha de solicitud</th>
+                            </tr>
+                        </thead>
+                        <tfoot class="text-info">
+                            <tr>
+                                <th class="text-center">Modificar</th>
+                                <th class="text-center">Ver conceptos</th>
+                                <th class="text-center">No. de Solicitud</th>
+                                <th class="text-center">Empresa que solicita</th>
+                                <th class="text-center">Solicitado por</th>
+                                <th class="text-center">Estatus</th>
+                                <th class="text-center">Destino</th>
+                                <th class="text-center">Fecha de partida</th>
+                                <th class="text-center">Fecha de retorno</th>
+                                <th class="text-center">Medio de transporte</th>
+                                <th class="text-center">Fecha de solicitud</th>
+                            </tr>
+                        </tfoot>
+
+                        <tbody>
+                            @foreach (var row in Model)
+                            {
+                                <tr>
+                                    <td class="text-center" style="width:5%">
+                                        <a href="@Url.Action("NewTravelRequest","Travel", new { id = row.IdTrvReq })" class="btn btn-simple btn-info btn-icon view"><i class="material-icons">border_color</i></a>
+                                    </td>
+                                    <td class="text-center" style="width:5%">
+                                        <a href="@Url.Action("TravelDetail", "Travel", new { reqID = row.IdTrvReq })" class="btn btn-simple btn-primary btn-icon view"><i class="material-icons">remove_red_eye</i></a>
+                                    </td>
+                                    <td class="text-center" style="width:5%">@row.IdTrvReq</td>
+                                    <td class="text-center" style="width:10%">@(row.Empresas.Razon_Social)</td>
+                                    <td class="text-center" style="width:10%">@string.Format("{0} {1}", row.Usuarios.Nombre, row.Usuarios.Apellidos)</td>
+                                    <td class="text-center" style="width:5%">
+                                        @switch (row.IdEstatus)
+                                        {
+                                            case 1:
+                                                <i class='material-icons' style='color:orange;' data-notify='icon'>near_me</i>
+                                                break;
+
+                                            case 2:
+                                                <i class='material-icons' style='color:tomato;' data-notify='icon'>clear</i>
+                                                break;
+
+                                            case 3:
+                                                <i class='material-icons' style='color:MediumSeaGreen;' data-notify='icon'>done</i>
+                                                break;
+                                        }
+                                    </td>
+                                    <td class="text-center" style="width:10%">@string.Format("{0}, {1}", row.PaisDes, row.Destino)</td>
+                                    <td class="text-center" style="width:10%">@row.FPartida.ToString("dd MMMM yyyy")</td>
+                                    <td class="text-center" style="width:10%">@row.FRetorno.ToString("dd MMMM yyyy")</td>
+                                    <td class="text-center" style="width:10%">@row.TrvTransporte.Transporte</td>
+                                    <td class="text-center" style="width:10%">@row.FAlta.ToString("dd MMMM yyyy")</td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+
+                </div>
+            </div>
+            <!-- end content-->
+        </div>
+        <!--  end card  -->
+    </div>
+</div>
+
+@section Scripts{
+    @*<script src="../assets/js/fullcalendar.min.js"></script>*@
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#datatables').DataTable({
+                "order": [[0, "desc"]], //column,type
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "Todos"]
+                ],
+                responsive: false,
+                language: {
+                    search: "_INPUT_",
+                    lengthMenu: "Mostrar _MENU_ entradas",
+                    searchPlaceholder: "Buscar", "paginate": { "previous": "Anterior", "next": "Siguiente", "first": "Primero", "last": "último" },
+                    info: "Mostrando solicitudes _START_ a _END_ de _TOTAL_ registros"
+                }
+            });
+
+
+            var table = $('#datatables').DataTable();
+
+            $('.card .material-datatables label').addClass('form-group');
+        });
+
+        $(document).ready(function () {
+            demo.initFullCalendar();
+        });
+
+    </script>
+}

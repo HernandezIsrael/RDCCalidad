@@ -1,0 +1,245 @@
+﻿@model List<Model.Activo_Fijo>
+
+@{
+    ViewBag.Title = "LibActivoFijo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-icon" data-background-color="gray" style="background:#159D93;">
+                <i class="material-icons">
+                    important_devices
+                </i>
+            </div>
+            <div class="card-content">
+                <h4 class="card-title">Inventario de Clusmext</h4>
+                <div class="toolbar">
+                    <!--        Here you can write extra buttons/actions for the toolbar              -->
+                </div>
+                <a href="@Url.Action("AFDetail","Capacidades")" class="btn btn-primary btn-round">Nuevo Activo Fijo <i class="material-icons">add</i></a>
+                <div class="material-datatables">
+
+                    <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100" style="width:100%">
+                        <thead class="text-info">
+                            <tr>
+                                <th class="disabled-sorting text-center">Editar</th>
+                                <th class="text-center">C.U.A.F</th>
+                                <th class="text-center">Empresa</th>
+                                <th class="text-center">ítem</th>
+                                <th class="text-center">Condición</th>
+                                @*<th class="text-center">Categoría</th>*@
+                                <th class="text-center">No. de Serie</th>
+                                <th class="text-center">Marca</th>
+                                <th class="text-center">Modelo</th>
+                                <th class="text-center">Descripción</th>
+                                <th class="text-center">Costo</th>
+                                <th class="text-center">Adquirido</th>
+                                <th class="text-center">Retirado</th>
+                                <th class="text-center">Valor actual</th>
+                                <th class="text-center">Moneda</th>
+                                <th class="text-center">N.U.R.C</th>
+                                <th class="text-center">Asignado a</th>
+                                <th class="text-center">Alta</th>
+
+                            </tr>
+                        </thead>
+                        <tfoot class="text-info">
+                            <tr>
+                                <th class="text-center">Editar</th>
+                                <th class="text-center">C.U.A.F</th>
+                                <th class="text-center">Empresa</th>
+                                <th class="text-center">ítem</th>
+                                <th class="text-center">Condición</th>
+                                @*<th class="text-center">Categoría</th>*@
+                                <th class="text-center">No. de Serie</th>
+                                <th class="text-center">Marca</th>
+                                <th class="text-center">Modelo</th>
+                                <th class="text-center">Descripción</th>
+                                <th class="text-center">Costo</th>
+                                <th class="text-center">Adquirido</th>
+                                <th class="text-center">Retirado</th>
+                                <th class="text-center">Valor actual</th>
+                                <th class="text-center">Moneda</th>
+                                <th class="text-center">N.U.R.C</th>
+                                <th class="text-center">Asignado a</th>
+                                <th class="text-center">Alta</th>
+                            </tr>
+                        </tfoot>
+
+                        <tbody>
+                            @foreach (var row in Model)
+                            {
+                                <tr>
+                                    <td style="width:4%" class="text-center">
+                                        <a href="@Url.Action("AFDetail","Capacidades", new { id = row.Id_Activo })" class="btn btn-simple btn-info btn-icon view">
+                                            <i class="material-icons">
+                                                border_color
+                                            </i>
+                                        </a>
+                                    </td>
+                                    <td style="width:5%" class="text-center">
+                                        @row.Id_Activo
+                                    </td>
+                                    <td style="width:7%" class="text-center">
+                                        @row.Empresas.Razon_Social
+                                    </td>
+                                    <td style="width:7%" class="text-center">
+                                        @row.Item
+                                    </td>
+                                    <td style="width:7%" class="text-center">
+                                        @switch (row.Id_Condicion)
+                                        {
+                                            case -1: //Sin asignar
+                                                <div class="text-info text-center">
+                                                    <i class="material-icons" rel="tooltip" data-placement="top" title="@row.Ca_Condicion.Condicion">
+                                                        remove_circle
+                                                    </i>
+                                                </div>
+                                                break;
+                                            case 1: //Buen estado
+                                                <div class="text-success text-center">
+                                                    <i class="material-icons" rel="tooltip" data-placement="top" title="@row.Ca_Condicion.Condicion">
+                                                        check_circle
+                                                    </i>
+                                                </div>
+                                                break;
+                                            case 2: //Mal estado
+                                                <div class="text-danger text-center">
+                                                    <i class="material-icons" rel="tooltip" data-placement="top" title="@row.Ca_Condicion.Condicion">
+                                                        cancel
+                                                    </i>
+                                                </div>
+                                                break;
+                                            case 3: //Vandalizado
+                                                <div class="text-rose text-center">
+                                                    <i class="material-icons" rel="tooltip" data-placement="top" title="@row.Ca_Condicion.Condicion">
+                                                        report_problem
+                                                    </i>
+                                                </div>
+                                                break;
+                                            case 4: //Baja
+                                                <div class="text-warning text-center">
+                                                    <i class="material-icons" rel="tooltip" data-placement="top" title="@row.Ca_Condicion.Condicion">
+                                                        thumb_down
+                                                    </i>
+                                                </div>
+                                                break;
+                                        }
+                                    </td>
+                                    <td style="width:7%" class="text-center">
+                                        @row.N_Serie
+                                    </td>
+                                    <td style="width:5%" class="text-center">
+                                        @if (row.Id_Marca != null)
+                                        {
+                                            @row.Ca_Marca.Marca
+                                        }
+                                        else
+                                        {
+                                            <a>N/A</a>
+                                        }
+                                    </td>
+                                    <td style="width:5%" class="text-center">
+                                        @row.Modelo
+                                    </td>
+                                    <td style="width:7%" class="text-center">
+                                        @row.Descripcion
+                                    </td>
+                                    <td style="width:5%" class="text-center">
+                                        @string.Format("{0:C2}", row.Precio_Adquisicion)
+                                    </td>
+                                    <td style="width:7%" class="text-center">
+                                        @if (row.F_Adquisicion != null)
+                                        {
+                                            @row.F_Adquisicion.Value.ToString("dd MMMM yyyy")
+                                        }
+                                        else
+                                        {
+                                            <a>N/A</a>
+                                        }
+                                    </td>
+                                    <td style="width:5%" class="text-center">
+                                        @if (@row.F_Retiro != null)
+                                        {
+                                            @row.F_Retiro.Value.ToString("dd MMMM yyyy")
+                                        }
+                                        else
+                                        {
+                                            <a>N/A</a>
+                                        }
+                                    </td>
+                                    <td style="width:5%" class="text-center">
+                                        @string.Format("{0:C2}", row.Valor_Actual)
+                                    </td>
+                                    <td style="width:5%" class="text-center">
+                                        @if (row.Id_Moneda != -1)
+                                        {
+                                            @row.Ca_Moneda.Moneda
+                                        }
+                                        else
+                                        {
+                                            <a>N/A</a>
+                                        }
+
+                                    </td>
+                                    <td style="width:5%" class="text-center">
+                                        @row.Id_Pago
+                                    </td>
+                                    <td style="width:7%" class="text-center">
+                                        @row.Usuario_Asignado
+                                    </td>
+                                    <td style="width:5%" class="text-center">
+                                        @if (row.F_Alta != null)
+                                        {
+                                            @row.F_Alta.Value.ToString("dd MMMM yyyy")
+                                        }
+                                        else
+                                        {
+                                            <a>N/A</a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+
+                </div>
+            </div>
+            <!-- end content-->
+        </div>
+        <!--  end card  -->
+    </div>
+</div>
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#datatables').DataTable({
+                "order": [[1, "asc"]], //column,type
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "Todos"]
+                ],
+                responsive: false,
+                language: {
+                    search: "_INPUT_",
+                    lengthMenu: "Mostrar _MENU_ registros",
+                    searchPlaceholder: "Buscar", "paginate": { "previous": "Anterior", "next": "Siguiente", "first": "Primero", "last": "Último" },
+                    info: "Mostrando _START_ a _END_ registros de _TOTAL_ registros"
+                }
+            });
+
+
+            var table = $('#datatables').DataTable();
+
+            $('.card .material-datatables label').addClass('form-group');
+        });
+
+    </script>
+}

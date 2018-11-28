@@ -1,0 +1,39 @@
+﻿@model Model.TaksComentarios
+
+@using (Ajax.BeginForm("AddComment", "Tickets", new AjaxOptions()
+{
+    HttpMethod = "POST",
+    UpdateTargetId = "resultado",
+    InsertionMode = InsertionMode.Replace,
+    OnBegin = "onBegin",
+    OnComplete = "onComplete",
+    OnSuccess = "onSuccess",
+    OnFailure = "onFailure"
+
+}))
+{
+    @Html.HiddenFor(x => x.IdTaksComentario)
+    @Html.HiddenFor(x => x.IdTaks)
+
+    <div class="input-group col-sm-6 col-md-offset-3">
+
+        <div class="col-sm-6 col-md-offset-3">
+            <div class="form-group label-floating">
+                <label for=@Model.Comentario>Escribir comentario...</label>
+                @Html.TextBoxFor(x => x.Comentario, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.Comentario, null, new { @class = "badge badge-danger" })
+            </div>
+        </div>
+        <div>
+
+            <button class="btn btn-primary btn-just-icon btn-round" type="submit" rel="tooltip" data-placement="top" title="Enviar">
+                <i class="material-icons">send</i>
+            </button>
+
+        </div>
+
+    </div>
+
+
+}
+

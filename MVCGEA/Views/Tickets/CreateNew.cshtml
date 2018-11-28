@@ -1,0 +1,106 @@
+﻿    @model Model.TaksAdmon
+
+    @{
+        ViewBag.Title = "CreateNew";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <div class="nav-align-center">
+        <h3>Nuevo ticket</h3>
+    </div>
+
+    <div class="col-sm-10 col-md-offset-1">
+        <div class="card">
+            <div class="card-header card-header-icon" data-background-color="rose">
+                <i class="material-icons">receipt</i>
+            </div>
+            <div class="card-content">
+                <h4 class="card-title">Completa los datos de tu solicitud.</h4>
+
+                <a class="btn btn-primary btn-round" href=@Url.Action("LibTickets", "Tickets")>
+                    <i class="material-icons">reply</i> Regresar
+                </a>
+
+                <br />
+                <br />
+
+                @using (Html.BeginForm("AddTicket", "Tickets", new { idDelFormulario = "frm-newTicket" }))
+                {
+
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">subject</i>
+                        </span>
+
+                        @Html.TextBoxFor(x => x.Asunto, new { @class = "form-control", @placeholder = "* Asunto" })
+                        @Html.ValidationMessageFor(x => x.Asunto, null, new { @class = "badge badge-danger" })                        
+
+                    </div>
+
+                    <br />
+
+                    @Html.HiddenFor(x => x.IdTaks)
+
+                    if (Model.Id_Empresa != -1)
+                    {
+                        @Html.DropDownListFor(x => x.Id_Empresa, new SelectList(ViewBag.Empresas, "Id_Empresa", "Razon_Social", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10" })
+                        @Html.ValidationMessageFor(x => x.Id_Empresa, null, new { @class = "badge badge-danger" })
+                    }
+                    else
+                    {
+                        @Html.DropDownListFor(x => x.Id_Empresa, new SelectList(ViewBag.Empresas, "Id_Empresa", "Razon_Social", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10" })
+                        @Html.ValidationMessageFor(x => x.Id_Empresa, "* Este campo es obligatorio", new { @class = "badge badge-danger" })
+                    }
+
+                    if (Model.IdTaksTipo != -1)
+                    {
+                        @Html.DropDownListFor(x => x.IdTaksTipo, new SelectList(ViewBag.TaskTipos, "IdTaksTipo", "TaksTipo1", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10" })
+                        @Html.ValidationMessageFor(x => x.IdTaksTipo, null, new { @class = "badge badge-danger" })
+                    }
+                    else
+                    {
+                        @Html.DropDownListFor(x => x.IdTaksTipo, new SelectList(ViewBag.TaskTipos, "IdTaksTipo", "TaksTipo1", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10" })
+                        @Html.ValidationMessageFor(x => x.IdTaksTipo, "* Este campo es obligatorio", new { @class = "badge badge-danger" })
+                    }
+
+                    if (Model.Id_CA_Area != -1)
+                    {
+                        @Html.DropDownListFor(x => x.Id_CA_Area, new SelectList(ViewBag.Areas, "Id_CA_Area", "Nombre_Area", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10" })
+                        @Html.ValidationMessageFor(x => x.Id_CA_Area, null, new { @class = "badge badge-danger" })
+                    }
+                    else
+                    {
+                        @Html.DropDownListFor(x => x.Id_CA_Area, new SelectList(ViewBag.Areas, "Id_CA_Area", "Nombre_Area", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10" })
+                        @Html.ValidationMessageFor(x => x.Id_CA_Area, "* Este campo es obligatorio", new { @class = "badge badge-danger" })
+                    }
+
+                    <br />
+                    <br />
+
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">text_fields</i>
+                        </span>
+
+                        @Html.TextAreaFor(x => x.Descripcion, new { @class = "form-control", @placeholder = "* Explica detalladamente el motivo de tu solicitud y el resultado que buscas." })
+                        @Html.ValidationMessageFor(x => x.Descripcion, null, new { @class = "badge badge-danger" })
+
+                    </div>
+
+                    <br />
+                    <p class="text-gray">* El campo es obligatorio.</p>
+                    <p class="text-gray">** Si deseas adjuntar archivos, favor de agrear un comentario en la discusión del ticket con el archivo.</p>
+
+                    <button type="submit" class="btn btn-info btn-round">
+                        <i class="material-icons">send</i> Enviar
+                    </button>
+                }
+
+            </div>
+        </div>
+    </div>
+
+    @*<div class="col-md-4"> Está siendo utilizado para probar las notificaciones :v
+        <button class="btn btn-primary btn-block" onclick="MyJS.showNotificationStyle('top', 'right', 'notifications', 'info', 'Israel Hernández', 'Olis Crayolis', 'Este es el mensaje', '#', '_blank')">Top Right</button>
+    </div>*@
+

@@ -1,0 +1,124 @@
+﻿@model List<Model.spSelPagos_Captura_UsuarioI_Result>
+<div class="toolbar">
+</div>
+<div id="mate" class="material-datatables ps-child">
+    <table id="datatables2" class="table ps-child">
+        <thead class="text-danger">
+            <tr>
+                <th>#</th>
+                <th>N.U.R.C</th>
+                <th>Folio fiscal</th>
+                <th>Empresa</th>
+                <th>Proveedor</th>
+                <th>Proyecto</th>
+                <th>Rubro</th>
+                <th>Autorizaciones</th>
+                <th>Descarga</th>
+                <th>Estatus</th>
+                <th>Fecha de pago</th>
+                <th>Importe bruto</th>
+                <th>I.V.A</th>
+                <th>Otros</th>
+                <th>Rent I.V.A</th>
+                <th>I.S.R</th>
+                <th>Total</th>
+                <th>Moneda</th>
+                <th>Creado por</th>
+                <th>Fecha de Alta</th>
+            </tr>
+        </thead>
+        <tbody>
+          @foreach (var item in Model)
+          {
+            <tr>
+                <td class="text-primary">
+                    <a href=@Url.Action("EditNurc", "NIngresos", new {id=0}) class="btn btn-simple btn-success btn-icon new">
+                        <i class="material-icons" rel="tooltip" data-placement="right" title="Agregar">add</i>
+                    </a>
+                    <a href=@Url.Action("EditNurc", "NIngresos", new {id=item.Id_Pago}) class="btn btn-simple btn-warning btn-icon edit">
+                        <i class="material-icons" rel="tooltip" data-placement="right" title="Modificar">create</i>
+                    </a>
+                </td>
+                <td>@item.Id_Pago</td>
+                <td>@item.Folio_Fiscal</td>
+                <td>@item.Razon_Social</td>
+                <td>@item.Proveedor</td>
+                <td>
+                    <div class="togglebutton">
+                        <label>
+                            <input type="checkbox" checked=@(item.Proyecto.HasValue?item.Proyecto.Value:false) disabled="disabled">
+                        </label>
+                    </div>
+                </td>
+                <td>@item.Codigo</td>
+                <td>
+                    <a href='#' class="btn btn-info btn-just-icon btn-round">
+                        @item.Autorizaciones
+                    </a>
+                </td>
+                <td>
+                    <a href='#' onclick="downloadFile('@item.Id_Pago'); return false;" target="_blank" class="btn btn-info btn-just-icon btn-round">
+                        <i class="material-icons">
+                            cloud_download
+                        </i>
+                    </a>
+                </td>
+                <td>@item.Estatus_Pago</td>
+                <td>@(item.F_Pago.HasValue ? item.F_Pago.Value.ToShortDateString() : "")</td>
+                <td>@item.Importe_Total.Value.ToString("C")</td>
+                <td>@item.Calculo_IVA.ToString("C")</td>
+                <td>@item.Otros.Value.ToString("C")</td>
+                <td>@item.Retenciones.Value.ToString("C")</td>
+                <td>@item.ISR.Value.ToString("C")</td>
+                <td>@item.Total.Value.ToString("C")</td>
+                <td>@item.Moneda</td>
+                <td>@item.Usuario</td>
+                <td>@(item.F_Alta.HasValue ? item.F_Alta.Value.ToShortDateString() : "")</td>
+            </tr>
+          }
+        </tbody>
+    </table>
+  
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#datatables2').DataTable({
+            "order": [[1, "desc"]],
+            "pagingType": "full_numbers",
+            "scrollY": 550,
+            "scrollX": true,
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "Todos"]
+            ],
+            responsive: false,
+            language: {
+                search: "_INPUT_",
+                searchPlaceholder: "Buscar ...",
+                "paginate": {
+                    "previous": "Anterior",
+                    "next": "Siguiente",
+                    "first": "Inicial",
+                    "last": "Ultimo",
+
+                },
+                "lengthMenu": "Mostrando _MENU_ registros",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+            }
+
+        });
+
+
+        var table = $('#datatables2').DataTable();
+
+
+        $('.card .material-datatables label').addClass('form-group');
+
+
+
+
+    });
+
+
+</script>

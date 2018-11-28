@@ -1,0 +1,143 @@
+﻿@model List<Model.Ca_Pais>
+@{
+    ViewBag.Title = "LibPais";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section Scripts{
+    <script src="~/scripts/jquery.unobtrusive-ajax.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#datatables').DataTable({
+                "order": [[2, "asc"]],
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "Todos"]
+                ],
+                responsive: false,
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Buscar ...",
+                    "paginate": {
+                        "previous": "Anterior",
+                        "next": "Siguiente",
+                        "first": "Inicial",
+                        "last": "Ultimo",
+
+                    },
+                    "lengthMenu": "Mostrando _MENU_ registros",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                }
+
+            });
+
+
+            var table = $('#datatables').DataTable();
+
+
+            $('.card .material-datatables label').addClass('form-group');
+
+
+
+
+        });
+
+    function llamarVistaParcial(v) {
+
+        var laURLDeLaVista = '@Url.Action("EditPais", "Pais")';
+        $.ajax({
+            cache: false,
+            async: true,
+            type: "GET",
+            url: laURLDeLaVista,
+            data: {id:v},
+            success: function (response) {
+                $('#resultado').html('');
+                $('#resultado').html(response);
+            }
+        });
+
+    }
+        function PopupOnClosed() {
+
+            $('#myModal').modal('hide');
+            setTimeout(function () { window.location.href = '@Url.Action("LibPais", "Pais")'; }, 350);
+
+        }
+
+        function onBegin(respuesta){
+            console.log(respuesta + 'Bg');
+        }
+        function onSuccess(respuesta) {
+            console.log(respuesta + 'Sc');
+        }
+        function onComplete(respuesta) {
+            console.log(respuesta + 'Cm');
+        }
+        function onFailure(respuesta) {
+            console.log(respuesta + 'Fl');
+        }
+
+    </script>
+}
+
+<div class="card">
+    <div class="card-header card-header-icon" data-background-color="rose">
+        <h4 class="card-title">
+            <i class="material-icons">
+                list
+            </i>
+            Paises
+        </h4>
+        <div class="toolbar"></div>
+
+    </div>
+    <div class="card-content table-responsive table-full-width material-datatables">
+        <table id="datatables" class="table">
+            <thead class="text-danger">
+                <tr>
+                    <th>#</th>
+                    <th>No</th>
+                    <th>País</th>
+                    <th>Activo</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-primary">
+
+                            <a href=@string.Format("EditPais/{0}",0)  class="btn btn-simple btn-success btn-icon new"  >
+                                <i class="material-icons" rel="tooltip" data-placement="right" title="Agregar">add</i>
+                            </a>
+                            <a href=@string.Format("EditPais/{0}",item.Id_Pais)  class="btn btn-simple btn-warning btn-icon edit">
+                                <i class="material-icons" rel="tooltip" data-placement="right" title="Modificar">create</i>
+
+                            </a>
+                        </td>
+                        <td>@(item.Id_Pais)</td>
+                        <td>@(item.Pais)</td>
+                      
+                        <td>
+                            <div class="togglebutton">
+                                <label>
+
+                                    @Html.CheckBoxFor(modelitem => item.Activo, new { Value = item.Activo, disabled = "disabled" })
+                                </label>
+                            </div>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+

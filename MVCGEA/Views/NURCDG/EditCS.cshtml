@@ -1,0 +1,54 @@
+﻿@model Model.Pagos
+@using (Ajax.BeginForm("SaveCS", "NURCDG", new AjaxOptions()
+{
+    HttpMethod = "POST",
+    UpdateTargetId = "resultado",
+    InsertionMode = InsertionMode.Replace,
+    OnBegin = "onBegin",
+    OnComplete = "onComplete",
+    OnSuccess = "onSuccess",
+    OnFailure = "onFailure"
+
+
+}))
+{
+    @Html.HiddenFor(x => x.Id_Pago)
+    <h4 class="card-title">SOCIOS</h4>
+    <div class="input-group">
+        <span class="input-group-addon">
+            <i class="material-icons">accessible_forward</i>
+        </span>
+        <div class="form-group">
+            <label class="control-label" for="Id_CS1">CS1</label>
+            @if (Model.Id_CS1 != null)
+            {
+                @Html.DropDownListFor(x => x.Id_CS1, new SelectList(ViewBag.ListCS, "Id", "CS", Model.Id_CS1), new { @class = "form-control" })
+            }
+            else
+            {
+                @Html.DropDownListFor(x => x.Id_CS1, new SelectList(ViewBag.ListCS, "Id", "CS", -1), new { @class = "form-control" })
+            }
+        </div>
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">
+            <i class="material-icons">accessible_forward</i>
+        </span>
+        <div class="form-group">
+            <label class="control-label" for="Id_CS2">CS2</label>
+            @if (Model.Id_CS2 != null)
+            {
+                @Html.DropDownListFor(x => x.Id_CS2, new SelectList(ViewBag.ListCS, "Id", "CS", Model.Id_CS2), new { @class = "form-control" })
+            }
+            else
+            {
+                @Html.DropDownListFor(x => x.Id_CS2, new SelectList(ViewBag.ListCS, "Id", "CS", -1), new { @class = "form-control" })
+            }
+
+        </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-fill btn-rose" style="background:#159D93" >Guardar</button>
+}
+

@@ -1,0 +1,132 @@
+﻿@model Model.Ca_Instituciones
+@{
+    ViewBag.Title = "EditPrograma";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="card ">
+    <div class="card-header card-header-icon" data-background-color="rose">
+        <i class="material-icons">account_balance</i>
+    </div>
+
+    <div class="card-content perfect-scrollbar-on" role="form">
+
+
+        @using (Html.BeginForm("Save", "Programas", FormMethod.Post, new { id = "frm-pais" }))
+        {
+            @Html.HiddenFor(x => x.Id_Institucion)
+            <h4 class="card-title">Programa</h4>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="material-icons">account_balance</i>
+                </span>
+                <div class="form-group">
+                    <label for=@Model.Institucion>Programa:</label>
+                    @Html.TextBoxFor(x => x.Institucion, new { @class = "form-control", @placeholder = "Programa" })
+                    @Html.ValidationMessageFor(x => x.Institucion, null, new { @class = "badge badge-danger" })
+
+                </div>
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    Activo:
+                </span>
+                <div class="form-group">
+
+                    <div class="togglebutton">
+                        <label>
+                            @Html.CheckBoxFor(x => x.Activo)
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-fill btn-rose">
+                Guardar
+            </button>
+
+        }
+        <div>
+            @Html.ActionLink("Regresar", "LibProgramas")
+        </div>
+    </div>
+
+
+</div>
+<div id="ListaRubros">
+
+</div>
+
+@section Scripts{
+<script src="~/scripts/jquery.unobtrusive-ajax.js"></script>
+    <script type="text/javascript">
+
+         @if (Model.Id_Institucion > 0) {
+             <text>
+
+         CallPartialV();
+
+
+             </text>
+
+         }
+
+
+        function llamarVistaParcial(v,y) {
+
+            var laURLDeLaVista = '@Url.Action("EditRubro", "Programas")';
+            $.ajax({
+                cache: false,
+                async: true,
+                type: "GET",
+                url: laURLDeLaVista,
+                data: { id: v, idInst: y },
+                success: function (response) {
+                    $('#resultado').html('');
+                    $('#resultado').html(response);
+                }
+            });
+
+        }
+        function PopupOnClosed() {
+
+            $('#myModal').modal('hide');
+            setTimeout(function () { window.location.href = '@Url.Action("EditPrograma/" + Model.Id_Institucion, "Programas")'; },3000);
+
+        }
+        function onBegin(respuesta) {
+            console.log(respuesta + 'Bg');
+        }
+        function onSuccess(respuesta) {
+            console.log(respuesta + 'Sc');
+        }
+        function onComplete(respuesta) {
+            console.log(respuesta + 'Cm');
+        }
+        function onFailure(respuesta) {
+            console.log(respuesta + 'Fl');
+        }
+
+
+
+
+    function CallPartialV() {
+
+        try {
+            $("#ListaRubros").load('@Url.Content("~/Programas/LibRubros?id=" + Model.Id_Institucion)');
+
+        }
+        catch (err) {
+            console.log(err.message);
+        }
+
+    }
+
+
+    </script>
+}
+
+

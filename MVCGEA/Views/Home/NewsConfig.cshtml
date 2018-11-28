@@ -1,0 +1,647 @@
+﻿@model Model.NewsFeed
+
+@{
+    ViewBag.Title = "NewsConfig";
+
+    //int idMsg = ViewBag.Msg;
+    //string MSG = ViewBag.MsgString;
+
+    Model.NewsFeed slide1 = new Model.NewsFeed();
+    Model.NewsFeed slide2 = new Model.NewsFeed();
+    Model.NewsFeed slide3 = new Model.NewsFeed();
+    Model.NewsFeed slide4 = new Model.NewsFeed();
+    Model.NewsFeed slide5 = new Model.NewsFeed();
+    Model.NewsFeed slide6 = new Model.NewsFeed();
+
+    slide1 = ViewBag.News[0];
+    slide2 = ViewBag.News[1];
+    slide3 = ViewBag.News[2];
+    slide4 = ViewBag.News[3];
+    slide5 = ViewBag.News[4];
+    slide6 = ViewBag.News[5];
+
+}
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Índices y formato de vista</h5>
+            </div>
+            <div class="modal-body text-center">
+                <img style="width:466px;height:361px" src="~/Image/IndexLayout.PNG" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK!</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-10 col-md-offset-1">
+    <div class="card">
+        <div class="card-header card-header-icon" data-background-color="gray" style="background:#159D93;">
+            <i class="material-icons">perm_media</i>
+        </div>
+        <div class="card-content">
+            <h4 class="card-title">Modificar el contenido</h4>
+            <div class="col-md-12">
+                <a href="@Url.Action("Main","Home")" class="btn btn-primary btn-round">Regresar &nbsp;<i class="material-icons">reply</i></a>
+                <a class="btn btn-primary btn-round" data-toggle="modal" data-target="#exampleModal">Ver índices y formato de vista &nbsp;<i class="material-icons">remove_red_eye</i></a>
+            </div>
+
+            <br />
+            <br />
+            <br />
+            <br />
+
+            <div class="col-md-12">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Tarjeta (índice): @slide1.Orden</h5>
+
+                            @using (Html.BeginForm("UpdateNews", "Home", new { id = slide1.IdItem }))
+                            {
+                                <div>
+                                    <img src="@slide1.Imagen" alt="@slide1.Cabecera" style="resize:horizontal" />
+                                </div>
+
+                                <div class="input-group col-md-12">
+
+                                    <label class="control-label" for=@Model.Cabecera> * Título o cabecera</label>
+
+                                    @Html.TextBoxFor(x => x.Cabecera, new { @class = "form-control", @placeholder = "* Título o cabecera", @required = "true", @type = "text", @Value = slide1.Cabecera })
+                                    @Html.ValidationMessageFor(x => x.Cabecera, null, new { @class = "badge badge-danger" })
+
+                                </div>
+
+                                <div class="input-group col-md-12">
+
+                                    <label class="control-label" for=@Model.Cabecera> * Detalles de la nota</label>
+
+                                    @Html.TextAreaFor(x => x.Descripcion, new { @class = "form-control", @placeholder = "* Detalles de la nota", @required = "true" })
+                                    @Html.ValidationMessageFor(x => x.Descripcion, null, new { @class = "badge badge-danger" })
+
+                                </div>
+
+                                <div class="input-group col-md-12">
+
+                                    <label class="control-label" for=@Model.URL> URL de la noticia</label>
+
+                                    @Html.TextBoxFor(x => x.URL, new { @class = "form-control", @placeholder = "URL de la noticia", @type = "text", @Value = slide1.URL })
+                                    @Html.ValidationMessageFor(x => x.URL, null, new { @class = "badge badge-danger" })
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <div class="checkbox">
+                                        <label>
+                                            @Html.CheckBoxFor(x => x.Mostrar, new { @name = "hola", @checked = true })
+                                        </label>
+                                        <label class="control-label" for=@Model.Mostrar> *Mostrar noticia</label>
+                                    </div>
+
+                                </div>
+
+                                <p class="text-gray">* El campo es obligatorio</p>
+
+                                <button type="submit" class="btn btn-info btn-round">
+                                    <i class="material-icons">sd_card</i> Guardar cambios
+                                </button>
+                            }
+
+                            <br />
+
+                            @using (Html.BeginForm("UploadFile", "Home", new { id = slide1.IdItem }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                <h5 class="card-title">Imagen</h5>
+                                <label>
+                                    Seleccionar imagen en formato ".jpg" o ".png" (Para mejorar el aspecto selecciona imágenes cuyda resolución sea de un formato 16:9 (Por ejemplo 1920 x 1080 pixeles).
+                                </label>
+                                <br />
+                                <div class="fileinput fileinput-new" name="UploadFile" id="UploadItemFile" data-provides="fileinput">
+                                    <div>
+                                        <span class="btn btn-round btn-primary btn-just-icon btn-file">
+                                            <span class="fileinput-new"><i class="material-icons">attach_file</i></span>
+                                            <span class="fileinput-exists"><i class="material-icons">done</i></span>
+                                            <input type="file" name="file" id="UploadFactura" class="fileinput" />
+                                        </span>
+
+                                        <button type="submit" class="btn btn-primary btn-round fileinput-exists">
+                                            <i class="material-icons">cloud_upload</i> Subir!
+                                        </button>
+
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Tareta (índice): @slide2.Orden</h5>
+
+                            @using (Html.BeginForm("UpdateNews", "Home", new { id = slide2.IdItem }))
+                            {
+                                <div>
+                                    <img src="@slide2.Imagen" alt="@slide2.Cabecera" style="resize:horizontal" />
+                                </div>
+
+                                <div class="input-group col-md-12">
+
+                                    <label class="control-label" for=@Model.Cabecera> * Título o cabecera</label>
+
+                                    @Html.TextBoxFor(x => x.Cabecera, new { @class = "form-control", @placeholder = "* Título o cabecera", @required = "true", @type = "text", @Value = slide2.Cabecera })
+                                    @Html.ValidationMessageFor(x => x.Cabecera, null, new { @class = "badge badge-danger" })
+
+                                </div>
+
+                                <div class="input-group col-md-12">
+
+                                    <label class="control-label" for=@Model.Cabecera> * Detalles de la nota</label>
+
+                                    @Html.TextAreaFor(x => x.Descripcion, new { @class = "form-control", @placeholder = "* Detalles de la nota", @required = "true" })
+                                    @Html.ValidationMessageFor(x => x.Descripcion, null, new { @class = "badge badge-danger" })
+
+                                </div>
+
+                                <div class="input-group col-md-12">
+
+                                    <label class="control-label" for=@Model.URL> URL de la noticia</label>
+
+                                    @Html.TextBoxFor(x => x.URL, new { @class = "form-control", @placeholder = "URL de la noticia", @type = "text", @Value = slide2.URL })
+                                    @Html.ValidationMessageFor(x => x.URL, null, new { @class = "badge badge-danger" })
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <div class="checkbox">
+                                        <label>
+                                            @Html.CheckBoxFor(x => x.Mostrar, new { @name = "hola", @checked = true })
+                                        </label>
+                                        <label class="control-label" for=@Model.Mostrar> *Mostrar noticia</label>
+                                    </div>
+
+                                </div>
+
+                                <p class="text-gray">* El campo es obligatorio</p>
+
+                                <button type="submit" class="btn btn-info btn-round">
+                                    <i class="material-icons">sd_card</i> Guardar cambios
+                                </button>
+                            }
+
+                            <br />
+
+                            @using (Html.BeginForm("UploadFile", "Home", new { id = slide2.IdItem }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                <h5 class="card-title">Imagen</h5>
+                                <label>
+                                    Seleccionar imagen en formato ".jpg" o ".png" (Para mejorar el aspecto selecciona imágenes cuyda resolución sea de un formato 16:9 (Por ejemplo 1920 x 1080 pixeles).
+                                </label>
+                                <br />
+                                <div class="fileinput fileinput-new" name="UploadFile" id="UploadItemFile" data-provides="fileinput">
+                                    <div>
+                                        <span class="btn btn-round btn-primary btn-just-icon btn-file">
+                                            <span class="fileinput-new"><i class="material-icons">attach_file</i></span>
+                                            <span class="fileinput-exists"><i class="material-icons">done</i></span>
+                                            <input type="file" name="file" id="UploadFactura" class="fileinput" />
+                                        </span>
+
+                                        <button type="submit" class="btn btn-primary btn-round fileinput-exists">
+                                            <i class="material-icons">cloud_upload</i> Subir!
+                                        </button>
+
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Tareta (índice): @slide3.Orden</h5>
+
+                            @using (Html.BeginForm("UpdateNews", "Home", new { id = slide3.IdItem }))
+                            {
+                                <div>
+                                    <img src="@slide3.Imagen" alt="@slide3.Cabecera" style="resize:horizontal" />
+                                </div>
+
+                                <div class="input-group col-md-12">
+
+                                    <label class="control-label" for=@Model.Cabecera> * Título o cabecera</label>
+
+                                    @Html.TextBoxFor(x => x.Cabecera, new { @class = "form-control", @placeholder = "* Título o cabecera", @required = "true", @type = "text", @Value = slide3.Cabecera })
+                                    @Html.ValidationMessageFor(x => x.Cabecera, null, new { @class = "badge badge-danger" })
+
+                                </div>
+
+                                <div class="input-group col-md-12">
+
+                                    <label class="control-label" for=@Model.Cabecera> * Detalles de la nota</label>
+
+                                    @Html.TextAreaFor(x => x.Descripcion, new { @class = "form-control", @placeholder = "* Detalles de la nota", @required = "true" })
+                                    @Html.ValidationMessageFor(x => x.Descripcion, null, new { @class = "badge badge-danger" })
+
+                                </div>
+
+                                <div class="input-group col-md-12">
+
+                                    <label class="control-label" for=@Model.URL> URL de la noticia</label>
+
+                                    @Html.TextBoxFor(x => x.URL, new { @class = "form-control", @placeholder = "URL de la noticia", @type = "text", @Value = slide3.URL })
+                                    @Html.ValidationMessageFor(x => x.URL, null, new { @class = "badge badge-danger" })
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <div class="checkbox">
+                                        <label>
+                                            @Html.CheckBoxFor(x => x.Mostrar, new { @name = "hola", @checked = true })
+                                        </label>
+                                        <label class="control-label" for=@Model.Mostrar> *Mostrar noticia</label>
+                                    </div>
+
+                                </div>
+
+                                <p class="text-gray">* El campo es obligatorio</p>
+
+                                <button type="submit" class="btn btn-info btn-round">
+                                    <i class="material-icons">sd_card</i> Guardar cambios
+                                </button>
+                            }
+
+                            <br />
+
+                            @using (Html.BeginForm("UploadFile", "Home", new { id = slide3.IdItem }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                <h5 class="card-title">Imagen</h5>
+                                <label>
+                                    Seleccionar imagen en formato ".jpg" o ".png" (Para mejorar el aspecto selecciona imágenes cuyda resolución sea de un formato 16:9 (Por ejemplo 1920 x 1080 pixeles).
+                                </label>
+                                <br />
+                                <div class="fileinput fileinput-new" name="UploadFile" id="UploadItemFile" data-provides="fileinput">
+                                    <div>
+                                        <span class="btn btn-round btn-primary btn-just-icon btn-file">
+                                            <span class="fileinput-new"><i class="material-icons">attach_file</i></span>
+                                            <span class="fileinput-exists"><i class="material-icons">done</i></span>
+                                            <input type="file" name="file" id="UploadFactura" class="fileinput" />
+                                        </span>
+
+                                        <button type="submit" class="btn btn-primary btn-round fileinput-exists">
+                                            <i class="material-icons">cloud_upload</i> Subir!
+                                        </button>
+
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Tareta (índice): @slide4.Orden</h5>
+
+                            @using (Html.BeginForm("UpdateNews", "Home", new { id = slide4.IdItem }))
+                            {
+                                <div>
+                                    <img src="@slide4.Imagen" alt="@slide4.Cabecera" style="resize:horizontal" />
+                                </div>
+
+                                <div class="input-group col-md-12">
+
+                                    <label class="control-label" for=@Model.Cabecera> * Título o cabecera</label>
+
+                                    @Html.TextBoxFor(x => x.Cabecera, new { @class = "form-control", @placeholder = "* Título o cabecera", @required = "true", @type = "text", @Value = slide4.Cabecera })
+                                    @Html.ValidationMessageFor(x => x.Cabecera, null, new { @class = "badge badge-danger" })
+
+                                </div>
+
+                                <div class="input-group col-md-12">
+
+                                    <label class="control-label" for=@Model.Cabecera> * Detalles de la nota</label>
+
+                                    @Html.TextAreaFor(x => x.Descripcion, new { @class = "form-control", @placeholder = "* Detalles de la nota", @required = "true" })
+                                    @Html.ValidationMessageFor(x => x.Descripcion, null, new { @class = "badge badge-danger" })
+
+                                </div>
+
+                                <div class="input-group col-md-12">
+
+                                    <label class="control-label" for=@Model.URL> URL de la noticia</label>
+
+                                    @Html.TextBoxFor(x => x.URL, new { @class = "form-control", @placeholder = "URL de la noticia", @type = "text", @Value = slide4.URL })
+                                    @Html.ValidationMessageFor(x => x.URL, null, new { @class = "badge badge-danger" })
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <div class="checkbox">
+                                        <label>
+                                            @Html.CheckBoxFor(x => x.Mostrar, new { @name = "hola", @checked = true })
+                                        </label>
+                                        <label class="control-label" for=@Model.Mostrar> *Mostrar noticia</label>
+                                    </div>
+
+                                </div>
+
+                                <p class="text-gray">* El campo es obligatorio</p>
+
+                                <button type="submit" class="btn btn-info btn-round">
+                                    <i class="material-icons">sd_card</i> Guardar cambios
+                                </button>
+                            }
+
+                            <br />
+
+                            @using (Html.BeginForm("UploadFile", "Home", new { id = slide4.IdItem }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                <h5 class="card-title">Imagen</h5>
+                                <label>
+                                    Seleccionar imagen en formato ".jpg" o ".png" (Para mejorar el aspecto selecciona imágenes cuyda resolución sea de un formato 16:9 (Por ejemplo 1920 x 1080 pixeles).
+                                </label>
+                                <br />
+                                <div class="fileinput fileinput-new" name="UploadFile" id="UploadItemFile" data-provides="fileinput">
+                                    <div>
+                                        <span class="btn btn-round btn-primary btn-just-icon btn-file">
+                                            <span class="fileinput-new"><i class="material-icons">attach_file</i></span>
+                                            <span class="fileinput-exists"><i class="material-icons">done</i></span>
+                                            <input type="file" name="file" id="UploadFactura" class="fileinput" />
+                                        </span>
+
+                                        <button type="submit" class="btn btn-primary btn-round fileinput-exists">
+                                            <i class="material-icons">cloud_upload</i> Subir!
+                                        </button>
+
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Tareta (índice): @slide5.Orden</h5>
+
+                            @using (Html.BeginForm("UpdateNews", "Home", new { id = slide5.IdItem }))
+                            {
+                                <div>
+                                    <img src="@slide5.Imagen" alt="@slide5.Cabecera" style="resize:horizontal" />
+                                </div>
+
+                                <div class="input-group col-md-12">
+
+                                    <label class="control-label" for=@Model.Cabecera> * Título o cabecera</label>
+
+                                    @Html.TextBoxFor(x => x.Cabecera, new { @class = "form-control", @placeholder = "* Título o cabecera", @required = "true", @type = "text", @Value = slide5.Cabecera })
+                                    @Html.ValidationMessageFor(x => x.Cabecera, null, new { @class = "badge badge-danger" })
+
+                                </div>
+
+                                <div class="input-group col-md-12">
+
+                                    <label class="control-label" for=@Model.Cabecera> * Detalles de la nota</label>
+
+                                    @Html.TextAreaFor(x => x.Descripcion, new { @class = "form-control", @placeholder = "* Detalles de la nota", @required = "true" })
+                                    @Html.ValidationMessageFor(x => x.Descripcion, null, new { @class = "badge badge-danger" })
+
+                                </div>
+
+                                <div class="input-group col-md-12">
+
+                                    <label class="control-label" for=@Model.URL> URL de la noticia</label>
+
+                                    @Html.TextBoxFor(x => x.URL, new { @class = "form-control", @placeholder = "URL de la noticia", @type = "text", @Value = slide5.URL })
+                                    @Html.ValidationMessageFor(x => x.URL, null, new { @class = "badge badge-danger" })
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <div class="checkbox">
+                                        <label>
+                                            @Html.CheckBoxFor(x => x.Mostrar, new { @name = "hola", @checked = true })
+                                        </label>
+                                        <label class="control-label" for=@Model.Mostrar> *Mostrar noticia</label>
+                                    </div>
+
+                                </div>
+
+                                <p class="text-gray">* El campo es obligatorio</p>
+
+                                <button type="submit" class="btn btn-info btn-round">
+                                    <i class="material-icons">sd_card</i> Guardar cambios
+                                </button>
+                            }
+
+                            <br />
+
+                            @using (Html.BeginForm("UploadFile", "Home", new { id = slide5.IdItem }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                <h5 class="card-title">Imagen</h5>
+                                <label>
+                                    Seleccionar imagen en formato ".jpg" o ".png" (Para mejorar el aspecto selecciona imágenes cuyda resolución sea de un formato 16:9 (Por ejemplo 1920 x 1080 pixeles).
+                                </label>
+                                <br />
+                                <div class="fileinput fileinput-new" name="UploadFile" id="UploadItemFile" data-provides="fileinput">
+                                    <div>
+                                        <span class="btn btn-round btn-primary btn-just-icon btn-file">
+                                            <span class="fileinput-new"><i class="material-icons">attach_file</i></span>
+                                            <span class="fileinput-exists"><i class="material-icons">done</i></span>
+                                            <input type="file" name="file" id="UploadFactura" class="fileinput" />
+                                        </span>
+
+                                        <button type="submit" class="btn btn-primary btn-round fileinput-exists">
+                                            <i class="material-icons">cloud_upload</i> Subir!
+                                        </button>
+
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Tareta (índice): @slide6.Orden</h5>
+
+                            @using (Html.BeginForm("UpdateNews", "Home", new { id = slide6.IdItem }))
+                            {
+                                <div>
+                                    <img src="@slide6.Imagen" alt="@slide6.Cabecera" style="resize:horizontal" />
+                                </div>
+
+                                <div class="input-group col-md-12">
+
+                                    <label class="control-label" for=@Model.Cabecera> * Título o cabecera</label>
+
+                                    @Html.TextBoxFor(x => x.Cabecera, new { @class = "form-control", @placeholder = "* Título o cabecera", @required = "true", @type = "text", @Value = slide6.Cabecera })
+                                    @Html.ValidationMessageFor(x => x.Cabecera, null, new { @class = "badge badge-danger" })
+
+                                </div>
+
+                                <div class="input-group col-md-12">
+
+                                    <label class="control-label" for=@Model.Cabecera> * Detalles de la nota</label>
+
+                                    @Html.TextAreaFor(x => x.Descripcion, new { @class = "form-control", @placeholder = "* Detalles de la nota", @required = "true" })
+                                    @Html.ValidationMessageFor(x => x.Descripcion, null, new { @class = "badge badge-danger" })
+
+                                </div>
+
+                                <div class="input-group col-md-12">
+
+                                    <label class="control-label" for=@Model.URL> URL de la noticia</label>
+
+                                    @Html.TextBoxFor(x => x.URL, new { @class = "form-control", @placeholder = "URL de la noticia", @type = "text", @Value = slide6.URL })
+                                    @Html.ValidationMessageFor(x => x.URL, null, new { @class = "badge badge-danger" })
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <div class="checkbox">
+                                        <label>
+                                            @Html.CheckBoxFor(x => x.Mostrar, new { @name = "hola", @checked = true })
+                                        </label>
+                                        <label class="control-label" for=@Model.Mostrar> *Mostrar noticia</label>
+                                    </div>
+
+                                </div>
+
+                                <p class="text-gray">* El campo es obligatorio</p>
+
+                                <button type="submit" class="btn btn-info btn-round">
+                                    <i class="material-icons">sd_card</i> Guardar cambios
+                                </button>
+                            }
+
+                            <br />
+
+                            @using (Html.BeginForm("UploadFile", "Home", new { id = slide6.IdItem }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                <h5 class="card-title">Imagen</h5>
+                                <label>
+                                    Seleccionar imagen en formato ".jpg" o ".png" (Para mejorar el aspecto selecciona imágenes cuyda resolución sea de un formato 16:9 (Por ejemplo 1920 x 1080 pixeles).
+                                </label>
+                                <br />
+                                <div class="fileinput fileinput-new" name="UploadFile" id="UploadItemFile" data-provides="fileinput">
+                                    <div>
+                                        <span class="btn btn-round btn-primary btn-just-icon btn-file">
+                                            <span class="fileinput-new"><i class="material-icons">attach_file</i></span>
+                                            <span class="fileinput-exists"><i class="material-icons">done</i></span>
+                                            <input type="file" name="file" id="UploadFactura" class="fileinput" />
+                                        </span>
+
+                                        <button type="submit" class="btn btn-primary btn-round fileinput-exists">
+                                            <i class="material-icons">cloud_upload</i> Subir!
+                                        </button>
+
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+    /**/
+    var onError = @ViewBag.Msg;
+    /**/
+
+
+    $(document).ready(function () {
+        switch (onError) {
+            case 1:
+            case 2:
+                swal({
+                    title: 'Ha ocurrido un error',
+                    /**/
+                    text: '@ViewBag.MsgString',
+    /**/
+    type: 'error',
+    buttonsStyling: false,
+    confirmButtonClass: 'btn btn-success',
+    confirmButtonText: 'Ok'
+})
+break;
+case 3:
+swal({
+    title: 'Listo!',
+    /**/
+    text: '@ViewBag.MsgString',
+    /**/
+    type: 'success',
+    buttonsStyling: false,
+    confirmButtonClass: 'btn btn-success',
+    confirmButtonText: 'Ok'
+})
+break;
+default:
+break;
+}
+/**/
+@*if (onError == 1 || onError == 2) {
+                swal({
+                    title: 'Ha ocurrido un error',
+                    text: '@ViewBag.MsgString',
+                    type: 'error',
+                    buttonsStyling: false,
+                    confirmButtonClass: 'btn btn-success',
+                    confirmButtonText: 'Ok'
+                })
+            }
+            else {
+                swal({
+                    title: 'Listo!',
+                    text: '@ViewBag.MsgString',
+                    type: 'success',
+                    buttonsStyling: false,
+                    confirmButtonClass: 'btn btn-success',
+                    confirmButtonText: 'Ok'
+                })
+            }*@
+    /**/
+});
+
+    </script>
+}

@@ -1,0 +1,108 @@
+﻿@model Model.Conceptos
+
+@*@using (Ajax.BeginForm("SaveConcepto", "CapturaNurc", new AjaxOptions()
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "GVConceptos",
+        InsertionMode = InsertionMode.Replace,
+        OnBegin = "onBegin",
+        OnComplete = "onComplete",
+        OnSuccess = "onSuccess",
+        OnFailure = "onFailure"
+
+
+    }))
+    {*@
+
+
+@*}*@
+
+<div class="card ps-child" id="card">
+    <div class="card-header card-header-icon ps-child" data-background-color="rose" style="background:#159D93">
+        <i class="material-icons">list</i>
+
+    </div>
+    <div class="card-content ps-child" id="cardcontent">
+        <h4 class="card-title">
+            Conceptos
+        </h4>
+        <div class="toolbar">
+
+
+        </div>
+        <div id="mate" class="material-datatables ps-child">
+
+            <table id="datatables3" class="table ps-child">
+                <thead class="text-danger">
+                    <tr>
+                        <th>#</th>
+                        <th>Concepto</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.ListConceptos)
+                    {
+                        <tr>
+                            <td class="text-primary">
+                                <a href="#Conceptos1" onclick="DelConptos(@item.Id_Conceptos)" class="btn btn-simple btn-danger btn-icon remove">
+                                    <i class="material-icons" rel="tooltip" data-placement="right" title="Eliminar">clear</i>
+                                </a>
+
+                            </td>
+                            <td>@item.Conceptos</td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#datatables3').DataTable({
+            "order": [[1, "desc"]],
+            "pagingType": "full_numbers",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "Todos"]
+            ],
+            responsive: false,
+            language: {
+                search: "_INPUT_",
+                searchPlaceholder: "Buscar ...",
+                "paginate": {
+                    "previous": "Anterior",
+                    "next": "Siguiente",
+                    "first": "Inicial",
+                    "last": "Ultimo",
+
+                },
+                "lengthMenu": "Mostrando _MENU_ registros",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+            }
+
+        });
+
+
+        var table = $('#datatables3').DataTable();
+
+
+        $('.card .material-datatables label').addClass('form-group');
+
+
+
+    });
+
+
+
+</script>
+

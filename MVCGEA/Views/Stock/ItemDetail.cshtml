@@ -1,0 +1,262 @@
+﻿@model Model.InvInventario
+
+@{
+    ViewBag.Title = "ItemDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int error = ViewBag.Error;
+    string errorMessage = string.Empty;
+    if (error == 1)
+    {
+        errorMessage = ViewBag.ImageError;
+    }
+}
+
+<div class="nav-align-center">
+    <h3>Invetario de Productos</h3>
+</div>
+
+<div class="col-sm-10 col-md-offset-1">
+    <div class="card">
+        <div class="card-header card-header-icon" data-background-color="gray" style="background:#159D93;">
+            <i class="material-icons">devices_other</i>
+        </div>
+        <div class="card-content">
+            <h4 class="card-title">Información del Producto</h4>
+
+            <a href="@Url.Action("Stock", "Stock")" class="btn btn-primary btn-round">
+                <i class="material-icons">reply</i> Regresar
+            </a>
+
+            <br />
+            <br />
+
+            @if (Model.IdInventario > 0)
+            {
+
+                if (Model.Imagen != null)
+                {
+                    <a href="#" class="btn btn-simple btn-icon view" style="width:250px">
+                        <img src='@string.Format("{0}", Model.Imagen)' style="resize:both" />
+                    </a>
+                }
+                else
+                {
+                    <a href="#" class="btn btn-simple btn-icon view" style="width:250px" rel="tooltip" data-placement="right" title="No se ha seleccionado ninguna imagen">
+                        <img src="~/Image/noimage.png" style="resize:both" />
+                    </a>
+                }
+
+                using (Html.BeginForm("UploadFile", "Stock", new { InvId = Model.IdInventario }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="fileinput fileinput-new text-center" name="UploadFile" id="UploadItemFile" data-provides="fileinput">
+                        <div>
+                            <span class="btn btn-round btn-primary btn-just-icon btn-file">
+                                <span class="fileinput-new"><i class="material-icons">attach_file</i></span>
+                                <span class="fileinput-exists"><i class="material-icons">done</i></span>
+                                <input type="file" name="file" id="UploadFactura" class="fileinput" />
+                            </span>
+
+                            <button type="submit" class="btn btn-primary btn-round fileinput-exists">
+                                <i class="material-icons">cloud_upload</i> Subir!
+                            </button>
+
+                            <label>
+                                Seleccionar imagen en formato ".jpg" o ".png"
+                            </label>
+                        </div>
+                    </div>
+                }
+            }
+
+            @using (Html.BeginForm("EdittItemInfo", "Stock", new { idDelFormulario = "frm-newStockItem" }))
+            {
+
+                @Html.HiddenFor(x => x.IdInventario)
+                @Html.HiddenFor(x => x.Imagen)
+
+                <div class="input-group">
+
+                    <span class="input-group-addon">
+                        <i class="material-icons">
+                            text_fields
+                        </i>
+                    </span>
+
+                    <label class="control-label" for=@Model.Dispobibles> * Nombre (Ej. Clip Estándar)</label>
+
+                    @Html.TextBoxFor(x => x.Item, new { @class = "form-control", @placeholder = "* Nombre (Ej. Clip Estándar)", @required = "true" })
+                    @Html.ValidationMessageFor(x => x.Item, null, new { @class = "badge badge-danger" })
+
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">list</i>
+                    </span>
+
+                    <label class="control-label" for=@Model.Dispobibles> * Descripción (Ej. CLIP No.2 Estándar Niquelados CS2.Caja con 100 u.)</label>
+
+                    @Html.TextAreaFor(x => x.Descripcion, new { @class = "form-control", @placeholder = "* Descripción (Ej. CLIP No.2 Estándar Niquelados CS2.Caja con 100 u.)", @required = "true" })
+                    @Html.ValidationMessageFor(x => x.Descripcion, null, new { @class = "badge badge-danger" })
+
+                </div>
+
+                <br />
+
+                <p class="text-muted">
+                    * Categoría de producto
+                </p>
+
+                if (Model.IdTipo != -1)
+                {
+                    @Html.DropDownListFor(x => x.IdTipo, new SelectList(ViewBag.InvTipos, "IdTipo", "Descripcion", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10", @required = "true" })
+                    @Html.ValidationMessageFor(x => x.IdTipo, null, new { @class = "badge badge-danger" })
+                }
+                else
+                {
+                    @Html.DropDownListFor(x => x.IdTipo, new SelectList(ViewBag.InvTipos, "IdTipo", "Descripcion", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10", required = "true" })
+                    @Html.ValidationMessageFor(x => x.IdTipo, "* Este campo es obligatorio", new { @class = "badge badge-danger" })
+                }
+
+                <br />
+                <br />
+
+                <p class="text-muted">
+                    * Subcategoría de producto
+                </p>
+
+                if (Model.IdSubTipo != -1)
+                {
+                    @Html.DropDownListFor(x => x.IdSubTipo, new SelectList(ViewBag.InvSubtipos, "IdSubTipo", "Descripcion", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10", @required = "true" })
+                    @Html.ValidationMessageFor(x => x.IdSubTipo, null, new { @class = "badge badge-danger" })
+                }
+                else
+                {
+                    @Html.DropDownListFor(x => x.IdSubTipo, new SelectList(ViewBag.InvSubtipos, "IdSubTipo", "Descripcion", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10", required = "true" })
+                    @Html.ValidationMessageFor(x => x.IdSubTipo, "* Este campo es obligatorio", new { @class = "badge badge-danger" })
+                }
+
+                <br />
+                <br />
+
+                <p class="text-muted">
+                    * Unidad de medida
+                </p>
+
+                if (Model.IdUnidadMedida != -1)
+                {
+                    @Html.DropDownListFor(x => x.IdUnidadMedida, new SelectList(ViewBag.InvUMedida, "IdUnidadMedida", "UnidadMedida", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10", @required = "true" })
+                    @Html.ValidationMessageFor(x => x.IdUnidadMedida, null, new { @class = "badge badge-danger" })
+                }
+                else
+                {
+                    @Html.DropDownListFor(x => x.IdUnidadMedida, new SelectList(ViewBag.InvUMedida, "IdUnidadMedida", "UnidadMedida", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10", required = "true" })
+                    @Html.ValidationMessageFor(x => x.IdUnidadMedida, "* Este campo es obligatorio", new { @class = "badge badge-danger" })
+                }
+
+
+                <br />
+                <br />
+
+                <div class="input-group">
+
+                    <span class="input-group-addon">
+                        <i class="material-icons">
+                            developer_mode
+                        </i>
+                    </span>
+
+                    <label class="control-label" for=@Model.Dispobibles> * Codigo interno (Ej. CLP02)</label>
+
+                    @Html.TextBoxFor(x => x.Codigo, new { @class = "form-control", @placeholder = "* Codigo interno (Ej. CLP02)", @required = "true" })
+                    @Html.ValidationMessageFor(x => x.Codigo, null, new { @class = "badge badge-danger" })
+
+                </div>
+
+                <div class="input-group">
+
+                    <span class="input-group-addon">
+                        <i class="material-icons">attach_money</i>
+                    </span>
+
+                    <label class="control-label" for=@Model.CostoUnitario> *Costo unitario (Ej. $ 15.00)</label>
+
+                    @Html.TextBoxFor(x => x.CostoUnitario, "{0:0.00}", new { @class = "form-control", @placeholder = "*Costo unitario (Ej. $ 15.00)", @type = "number", @required = "true" })
+                    @Html.ValidationMessageFor(x => x.CostoUnitario, null, new { @class = "badge badge-danger" })
+
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">filter_9_plus</i>
+                    </span>
+
+                    <label class="control-label" for=@Model.Dispobibles> * Unidades en existencia (Ej. 100)</label>
+
+                    @Html.TextBoxFor(x => x.Dispobibles, new { @class = "form-control", @placeholder = "* Unidades en existencia (Ej. 100)", @required = "true", @type = "number" })
+                    @Html.ValidationMessageFor(x => x.Dispobibles, null, new { @class = "badge badge-danger" })
+
+                </div>
+
+                <div class="input-group">
+
+                    <span class="input-group-addon">
+                        <i class="material-icons">
+                            exposure_plus_1
+                        </i>
+                    </span>
+
+                    <label class="control-label" for=@Model.InvMin>Cantidad mínima para generar alertas de reabastecimiento</label>
+
+                    @Html.TextBoxFor(x => x.InvMin, "{0:N}", new { @class = "form-control", @placeholder = "Cantidad mínima para generar alertas de reabastecimiento", @type = "number" })
+                    @Html.ValidationMessageFor(x => x.CostoUnitario, null, new { @class = "badge badge-danger" })
+
+                </div>
+
+                <br />
+                <br />
+
+                <div class="togglebutton">
+                    <label>
+                        @Html.CheckBoxFor(x => x.ReqDevolucion, new { @type = "checkbox" })
+                        Requiere devolución de ítem agotado para reabastecer
+                    </label>
+                </div>
+
+                <br />
+                <br />
+
+                <p class="text-gray">* El campo es obligatorio</p>
+
+                <button type="submit" class="btn btn-info btn-round">
+                    <i class="material-icons">sd_card</i> Guardar
+                </button>
+
+            }
+
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+    var onError = @ViewBag.Error;
+
+
+        $(document).ready(function () {
+            if (onError == 1){
+                swal({
+                    title: 'Ha ocurrido un error',
+                    text: '@ViewBag.ImageError',
+                    type: 'error',
+                    buttonsStyling: false,
+                    confirmButtonClass: 'btn btn-success',
+                    confirmButtonText: 'Ok'
+                })
+            }
+        });
+
+    </script>
+}

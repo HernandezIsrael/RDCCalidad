@@ -1,0 +1,45 @@
+@model Model.Ca_Bancos
+
+@using (Ajax.BeginForm("Save", "Banco", new AjaxOptions()
+{
+    HttpMethod = "POST",
+    UpdateTargetId = "resultado",
+    InsertionMode = InsertionMode.Replace,
+    OnBegin = "onBegin",
+    OnComplete = "onComplete",
+    OnSuccess = "onSuccess",
+    OnFailure = "onFailure"
+
+
+}))
+{
+    @Html.HiddenFor(x => x.Id_Banco)
+    <h4 class="card-title">Banco</h4>
+    <div class="input-group">
+        <span class="input-group-addon">
+            <i class="material-icons">work</i>
+        </span>
+        <div class="form-group">
+
+            @Html.TextBoxFor(x => x.Banco, new { @class = "form-control", @placeholder = "Banco" })
+            @Html.ValidationMessageFor(x => x.Banco, null, new { @class = "badge badge-danger" })
+
+        </div>
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">
+            Activo:
+        </span>
+        <div class="form-group">
+
+            <div class="togglebutton">
+                <label>
+                    @Html.CheckBoxFor(x => x.Activo)
+                </label>
+            </div>
+
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-fill btn-rose">Guardar</button>
+}

@@ -1,0 +1,45 @@
+﻿@model Model.CaTipoTesoreria
+@using (Ajax.BeginForm("Save", "TipoTesoreria", new AjaxOptions()
+{
+    HttpMethod = "POST",
+    UpdateTargetId = "resultado",
+    InsertionMode = InsertionMode.Replace,
+    OnBegin = "onBegin",
+    OnComplete = "onComplete",
+    OnSuccess = "onSuccess",
+    OnFailure = "onFailure"
+
+
+}))
+{
+    @Html.HiddenFor(x => x.IdTipoTesoreria)
+    <h4 class="card-title">Tipo de documento Tesoreria.</h4>
+    <div class="input-group">
+        <span class="input-group-addon">
+            <i class="material-icons">book</i>
+        </span>
+        <div class="form-group">
+
+            @Html.TextBoxFor(x => x.TipoTesoreria, new { @class = "form-control", @placeholder = "Tipo de documento." })
+            @Html.ValidationMessageFor(x => x.TipoTesoreria, null, new { @class = "badge badge-danger" })
+
+        </div>
+    </div>
+
+    <div class="input-group">
+        <span class="input-group-addon">
+            Activo:
+        </span>
+        <div class="form-group">
+
+            <div class="togglebutton">
+                <label>
+                    @Html.CheckBoxFor(x => x.Activo)
+                </label>
+            </div>
+
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-fill btn-rose">Guardar</button>
+}

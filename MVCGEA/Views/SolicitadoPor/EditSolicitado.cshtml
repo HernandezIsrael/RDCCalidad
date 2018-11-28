@@ -1,0 +1,57 @@
+﻿@model Model.Ca_Solicitado_por
+
+
+@using (Ajax.BeginForm("Save", "SolicitadoPor", new AjaxOptions()
+{
+    HttpMethod = "POST",
+    UpdateTargetId = "resultado",
+    InsertionMode = InsertionMode.Replace,
+    OnBegin = "onBegin",
+    OnComplete = "onComplete",
+    OnSuccess = "onSuccess",
+    OnFailure = "onFailure"
+
+
+}))
+{
+    @Html.HiddenFor(x => x.Id_Solicitado_por)
+    <h4 class="card-title">Solicitado por</h4>
+    <div class="input-group">
+        <span class="input-group-addon">
+            <i class="material-icons">person_pin</i>
+        </span>
+        <div class="form-group">
+
+            @Html.TextBoxFor(x => x.Solicitado_por, new { @class = "form-control", @placeholder = "Solicitado por..." })
+            @Html.ValidationMessageFor(x => x.Solicitado_por, null, new { @class = "badge badge-danger" })
+
+        </div>
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">
+            <i class="material-icons">email</i>
+        </span>
+        <div class="form-group">
+        
+            @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @placeholder = "E-mail", @type="email"})
+            @Html.ValidationMessageFor(x => x.Email, null, new { @class = "badge badge-danger" })
+
+        </div>
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">
+            Activo:
+        </span>
+        <div class="form-group">
+
+            <div class="togglebutton">
+                <label>
+                    @Html.CheckBoxFor(x => x.Activo)
+                </label>
+            </div>
+
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-fill btn-rose">Guardar</button>
+}

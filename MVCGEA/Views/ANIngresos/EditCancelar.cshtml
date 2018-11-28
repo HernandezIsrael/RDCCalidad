@@ -1,0 +1,32 @@
+﻿
+@model Model.Pagos
+
+
+@using (Ajax.BeginForm("Cancel", "ANIngresos", new AjaxOptions()
+{
+    HttpMethod = "POST",
+    UpdateTargetId = "resultado",
+    InsertionMode = InsertionMode.Replace,
+    OnBegin = "onBegin",
+    OnComplete = "onComplete",
+    OnSuccess = "onSuccess",
+    OnFailure = "onFailure"
+
+
+}))
+{
+    @Html.HiddenFor(x => x.Id_Pago)
+    <h4 class="card-title">Rechazar N.U.R.C</h4>
+    <div class="input-group">
+        <span class="input-group-addon">
+            <i class="material-icons">sentiment_very_dissatisfied</i>
+        </span>
+        <div class="form-group">
+            <label class="control-label" for="Comentarios">Comentario</label>
+            @Html.TextAreaFor(x => x.Comentarios, new { @class = "form-control" })
+        </div>
+    </div>
+    <button type="submit" class="btn btn-fill btn-rose" style="background:#159D93">Cancelar</button>
+}
+
+

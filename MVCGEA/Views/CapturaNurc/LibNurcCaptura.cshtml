@@ -1,0 +1,176 @@
+﻿<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "LibNurcCaptura";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts{
+  
+    <script src="~/scripts/jquery.unobtrusive-ajax.js"></script>
+    @*<script src="~/scripts/perfect-scrollbar.js" type="text/javascript"></script>*@
+    <script type="text/javascript">
+        
+        $(document).ready(function () {
+            LlamrGV(1);
+            LlamrGV2(1);
+        });
+       
+        function LlamrGV(p) {
+
+            var laURLDeLaVista = '@Url.Action("LibNurcProcesados", "CapturaNurc")';
+            swal({
+               
+                text: 'Cargando ...',
+                allowOutsideClick: false,
+                allowEscapeKey:false,
+                onOpen: () => {
+                    swal.showLoading()
+                }
+            })
+            $.ajax({
+                cache: false,
+                async: true,
+                type: "GET",
+                url: laURLDeLaVista,
+                data: { page: p },
+                success: function (response) {
+
+                    $('#proc').html('');
+                    try {
+                        $('#proc').html(response).load(swal.closeModal());
+                    } catch (err) { }
+                }
+            });
+            return false;
+        }
+        function LlamrGV2(p) {
+
+            var laURLDeLaVista = '@Url.Action("LibNCaptura", "CapturaNurc")';
+           
+            $.ajax({
+                cache: false,
+                async: true,
+                type: "GET",
+                url: laURLDeLaVista,
+                data: { page2: p },
+                success: function (response) {
+
+                    $('#cap').html('');
+                    try {
+                        $('#cap').html(response).load(swal.closeModal());
+                    } catch (err) { }
+                }
+            });
+            return false;
+        }
+        function SearchGV() {
+
+            var txt = $("#search").val();
+            var laURLDeLaVista = '@Url.Action("LibNurcProcesados", "CapturaNurc")';
+            swal({
+
+                text: 'Cargando ...',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                onOpen: () => {
+                    swal.showLoading()
+                }
+            })
+            $.ajax({
+                cache: false,
+                async: true,
+                type: "GET",
+                url: laURLDeLaVista,
+                data: { search: txt },
+                success: function (response) {
+
+                    $('#proc').html('');
+                    try {
+                        $('#proc').html(response).load(swal.closeModal());
+                    } catch (err) { }
+                }
+            });
+            return false;
+        }
+        function SearchGV2() {
+
+            var txt = $("#search2").val();
+            var laURLDeLaVista = '@Url.Action("LibNCaptura", "CapturaNurc")';
+            swal({
+
+                text: 'Cargando ...',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                onOpen: () => {
+                    swal.showLoading()
+                }
+            })
+            $.ajax({
+                cache: false,
+                async: true,
+                type: "GET",
+                url: laURLDeLaVista,
+                data: { search2: txt },
+                success: function (response) {
+
+                    $('#cap').html('');
+                    try {
+                        $('#cap').html(response).load(swal.closeModal());
+                    } catch (err) { }
+                }
+            });
+            return false;
+        }
+
+
+    </script>
+}
+<div class="col-sm-10 col-md-offset-1">
+    <div class="card">
+        <div class="card-header card-header-icon" data-background-color="rose" style="background:#159D93">
+            <div class="nav-tabs-navigation">
+                <div class="nav-tabs-wrapper">
+                    <ul class="nav nav-tabs" id="tabs" data-tabs="tabs"   style="background:#159D93">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#np" data-toggle="tab">
+                                <i class="material-icons">credit_card</i>
+                                N.U.R.C.S PROCESADOS
+                                <div class="ripple-container"></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active show" href="#nc" data-toggle="tab">
+                                <i class="material-icons">create</i>
+                               N.U.R.C.S EN CAPTURA
+                                <div class="ripple-container"></div>
+                            </a>
+                        </li>
+                      
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card-content">
+            <br />
+            <br />
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="np">
+                    <div id="proc">
+
+                    </div>
+                </div>
+                <div class="tab-pane" id="nc">
+                    <div id="cap">
+
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+

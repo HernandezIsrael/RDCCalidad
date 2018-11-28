@@ -1,0 +1,144 @@
+﻿@model List<Model.TaksAdmon>
+@{
+    ViewBag.Title = "LibTickets";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section fixTable{
+<script type="text/javascript">
+        $(document).ready(function () {
+            $('#datatables').DataTable({
+                "order": [[0, "desc"]], //column,type
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "Todos"]
+                ],
+                responsive: false,
+                language: {
+                    search: "_INPUT_",
+                    lengthMenu: "Mostrar _MENU_ entradas",
+                    searchPlaceholder: "Buscar", "paginate": { "previous": "Anterior", "next": "Siguiente", "first": "Primero", "last": "último" },
+                    info: "Mostrando _START_ a _END_ tickets de _TOTAL_ registros"
+                }
+            });
+
+
+            var table = $('#datatables').DataTable();
+
+            $('.card .material-datatables label').addClass('form-group');
+        });
+    
+</script>
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-icon" data-background-color="gray" style="background:#159D93;">
+                <i class="material-icons">assignment</i>
+            </div>
+            <div class="card-content">
+                <h4 class="card-title">Lista de tickets</h4>
+                <div class="toolbar">
+                    <!--        Here you can write extra buttons/actions for the toolbar              -->
+                </div>
+                <div class="material-datatables">
+                    <a href="@Url.Action("CreateNew","Tickets")" class="btn btn-primary btn-round">Crear nuevo ticket <i class="material-icons">add</i></a>
+                    <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100" style="width:100%">
+                        <thead class="text-info">
+                            <tr>
+                                <th class="disabled-sorting text-center">Crear</th>
+                                <th class="disabled-sorting text-center">Visualizar</th>
+                                <th class="text-center">No. de ticket</th>
+                                <th class="text-center">Destino</th>
+                                <th class="text-center">Solicitado por</th>
+                                <th class="text-center">Estatus</th>
+                                <th class="text-center">Tipo</th>
+                                <th class="text-center">Empresa</th>
+                                <th class="text-center">Asunto</th>
+                                <th class="text-center">Fecha de solicitud</th>
+                                <th class="text-center">Fecha de cierre</th>
+                                <th class="text-center">Atendió</th>
+                            </tr>
+                        </thead>
+                        <tfoot class="text-info">
+                            <tr>
+                                <th class="text-center">Crear</th>
+                                <th class="text-center">Visualizar</th>
+                                <th class="text-center">No. de ticket</th>
+                                <th class="text-center">Destino</th>
+                                <th class="text-center">Solicitado por</th>
+                                <th class="text-center">Estatus</th>
+                                <th class="text-center">Tipo</th>
+                                <th class="text-center">Empresa</th>
+                                <th class="text-center">Asunto</th>
+                                <th class="text-center">Fecha de solicitud</th>
+                                <th class="text-center">Fecha de cierre</th>
+                                <th class="text-center">Atendió</th>
+                            </tr>
+                        </tfoot>
+
+                        <tbody>
+                            @foreach (var row in Model)
+                            {
+                                <tr>
+                                    <td class="text-center" style="width:5%">
+                                        <a href="@Url.Action("CreateNew","Tickets")" class="btn btn-simple btn-info btn-icon view"><i class="material-icons">add</i></a>
+                                    </td>
+                                    <td class="text-center" style="width:5%">
+                                        <a href="@Url.Action("TicketDetail", "Tickets", new { ticketID = row.IdTaks, status = row.IdEstatusTaks })" class="btn btn-simple btn-primary btn-icon view"><i class="material-icons">remove_red_eye</i></a>
+                                    </td>
+                                    <td class="text-center" style="width:10%">@row.IdTaks</td>
+                                    <td class="text-center" style="width:5%">@(row.CA_Areas.Nombre_Area)</td>
+                                    <td class="text-center" style="width:10%">@string.Format("{0} {1}", row.Usuarios.Nombre, row.Usuarios.Apellidos)</td>
+                                    <td class="text-center" style="width:5%">
+                                        @switch (row.IdEstatusTaks)
+                                        {
+                                            case 1:
+                                            <a href ="#" rel="tooltip" data-placement="top" title="Incompleta">
+                                                <i class='material-icons' style='color:DodgerBlue;' data-notify='icon'>create</i>
+                                            </a>
+                                            break;
+                                            case 2:
+                                                <a href ="#" rel="tooltip" data-placement="top" title="Ticket enviado">
+                                                    <i class='material-icons' style='color:orange;' data-notify='icon'>how_to_vote</i>
+                                                </a>
+                                            break;
+                                            case 3:
+                                                <a href ="#" rel="tooltip" data-placement="top" title="Completado">
+                                                    <i class='material-icons' style='color:MediumSeaGreen;' data-notify='icon'>check_circle</i>
+                                                </a>
+                                            break;
+                                            case 4:
+                                                <a href ="#" rel="tooltip" data-placement="top" title="Rechazado">
+                                                    <i class='material-icons' style='color:tomato;' data-notify='icon'>cancel</i>
+                                                </a>
+                                            break;
+                                            case 5:
+                                                <a href ="#" rel="tooltip" data-placement="top" title="Visto">
+                                                    <i class='material-icons' style='color:DodgerBlue;' data-notify='icon'>done_all</i>
+                                                </a>
+                                            break;
+                                        }
+                                    </td>
+                                    <td class="text-center" style="width:10%">@row.TaksTipo.TaksTipo1</td>
+                                    <td class="text-center" style="width:10%">@row.Empresas.Razon_Social</td>
+                                    <td class="text-center" style="width:10%">@row.Asunto</td>
+                                    <td class="text-center" style="width:10%">@row.FAlta</td>
+                                    <td class="text-center" style="width:10%">@row.FCierre</td>
+                                    <td class="text-center" style="width:10%">@string.Format("{0} {1}", row.Usuarios.Nombre, row.Usuarios.Apellidos)</td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+
+                </div>
+            </div>
+            <!-- end content-->
+        </div>
+        <!--  end card  -->
+    </div>
+</div>

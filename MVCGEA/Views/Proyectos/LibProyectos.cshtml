@@ -1,0 +1,118 @@
+﻿@model Model.Proyectos
+@{
+    ViewBag.Title = "LibProyectos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts{
+
+    <script src="~/scripts/jquery.unobtrusive-ajax.js"></script>
+    <script type="text/javascript">
+
+
+        $("#Id_Empresa").change(function () {
+                 LlamrGV($("#Id_Empresa").val());
+        });
+
+
+        function LlamrGV(b) {
+
+            var laURLDeLaVista = '@Url.Action("ListaProyectos", "Proyectos")';
+            $.ajax({
+                cache: false,
+                async: true,
+                type: "GET",
+                url: laURLDeLaVista,
+                data: { id: b },
+                success: function (response) {
+                    $('#ListProc').html('');
+                    $('#ListProc').html(response);
+
+                }
+            });
+        }
+
+        function LlamrPr(s) {
+            var laURLDeLaVista = '@Url.Action("EditProyecto", "Proyectos")';
+            $.ajax({
+                cache: false,
+                async: true,
+                type: "GET",
+                url: laURLDeLaVista,
+                data: { id: s },
+                success: function (response) {
+                    $('#resultado').html('');
+                    $('#resultado').html(response);
+
+                }
+            });
+        }
+        function onBegin(respuesta) {
+            console.log(respuesta + 'Bg');
+        }
+        function onSuccess(respuesta) {
+            console.log(respuesta + 'Sc');
+        }
+        function onComplete(respuesta) {
+            console.log(respuesta + 'Cm');
+        }
+        function onFailure(respuesta) {
+            console.log(respuesta + 'Fl');
+        }
+        function PopupOnClosed() {
+            $('#myModal').modal('hide');
+            @*setTimeout(function () { window.location.href = '@Url.Action("LibProyectos", "Proyectos")'; }, 400);*@
+            LlamrGV($("#Id_Empresa").val());
+        }
+    </script>
+}
+
+
+<div class="col-sm-10 col-md-offset-1">
+    <div class="card">
+        <div class="card-header card-header-icon" data-background-color="rose" style="background:#159D93">
+            <i class="material-icons">receipt</i>
+        </div>
+        <div class="card-content">
+            <h4 class="card-title">Proyecto:</h4>
+
+
+          
+
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">business</i>
+                    </span>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for=@Model.Id_Empresa>Empresas:</label>
+
+                        @Html.DropDownListFor(x => x.Id_Empresa, new SelectList(ViewBag.ListEmpresas, "Id", "NombreCompleto",Model.Id_Empresa), new { @class = "form-control" })
+
+                       
+                    </div>
+                </div>
+        </div>
+    </div>
+    <br />
+    <div id="ListProc">
+
+    </div>
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="card " role="dialog">
+                <div class="card-header card-header-icon" data-background-color="rose" style="background:#159D93">
+                    <i class="material-icons">receipt</i>
+                </div>
+
+                <div class="card-content" id="resultado">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+

@@ -1,0 +1,93 @@
+﻿@model List<Model.Menu>
+
+@{
+    ViewBag.Title = "Menu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts{
+    <script src="~/scripts/jquery.unobtrusive-ajax.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#datatables').DataTable({
+                "order": [[1, "desc"]],
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "Todos"]
+                ],
+                responsive: false,
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Buscar ...",
+                    "paginate": {
+                        "previous": "Anterior",
+                        "next": "Siguiente",
+                        "first": "Inicial",
+                        "last": "Ultimo",
+
+                    },
+                    "lengthMenu": "Mostrando _MENU_ registros",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                }
+
+            });
+
+            var table = $('#datatables').DataTable();
+
+            $('.card .material-datatables label').addClass('form-group');
+
+
+
+
+        });
+    </script>
+}
+<div class="card">
+    <div class="card-header card-header-icon" data-background-color="rose">
+        <h4 class="card-title">
+            <i class="material-icons">
+                http
+            </i>
+            Menu
+        </h4>
+        <div class="toolbar"></div>
+
+    </div>
+    <div class="card-content table-responsive table-full-width material-datatables">
+        <table id="datatables" class="table">
+            <thead class="text-danger">
+                <tr>
+                    <th>Grupo</th>
+                    <th>Controlador</th>
+                    <th>Menu</th>
+                    <th>URL</th>
+                    <th>Activo</th>
+                    <th>Orden</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@(item.Grupos_Menu.Grupo)</td>
+                        <td>@(item.Controlador)</td>
+                        <td>@(item.Menu1)</td>
+                        <td>@(item.URL)</td>
+                        <td>
+                            <div class="togglebutton">
+                                <label>
+                                    @Html.CheckBoxFor(modelitem => item.Activo, new { Value = item.Activo, disabled = "disabled" })
+                                </label>
+                            </div>
+                        </td>
+                        <td>@(item.Orden)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a href="/Menu/LibMenu">
+            <i class="material-icons" rel="tooltip" data-placement="right" title="Atras">reply</i></a>
+</div>
+</div>
+

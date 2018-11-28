@@ -1,0 +1,48 @@
+﻿@model Model.Ca_Medio_Entrega
+
+
+@using (Ajax.BeginForm("Save", "Medios", new AjaxOptions()
+{
+    HttpMethod = "POST",
+    UpdateTargetId = "resultado",
+    InsertionMode = InsertionMode.Replace,
+    OnBegin = "onBegin",
+    OnComplete = "onComplete",
+    OnSuccess = "onSuccess",
+    OnFailure = "onFailure"
+
+
+}))
+{
+    @Html.HiddenFor(x => x.Id_Medio)
+    <h4 class="card-title">Medio de entrega</h4>
+    <div class="input-group">
+        <span class="input-group-addon">
+            <i class="material-icons">local_shipping</i>
+        </span>
+        <div class="form-group">
+            <label for=@Model.Medio>Medio:</label>
+            @Html.TextBoxFor(x => x.Medio, new { @class = "form-control", @placeholder = "Medio de entrega" })
+            @Html.ValidationMessageFor(x => x.Medio, null, new { @class = "badge badge-danger" })
+
+        </div>
+    </div>
+
+    <div class="input-group">
+        <span class="input-group-addon">
+            Activo:
+        </span>
+        <div class="form-group">
+
+            <div class="togglebutton">
+                <label>
+                    @Html.CheckBoxFor(x => x.Activo)
+                </label>
+            </div>
+
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-fill btn-rose">Guardar</button>
+}
+

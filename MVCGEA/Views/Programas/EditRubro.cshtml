@@ -1,0 +1,61 @@
+﻿@model Model.Ca_Rubros
+
+
+
+ @using (Ajax.BeginForm("SaveRubro", "Programas", new AjaxOptions()
+ {
+     HttpMethod = "POST",
+     UpdateTargetId = "resultado",
+     InsertionMode = InsertionMode.Replace,
+     OnBegin = "onBegin",
+     OnComplete = "onComplete",
+     OnSuccess = "onSuccess",
+     OnFailure = "onFailure"
+
+
+ }))
+ {
+    @Html.HiddenFor(x => x.Id_Rubro)
+    @Html.HiddenFor(x => x.Id_Institucion)
+        <h4 class="card-title">Rubro</h4>
+        <div class="input-group">
+            <span class="input-group-addon">
+                <i class="material-icons">code</i>
+            </span>
+            <div class="form-group">
+                <label for=@Model.Codigo>Codigo:</label>
+                @Html.TextBoxFor(x => x.Codigo, new { @class = "form-control", @placeholder = "Codigo" })
+                @Html.ValidationMessageFor(x => x.Codigo, null, new { @class = "badge badge-danger" })
+
+            </div>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">
+                <i class="material-icons">create</i>
+            </span>
+            <div class="form-group">
+                <label for=@Model.Rubro>Rubro:</label>
+                @Html.TextBoxFor(x => x.Rubro, new { @class = "form-control", @placeholder = "Rubro" })
+                @Html.ValidationMessageFor(x => x.Rubro, null, new { @class = "badge badge-danger" })
+
+            </div>
+        </div>
+
+        <div class="input-group">
+            <span class="input-group-addon">
+                Activo:
+            </span>
+            <div class="form-group">
+
+                <div class="togglebutton">
+                    <label>
+                        @Html.CheckBoxFor(x => x.Activo)
+                    </label>
+                </div>
+
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-fill btn-rose">Guardar</button>
+    }
+

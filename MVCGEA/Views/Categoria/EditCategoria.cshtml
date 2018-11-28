@@ -1,0 +1,46 @@
+﻿@model Model.Ca_Categoria
+
+
+@using (Ajax.BeginForm("Save", "Categoria", new AjaxOptions()
+{
+    HttpMethod = "POST",
+    UpdateTargetId = "resultado",
+    InsertionMode = InsertionMode.Replace,
+    OnBegin = "onBegin",
+    OnComplete = "onComplete",
+    OnSuccess = "onSuccess",
+    OnFailure = "onFailure"
+
+
+}))
+{
+    @Html.HiddenFor(x => x.Id_Categoria)
+    <h4 class="card-title">Categoria</h4>
+    <div class="input-group">
+        <span class="input-group-addon">
+            <i class="material-icons">playlist_add_check</i>
+        </span>
+        <div class="form-group">
+
+            @Html.TextBoxFor(x => x.Categoria, new { @class = "form-control", @placeholder = "Categoria" })
+            @Html.ValidationMessageFor(x => x.Categoria, null, new { @class = "badge badge-danger" })
+
+        </div>
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">
+            Activo:
+        </span>
+        <div class="form-group">
+
+            <div class="togglebutton">
+                <label>
+                    @Html.CheckBoxFor(x => x.Activo)
+                </label>
+            </div>
+
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-fill btn-rose">Guardar</button>
+}

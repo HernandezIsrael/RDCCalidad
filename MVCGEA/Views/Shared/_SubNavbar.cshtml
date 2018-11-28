@@ -1,0 +1,218 @@
+﻿@model List<Model.Notifications>
+
+<nav class="navbar navbar-transparent navbar-absolute">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"> @string.Format("Bienvenid@ {0}", Session["Name"]) </a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="material-icons">dashboard</i>
+                        <p class="hidden-lg hidden-md">Dashboard</p>
+                    </a>
+                </li>
+                <li class="col-xl-4 dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="material-icons">notifications</i>
+                        @{
+                            int i = 0;
+                            foreach (var value in Model)
+                            {
+                                if (value.IdStatus == 2)
+                                {
+                                    i++;
+                                }
+                            }
+                            if (i != 0)
+                            {
+                                <span class="notification">
+                                    @i
+                                </span>
+                            }
+
+                        }
+                        <p class="hidden-lg hidden-md">Notifications</p>
+                    </a>
+                    <ul class="dropdown-menu">
+
+                        @if (Model.Count() > 0)
+                        {
+
+                            foreach (var notification in Model)
+                            {
+                                if (notification.Link != "#")
+                                {
+                                    <li>
+                                        <a href=@string.Format("{0}&newNotificationStatus=1", notification.Link)>
+                                            <table width="100" style="width:100%">
+                                                <tr>
+                                                    <td style="width:20%">
+
+                                                        <i class="material-icons @string.Format("{0}",(notification.IdStatus == 1)?"text-gray":"")">&nbsp;&nbsp;&nbsp;@notification.Icono&nbsp;&nbsp;&nbsp;&nbsp;</i>
+                                                        <br />
+
+                                                    </td>
+                                                    <td style="width:80%">
+
+                                                        <span class="@string.Format("{0}",(notification.IdStatus == 1)?"text-gray":"")">
+                                                            <b>@string.Format("{0} {1}", notification.Usuarios.Nombre, notification.Usuarios.Apellidos)</b> @notification.Titulo <b>@notification.Descripcion</b>
+                                                        </span>
+                                                        <br />
+
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:20%">
+                                                        <br />
+                                                        @if (notification.FAlta.Date == DateTime.Now.Date)
+                                                        {
+
+                                                            <span class="@string.Format("{0}",(notification.IdStatus == 1)?"text-gray":"text-info")">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hoy&nbsp;</span>
+
+                                                        }
+                                                        else if (notification.FAlta.Day == DateTime.Now.Day - 1)
+                                                        {
+                                                            if (notification.FAlta.Month == DateTime.Now.Month)
+                                                            {
+                                                                if (notification.FAlta.Year == DateTime.Now.Year)
+                                                                {
+
+                                                                    <span class="@string.Format("{0}",(notification.IdStatus == 1)?"text-gray":"text-info")">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ayer&nbsp;</span>
+
+                                                                }
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="@string.Format("{0}",(notification.IdStatus == 1)?"text-gray":"text-info")">@string.Format("{0}/{1}/{2}", notification.FAlta.Day, notification.FAlta.Month, notification.FAlta.Year)&nbsp;</span>
+                                                        }
+                                                    </td>
+                                                    <td style="width:80%">
+
+                                                        <br />
+                                                        <span class="@string.Format("{0}",(notification.IdStatus == 1)?"text-gray":"text-info")">@string.Format("a las {0}:{1}", notification.FAlta.Hour, (notification.FAlta.Minute < 10) ? "0" + notification.FAlta.Minute : notification.FAlta.Minute.ToString())</span>
+
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a href='@Url.Action(notification.Vista, notification.Controlador, new { notificationID = notification.IdNotification, newNotificationStatus = 1 })'>
+                                            <table width="100" style="width:100%">
+                                                <tr>
+                                                    <td style="width:20%">
+
+                                                        <i class="material-icons @string.Format("{0}",(notification.IdStatus == 1)?"text-gray":"")">&nbsp;&nbsp;&nbsp;@notification.Icono&nbsp;&nbsp;&nbsp;&nbsp;</i>
+                                                        <br />
+
+                                                    </td>
+                                                    <td style="width:80%">
+
+                                                        <span class="@string.Format("{0}",(notification.IdStatus == 1)?"text-gray":"")">
+                                                            <b>@string.Format("{0} {1}", notification.Usuarios.Nombre, notification.Usuarios.Apellidos)</b> @notification.Titulo <b>@notification.Descripcion</b>
+                                                        </span>
+                                                        <br />
+
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:20%">
+                                                        <br />
+                                                        @if (notification.FAlta.Date == DateTime.Now.Date)
+                                                        {
+
+                                                            <span class="@string.Format("{0}",(notification.IdStatus == 1)?"text-gray":"text-info")">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hoy&nbsp;</span>
+
+                                                        }
+                                                        else if (notification.FAlta.Day == DateTime.Now.Day - 1)
+                                                        {
+                                                            if (notification.FAlta.Month == DateTime.Now.Month)
+                                                            {
+                                                                if (notification.FAlta.Year == DateTime.Now.Year)
+                                                                {
+
+                                                                    <span class="@string.Format("{0}",(notification.IdStatus == 1)?"text-gray":"text-info")">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ayer&nbsp;</span>
+
+                                                                }
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="@string.Format("{0}",(notification.IdStatus == 1)?"text-gray":"text-info")">@string.Format("{0}/{1}/{2}", notification.FAlta.Day, notification.FAlta.Month, notification.FAlta.Year)&nbsp;</span>
+                                                        }
+                                                    </td>
+                                                    <td style="width:80%">
+
+                                                        <br />
+                                                        <span class="@string.Format("{0}",(notification.IdStatus == 1)?"text-gray":"text-info")">@string.Format("a las {0}:{1}", notification.FAlta.Hour, (notification.FAlta.Minute < 10) ? "0" + notification.FAlta.Minute : notification.FAlta.Minute.ToString())</span>
+
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </a>
+                                    </li>
+                                }
+
+                            }
+                        }
+                        else
+                        {
+                            <li>
+                                <a>
+                                    No tienes nuevas notificaciones
+                                </a>
+                            </li>
+                        }
+
+                    </ul>
+                </li>
+                <li>
+                    <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="material-icons">person</i>
+                        <p class="hidden-lg hidden-md">Profile</p>
+                    </a>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group  is-empty">
+                    <input type="text" class="form-control" placeholder="Search">
+                    <span class="material-input"></span>
+                </div>
+                <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                    <i class="material-icons">search</i>
+                    <div class="ripple-container"></div>
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+@section Scripts{
+    <script type="text/javascript">
+
+        function clearNotifications(n) {
+                var laURLDeLaVista = '@Url.Action("Clear", "Notifications")';
+                $.ajax({
+                    cache: false,
+                    async: true,
+                    type: "POST",
+                    url: laURLDeLaVista,
+                    data: { list: n }
+                });
+
+        }
+
+    </script>
+}

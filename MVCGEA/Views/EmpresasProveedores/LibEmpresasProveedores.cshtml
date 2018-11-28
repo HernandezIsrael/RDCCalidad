@@ -1,0 +1,176 @@
+﻿@model Model.Re_Proveedores_Empresa
+@{
+    ViewBag.Title = "LibEmpresasProveedores";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts{
+
+    <script src="~/scripts/jquery.unobtrusive-ajax.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+            OnComplete();
+
+
+        });
+
+        $("#Id_Empresa").change(function () {
+         $("#Id_Proveedor").empty();
+         $.ajax({
+             type: 'POST',
+             url: '@Url.Action("GetEnter")',
+
+             dataType: 'json',
+
+             data: { id: $("#Id_Empresa").val() },
+             success: function (states) {
+                 LlamrGV($("#Id_Empresa").val());
+                 $.each(states, function (i, state) {
+
+
+                     if (state.Value == -1) {
+                         $("#Id_Proveedor").append('<option selected = "selected" value="' + state.Value + '">' +
+                          state.Text + '</option>');
+
+
+                     } else {
+                         $("#Id_Proveedor").append('<option value="' + state.Value + '">' +
+                              state.Text + '</option>');
+                     }
+
+
+                 });
+             },
+             error: function (ex) {
+                 alert('Failed to retrieve .' + ex);
+             }
+         });
+         return false;
+     });
+        function OnComplete() {
+            $("#Id_Proveedor").empty();
+            if ($("#Id_Empresa").val() != -1) {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetEnter")',
+
+                    dataType: 'json',
+
+                    data: { id: $("#Id_Empresa").val() },
+                    success: function (states) {
+                       LlamrGV($("#Id_Empresa").val());
+                        $.each(states, function (i, state) {
+
+                            if (state.Value == -1) {
+                                $("#Id_Proveedor").append('<option selected = "selected" value="' + state.Value + '">' +
+                                 state.Text + '</option>');
+
+
+                            } else {
+                                $("#Id_Proveedor").append('<option value="' + state.Value + '">' +
+                                     state.Text + '</option>');
+                            }
+
+
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve .' + ex);
+                    }
+                });
+            }
+
+            return false;
+
+        }
+
+     function LlamrGV(b) {
+
+         var laURLDeLaVista = '@Url.Action("EditEmpresasProveedor", "EmpresasProveedores")';
+         $.ajax({
+             cache: false,
+             async: true,
+             type: "GET",
+             url: laURLDeLaVista,
+             data: { id: b },
+             success: function (response) {
+                 $('#ListEmp').html('');
+                 $('#ListEmp').html(response);
+             }
+         });
+     }
+
+
+
+    </script>
+}
+
+
+<div class="col-sm-10 col-md-offset-1">
+    <div class="card">
+        <div class="card-header card-header-icon" data-background-color="rose" style="background:#159D93">
+            <i class="material-icons">receipt</i>
+        </div>
+        <div class="card-content">
+            <h4 class="card-title">Empresas-Proveedor:</h4>
+
+
+            @using (Html.BeginForm("Save", "EmpresasProveedores", FormMethod.Post, new { id = "frm-Empresa" }))
+            {
+
+                
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">business</i>
+                    </span>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for=@Model.Id_Empresa>Empresas:</label>
+
+                        @Html.DropDownListFor(x => x.Id_Empresa, new SelectList(ViewBag.ListEmpresas, "Id", "NombreCompleto", -1), new { @class = "form-control" })
+
+                        @Html.ValidationMessageFor(x => x.Id_Empresa, null, new { @class = "badge badge-danger" })
+                    </div>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">business</i>
+                    </span>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for=@Model.Id_Proveedor>Proveedores:</label>
+
+                        @Html.DropDownListFor(x => x.Id_Proveedor, new SelectList(string.Empty, "Id", "NombreCompleto", string.Empty), new { @class = "form-control" })
+
+                        @Html.ValidationMessageFor(x => x.Id_Proveedor, null, new { @class = "badge badge-danger" })
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+                <button type="submit" class="btn btn-info btn-round" style="background:#159D93">
+                    <i class="material-icons">save</i> Guardar
+                </button>
+
+
+            }
+
+
+        </div>
+    </div>
+    <br />
+    <div id="ListEmp">
+
+    </div>
+
+</div>
+
+
+
+

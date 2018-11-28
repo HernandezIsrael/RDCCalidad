@@ -1,0 +1,42 @@
+﻿@model Model.Pagos
+@using (Html.BeginForm("SaveDoctos", "NURCP", FormMethod.Post, new { id = "frm-nurc-docto", enctype = "multipart/form-data" }))
+{
+    <h4 class="card-title">Autorizar N.U.R.C</h4>
+    @Html.HiddenFor(x => x.Id_Pago)
+    <div class="input-group ">
+        <span class="input-group-addon">
+            <i class="material-icons">date_range</i>
+        </span>
+        <div class="form-group ">
+            <label class="control-label" for="F_Pago">Fecha de pago</label>
+            @Html.TextBoxFor(x => x.F_Pago, new { @class = "form-control ", @type = "date", @Value = Model.F_Pago.HasValue ? Model.F_Pago.Value.ToString("yyyy-MM-dd") : "" })
+        </div>
+    </div>
+    <div class="input-group ">
+        <span class="input-group-addon">
+            <i class="material-icons">book</i>
+        </span>
+        <div class="form-group ">
+            <label class="control-label" for="F_Pago">No. Transferencia</label>
+           @Html.TextBoxFor(x=> x.N_Transferencia,new {@class= "form-control" })
+        </div>
+    </div>
+    <div class="input-group ">
+        <span class="input-group-addon">
+            <i class="material-icons">attach_money</i>
+        </span>
+        <div class="form-group ">
+            <label class="control-label" for="F_Pago">Tipo de cambio</label>
+            @Html.TextBoxFor(x => x.Cambio, "{0:0.0000}", new { @class = "form-control", @type = "number", @step = 0.0001 })
+        </div>
+    </div>
+
+    <br>
+
+    <input type="file" name="file" />
+    <br>
+    <input type="submit" class="btn btn-rose btn-round btn-file" style="background:#159D93;"  value="Subir" />
+
+  
+
+    }

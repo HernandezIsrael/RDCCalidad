@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "PDFView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    function llamarVistaParcial() {
+        window.location = "@Url.Action("PDF", "Capacidades")";
+        return false;
+    }
+</script>
+<a href="#" onclick="llamarVistaParcial()">Gruñeme</a>
+

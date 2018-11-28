@@ -1,0 +1,91 @@
+﻿@model List<Model.Re_Usuario_Empresa>
+<div class="card">
+    <div class="card-header card-header-icon" data-background-color="rose" style="background:#159D93">
+        <i class="material-icons">list</i>
+
+    </div>
+    <div class="card-content">
+        <h4 class="card-title">
+            Empresas
+        </h4>
+        <div class="toolbar">
+            <!--        Here you can write extra buttons/actions for the toolbar              -->
+        </div>
+        <div class="material-datatables">
+            <table id="datatables" class="table">
+                <thead class="text-danger">
+                    <tr>
+                        <td>#</td>
+                        <td>Empresa</td>
+
+                        <td>R.F.C</td>
+                       
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="text-primary">
+                                <a href=@Url.Action("Eliminar","UsuarioEmpresas",new { id = item.Id_Re_Usuario_Empresas, idusr = item.Id_Usuario }) class="btn btn-simple btn-danger btn-icon remove">
+                                    <i class="material-icons" rel="tooltip" data-placement="right" title="Eliminar">clear</i>
+                                </a>
+                               
+                            </td>
+                            <td>@item.Empresas.Razon_Social</td>
+
+                            <td>@item.Empresas.RFC</td>
+                           
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#datatables').DataTable({
+                "order": [[1, "asc"]],
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "Todos"]
+                ],
+                responsive: false,
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Buscar ...",
+                    "paginate": {
+                        "previous": "Anterior",
+                        "next": "Siguiente",
+                        "first": "Inicial",
+                        "last": "Ultimo",
+
+                    },
+                    "lengthMenu": "Mostrando _MENU_ registros",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                }
+
+            });
+
+
+            var table = $('#datatables').DataTable();
+
+
+            $('.card .material-datatables label').addClass('form-group');
+
+
+
+
+        });
+
+
+
+</script>

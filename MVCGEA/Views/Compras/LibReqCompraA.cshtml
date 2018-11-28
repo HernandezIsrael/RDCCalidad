@@ -1,0 +1,153 @@
+﻿@model List<Model.SpSelReqCompra_Result>
+@{
+    ViewBag.Title = "LibReqCompraA";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts{
+    <script src="~/scripts/jquery.unobtrusive-ajax.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#datatables').DataTable({
+                "order": [[1, "desc"]],
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "Todos"]
+                ],
+                responsive: false,
+                "scrollY": 550,
+                "scrollX": true,
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Buscar ...",
+                    "paginate": {
+                        "previous": "Anterior",
+                        "next": "Siguiente",
+                        "first": "Inicial",
+                        "last": "Ultimo",
+
+                    },
+                    "lengthMenu": "Mostrando _MENU_ registros",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                }
+
+            });
+
+
+            var table = $('#datatables').DataTable();
+
+
+            $('.card .material-datatables label').addClass('form-group');
+
+
+
+
+        });
+
+        function llamarVistaParcial(v) {
+
+            var laURLDeLaVista = '@Url.Action("EditTipoVinculaciones", "TipoVinculacion")';
+            $.ajax({
+                cache: false,
+                async: true,
+                type: "GET",
+                url: laURLDeLaVista,
+                data: { id: v },
+                success: function (response) {
+                    $('#resultado').html('');
+                    $('#resultado').html(response);
+                }
+            });
+        }
+        function PopupOnClosed() {
+
+            $('#myModal').modal('hide');
+            setTimeout(function () { window.location.href = '@Url.Action("LibTipoVinculaciones", "TipoVinculacion")'; }, 400);
+
+        }
+
+        function onBegin(respuesta) {
+            console.log(respuesta + 'Bg');
+        }
+        function onSuccess(respuesta) {
+            console.log(respuesta + 'Sc');
+        }
+        function onComplete(respuesta) {
+            console.log(respuesta + 'Cm');
+        }
+        function onFailure(respuesta) {
+            console.log(respuesta + 'Fl');
+        }
+
+    </script>
+}
+
+<div class="card">
+    <div class="card-header card-header-icon" data-background-color="rose" style="background:#159D93">
+        <i class="material-icons">list</i>
+
+    </div>
+    <div class="card-content">
+        <h4 class="card-title">
+           Requisiciones de compra
+        </h4>
+        <div class="toolbar">
+            <!--        Here you can write extra buttons/actions for the toolbar              -->
+        </div>
+        <div class="material-datatables">
+            <table id="datatables" class="table">
+                <thead class="text-danger">
+                    <tr>
+                        <th style="width:50px;">#</th>
+                        <th style="width:50px;">Folio</th>
+                        <th style="width:200px;">Estatus</th>
+                        <th style="width:150px;">Aplica a proyecto</th>
+                        <th style="width:150px;">Servicio</th>
+                        <th style="width:100px;">Area</th>
+                        <th style="width:300px;">Empresa</th>
+                        <th style="width:300px;">Proveedor</th>
+                        <th style="width:200px;">Dirección de entrega</th>
+                        <th style="width:120px;">Fecha de alta</th>
+                        <th style="width:120px;">Vigencia</th>
+                        <th style="width:100px;">Creado por</th>
+
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="text-primary">
+
+                                <a href=@Url.Action("EditCodole", "Codole",new {id=0}) class="btn btn-simple btn-success btn-icon new">
+                                    <i class="material-icons" rel="tooltip" data-placement="right" title="Agregar">add</i>
+                                </a>
+                                <a href=@Url.Action("EditCodole", "Codole", new {id=item.IdReqCompra}) class="btn btn-simple btn-warning btn-icon edit">
+                                    <i class="material-icons" rel="tooltip" data-placement="right" title="Modificar">create</i>
+
+                                </a>
+                            </td>
+                            <td>@item.IdReqCompra</td>
+                            <td>@item.Estatus</td>
+                            <td>@item.AplicaProyecto</td>
+                            <td>@item.Servicio</td>
+                            <td>@item.Area</td>
+                            <td>@item.Razon_Social</td>
+                            <td>@item.Proveedor</td>
+                            <td>@item.Direccion</td>
+                            <td>@item.FAlta.Value.ToShortDateString()</td>
+                            <td>@item.VigenciaCotizacion.Value.ToShortDateString()</td>
+                            <td>@item.Usuario</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+

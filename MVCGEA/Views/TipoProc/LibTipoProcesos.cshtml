@@ -1,0 +1,168 @@
+﻿@model List<Model.CaTipoRProcesos>
+@{
+    ViewBag.Title = "LibTipoProcesos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts{
+    <script src="~/scripts/jquery.unobtrusive-ajax.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#datatables').DataTable({
+                "order": [[2, "asc"]],
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "Todos"]
+                ],
+                responsive: false,
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Buscar ...",
+                    "paginate": {
+                        "previous": "Anterior",
+                        "next": "Siguiente",
+                        "first": "Inicial",
+                        "last": "Ultimo",
+
+                    },
+                    "lengthMenu": "Mostrando _MENU_ registros",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                }
+
+            });
+
+
+            var table = $('#datatables').DataTable();
+
+
+            $('.card .material-datatables label').addClass('form-group');
+
+
+
+
+        });
+
+        function llamarVistaParcial(v) {
+
+            var laURLDeLaVista = '@Url.Action("EditProcesos", "TipoProc")';
+            $.ajax({
+                cache: false,
+                async: true,
+                type: "GET",
+                url: laURLDeLaVista,
+                data: { id: v },
+                success: function (response) {
+                    $('#resultado').html('');
+                    $('#resultado').html(response);
+                }
+            });
+        }
+        function PopupOnClosed() {
+
+            $('#myModal').modal('hide');
+            setTimeout(function () { window.location.href = '@Url.Action("LibTipoProcesos", "TipoProc")'; }, 400);
+
+        }
+
+        function onBegin(respuesta) {
+            console.log(respuesta + 'Bg');
+        }
+        function onSuccess(respuesta) {
+            console.log(respuesta + 'Sc');
+        }
+        function onComplete(respuesta) {
+            console.log(respuesta + 'Cm');
+        }
+        function onFailure(respuesta) {
+            console.log(respuesta + 'Fl');
+        }
+
+    </script>
+}
+
+<div class="card">
+    <div class="card-header card-header-icon" data-background-color="rose">
+        <i class="material-icons">list</i>
+
+    </div>
+    <div class="card-content">
+        <h4 class="card-title">
+            Documentos Procesos.
+        </h4>
+        <div class="toolbar">
+            <!--        Here you can write extra buttons/actions for the toolbar              -->
+        </div>
+        <div class="material-datatables">
+            <table id="datatables" class="table">
+                <thead class="text-danger">
+                    <tr>
+                        <th>#</th>
+                        <th>No</th>
+
+                        <th>Tipo de documento</th>
+                        <th>Activo</th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="text-primary">
+
+                                <a href="#" onclick="llamarVistaParcial(0)" class="btn btn-simple btn-success btn-icon new" data-toggle="modal" data-target="#myModal">
+                                    <i class="material-icons" rel="tooltip" data-placement="right" title="Agregar">add</i>
+                                </a>
+                                <a href="#" onclick="llamarVistaParcial(@item.IdTipoRProcesos)" class="btn btn-simple btn-warning btn-icon edit" data-toggle="modal" data-target="#myModal">
+                                    <i class="material-icons" rel="tooltip" data-placement="right" title="Modificar">create</i>
+
+                                </a>
+                            </td>
+                            <td>@(item.IdTipoRProcesos)</td>
+
+                            <td>@(item.TipoRProcesos)</td>
+                            <td>
+                                <div class="togglebutton">
+                                    <label>
+
+                                        @Html.CheckBoxFor(modelitem => item.Activo, new { Value = item.Activo, disabled = "disabled" })
+                                    </label>
+                                </div>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- end content-->
+</div>
+
+
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="card " role="dialog">
+            <div class="card-header card-header-icon" data-background-color="rose">
+                <i class="material-icons">book</i>
+            </div>
+
+            <div class="card-content" id="resultado">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+

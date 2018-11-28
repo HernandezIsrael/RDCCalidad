@@ -1,0 +1,191 @@
+﻿@*https://developers.itextpdf.com/content/itext-7-converting-html-pdf-pdfhtml/chapter-1-hello-html-pdf
+    https://www.aspsnippets.com/Articles/MVC-iTextSharp-Example-Convert-HTML-to-PDF-using-iTextSharp-in-ASPNet-MVC.aspx*@
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Model.spSelReporteServicios_Result> servicios = new List<Model.spSelReporteServicios_Result>();
+    servicios = ViewBag.Servicios;
+}
+
+
+<div class="col-md-8 col-md-offset-2 text-center">
+    <div class="card">
+        <div class="card-header">
+            <img src="~/Image/Clusmext-logo.png" style="width:365px;height:112px" />
+        </div>
+        <div class="card-content">
+
+            <div id="PDFContent" style="align-content:center">
+
+                @*********************************** INICIA EL PDF ***********************************@
+
+                <table style="height: 5px; margin-left: auto; margin-right: auto;" border="0" width="708" cellspacing="0">
+                    <tbody>
+                        <tr>
+                            <td style="width: 667px; text-align: right;">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 667px; text-align: right;"><strong>FORMATO DE ADMINISTRACI&Oacute;N DE CAPACIDADES</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 667px; text-align: center;">&nbsp;</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="height: 48px; border-color: black; width: 708px; margin-left: auto; margin-right: auto;" border="1" cellspacing="0" cellpadding="3">
+                    <tbody>
+                        <tr>
+                            <td style="background-color: #dfdfdf;"><strong>SOCIO / CLIENTE:</strong></td>
+                            <td style="width: 517px;">&nbsp;@ViewBag.Cliente</td>
+                        </tr>
+                        <tr>
+                            <td style="background-color: #dfdfdf;"><strong>ASUNTO:</strong></td>
+                            <td style="width: 517px;">Informativa de los servicios de Capacidades que actualmente se est&aacute;n administrando por parte de la empresa <strong>Clusmext S.A de C.V.</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="background-color: #dfdfdf;"><strong>FECHA INFORME:</strong></td>
+                            <td style="width: 517px;">&nbsp;@DateTime.Now.ToString("dd MMMM yyyy")</td>
+                        </tr>
+                        <tr>
+                            <td style="background-color: #dfdfdf;"><strong>INFORMA:</strong></td>
+                            <td style="width: 517px;">&nbsp; Cristopher De Le&oacute;n / &Aacute;rea de capacidades</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                @if (servicios != null)
+                {
+                    <table style="width: 708px; height: 185px; margin-left: auto; margin-right: auto;" border="1" cellspacing="0" cellpadding="2">
+                        <tbody>
+                            <tr style="height: 18px;">
+                                <td style="width: 602px; background-color: #dfdfdf; height: 18px;"><strong>ANTECEDENTES:</strong></td>
+                            </tr>
+                            <tr style="height: 72px;">
+                                <td style="width: 602px; height: 72px;">En la empresa Clusmext S.A de C.V. como parte de su organizaci&oacute;n se tiene un &aacute;rea llamada Capacidades, la cual se encarga de la administraci&oacute;n y pago de servicios como son: Luz, Tel&eacute;fono, Contrataci&oacute;n y pagos de Arrendamientos, as&iacute; como apoyar al logro de la obtenci&oacute;n de la infraestructura que nuestros socios y clientes necesiten para el desarrollo de sus actividades.</td>
+                            </tr>
+                            <tr style="height: 18px;">
+                                <td style="width: 602px; background-color: #dfdfdf; height: 18px;"><strong>JUSTIFICACI&Oacute;N:</strong></td>
+                            </tr>
+                            <tr style="height: 54px;">
+                                <td style="width: 602px; height: 54px;">Nuestros Socios y/o Clientes tendr&aacute;n por este medio claro y documentado los tipos de servicios que se est&aacute;n administrando actualmente por parte de Clusmext S.A de C.V. y su &aacute;rea de Capacidades con base a lo descrito anteriormente.</td>
+                            </tr>
+                            <tr style="height: 18px;">
+                                <td style="width: 602px; background-color: #dfdfdf; height: 18px;"><strong>OBJETIVO:</strong></td>
+                            </tr>
+                            <tr style="height: 36px;">
+                                <td style="width: 602px; height: 36px;">Dar a conocer el tipo y alcance de cada uno los servicios que se administran actualmente por empresa. As&iacute; como la informaci&oacute;n con la que se cuenta actualmente.</td>
+                            </tr>
+                            <tr style="height: 18px;">
+                                <td style="width: 602px; background-color: #dfdfdf; height: 18px;"><strong>DESCRIPCI&Oacute;N:</strong></td>
+                            </tr>
+                            <tr style="height: 146px;">
+                                <td style="width: 602px; height: 146px;">
+                                    <table style="height: 36px; margin-left: auto; margin-right: auto;" width="687">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width: 247px; text-align: center;"><strong>@ViewBag.Cliente</strong></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <table style="height: 33px; margin-left: auto; margin-right: auto;" border="1" width="687" cellspacing="0" cellpadding="3">
+                                        <tbody>
+                                            <tr>
+                                                <td style="color: white; background-color: black; text-align: center;">Servicio</td>
+                                                <td style="color: white; background-color: black; text-align: center;">Descripci&oacute;n</td>
+                                                <td style="color: white; background-color: black; text-align: center;">Direcci&oacute;n</td>
+                                                <td style="color: white; background-color: black; text-align: center;">Alcance CLUSMEXT</td>
+                                            </tr>
+                                            @if (servicios != null)
+                                            {
+                                                foreach (var row in servicios)
+                                                {
+                                                    <tr>
+                                                        <td style="width: 164px; text-align: center;">@row.Tipo_Servicio</td>
+                                                        <td style="width: 165px; text-align: center;">@row.NReferencia</td>
+                                                        <td style="width: 165px;">@row.Direccion</td>
+                                                        <td style="width: 165px;">@row.Descripcion</td>
+                                                    </tr>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <td style="width: 164px; text-align: center;">000000</td>
+                                                    <td style="width: 165px; text-align: center;">0000000</td>
+                                                    <td style="width: 165px;">000000000</td>
+                                                    <td style="width: 165px;">0000000</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                    <p>&nbsp;</p>
+                                </td>
+                            </tr>
+                            <tr style="height: 17px;">
+                                <td style="width: 602px; height: 18px; background-color: #dfdfdf;"><strong>&nbsp;RESTRICCIONES&nbsp;QUE&nbsp;PUEDEN&nbsp;AFECTAR&nbsp;LA&nbsp;GESTI&Oacute;N&nbsp;Y&nbsp;SERVICIO</strong></td>
+                            </tr>
+                            <tr style="height: 18px;">
+                                <td style="width: 602px; height: 18px;">
+                                    <ul>
+                                        <li class="cs4383A195"><span class="cs66480997">El proveedor tenga problemas internos para dar su servicio</span></li>
+                                        <li class="cs4383A195"><span class="cs66480997">Presupuesto limitado para proceder al pago</span></li>
+                                        <li class="cs4383A195"><span class="cs66480997">No se proporcione informaci&oacute;n para la actualizaci&oacute;n de dato, activaci&oacute;n o contrataci&oacute;n de nuevos servicios</span></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr style="height: 18px;">
+                                <td style="width: 602px; height: 18px; background-color: #dfdfdf;">&nbsp;<strong>BENEFICIOS&nbsp;Y/O&nbsp;LOGROS&nbsp;ESPERADOS</strong></td>
+                            </tr>
+                            <tr style="height: 18px;">
+                                <td style="width: 602px; height: 18px;">
+                                    <ul>
+                                        <li class="cs4383A195"><span class="cs66480997">Disminuir quejas</span></li>
+                                        <li class="cs4383A195"><span class="cs66480997">Dar un valor agregado a la instituci&oacute;n</span></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr style="height: 18px;">
+                                <td style="width: 602px; height: 18px; background-color: #dfdfdf;">O<strong>BSERVACIONES&nbsp;Y&nbsp;FIRMA&nbsp;DE&nbsp;QUIEN&nbsp;APRUEBA</strong></td>
+                            </tr>
+                            <tr style="height: 18px;">
+                                <td style="width: 602px; height: 18px;">&nbsp;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div></div>
+                }
+
+                @*********************************** TERMINA EL PDF ***********************************@
+
+            </div>
+
+            <div>
+                <br />
+                @using (Html.BeginForm("Export", "Capacidades", FormMethod.Post))
+                {
+                    <input type="hidden" name="HtmlString" />
+                    <div class="text-center">
+                        <a href="@Url.Action("LibServicios","Capacidades")" class="btn btn-primary btn-round"><i class="material-icons">reply</i>&nbsp; Regresar</a>
+                        <button type="submit" id="btnSubmit" class="btn btn-primary btn-round">
+                            <i class="material-icons">cloud_download</i>&nbsp;&nbsp;EXPORTAR A PDF
+                        </button>
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").click(function () {
+            $("input[name='HtmlString']").val($("#PDFContent").html());
+        });
+    });
+</script>

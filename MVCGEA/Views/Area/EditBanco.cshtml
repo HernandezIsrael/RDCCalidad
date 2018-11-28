@@ -1,0 +1,81 @@
+﻿@model Model.CA_Areas
+
+@*@using (Html.BeginForm("Save", "Area", FormMethod.Post, new { id = "frm-Area" }))
+{
+    @Html.HiddenFor(x => x.Id_CA_Area)
+    <h4 class="card-title">Areas</h4>
+    <div class="input-group">
+        <span class="input-group-addon">
+            <i class="material-icons">work</i>
+        </span>
+        <div class="form-group">
+
+            @Html.TextBoxFor(x => x.Nombre_Area, new { @class = "form-control", @placeholder = "Area" })
+            @Html.ValidationMessageFor(x => x.Nombre_Area, null, new { @class = "badge badge-danger" })
+
+        </div>
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">
+          Activo:
+        </span>
+        <div class="form-group">
+            
+            <div class="togglebutton">
+                <label>
+                    @Html.CheckBoxFor(x => x.Activo)
+                </label>
+            </div>
+
+        </div>
+    </div>
+
+        <button type="submit" class="btn btn-fill btn-rose" >Guardar</button>
+        }*@
+
+
+
+
+@using (Ajax.BeginForm("Save", "Area", new AjaxOptions() {
+        HttpMethod = "POST",
+        UpdateTargetId = "resultado",
+        InsertionMode = InsertionMode.Replace,
+    OnBegin = "onBegin",
+    OnComplete= "onComplete",
+    OnSuccess= "onSuccess",
+    OnFailure= "onFailure"
+
+
+}))
+
+{
+    @Html.HiddenFor(x => x.Id_CA_Area)
+    <h4 class="card-title">Areas</h4>
+    <div class="input-group">
+        <span class="input-group-addon">
+            <i class="material-icons">work</i>
+        </span>
+        <div class="form-group">
+
+            @Html.TextBoxFor(x => x.Nombre_Area, new { @class = "form-control", @placeholder = "Area" })
+            @Html.ValidationMessageFor(x => x.Nombre_Area, null, new { @class = "badge badge-danger" })
+
+        </div>
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">
+            Activo:
+        </span>
+        <div class="form-group">
+
+            <div class="togglebutton">
+                <label>
+                    @Html.CheckBoxFor(x => x.Activo)
+                </label>
+            </div>
+
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-fill btn-rose">Guardar</button>
+}

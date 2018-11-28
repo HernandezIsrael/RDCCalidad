@@ -1,0 +1,48 @@
+﻿@model Model.Ca_Moneda
+
+
+@using (Ajax.BeginForm("Save", "Moneda", new AjaxOptions()
+{
+    HttpMethod = "POST",
+    UpdateTargetId = "resultado",
+    InsertionMode = InsertionMode.Replace,
+    OnBegin = "onBegin",
+    OnComplete = "onComplete",
+    OnSuccess = "onSuccess",
+    OnFailure = "onFailure"
+
+
+}))
+{
+    @Html.HiddenFor(x => x.Id_Moneda)
+    <h4 class="card-title">Moneda</h4>
+    <div class="input-group">
+        <span class="input-group-addon">
+            <i class="material-icons">monetization_on</i>
+        </span>
+        <div class="form-group">
+            <label for=@Model.Moneda>Moneda:</label>
+            @Html.TextBoxFor(x => x.Moneda, new { @class = "form-control", @placeholder = "Moneda" })
+            @Html.ValidationMessageFor(x => x.Moneda, null, new { @class = "badge badge-danger" })
+
+        </div>
+    </div>
+
+    <div class="input-group">
+        <span class="input-group-addon">
+            Activo:
+        </span>
+        <div class="form-group">
+
+            <div class="togglebutton">
+                <label>
+                    @Html.CheckBoxFor(x => x.Activo)
+                </label>
+            </div>
+
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-fill btn-rose">Guardar</button>
+}
+

@@ -1,0 +1,424 @@
+﻿
+@{
+    ViewBag.Title = "LibReqsPapeleria";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Model.Usuarios userData = ViewBag.User;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-icon" data-background-color="gray" style="background:#159D93;">
+                <i class="material-icons">
+                    content_cut
+                </i>
+            </div>
+            <div class="card-content">
+                <h4 class="card-title">Solicitud de papelería</h4>
+                <div class="toolbar">
+                    <!--        Here you can write extra buttons/actions for the toolbar              -->
+                </div>
+
+                @if (DateTime.Now.Day > 22)
+                {
+                    <div>
+                        <a href=@Url.Action("RequestDetails","Stock") class="btn btn-primary btn-round">Nueva solicitud <i class="material-icons">add</i></a>
+                    </div>
+                }
+
+                <div class="">
+                    <div class="card">
+                        <div class="card-header card-header-tabs" data-background-color="gray" style="background:#159D93;">
+                            <div class="nav-tabs-navigation">
+                                <div class="nav-tabs-wrapper">
+                                    <span class="nav-tabs-title"></span>
+                                    <ul class="nav nav-tabs" data-tabs="tabs">
+                                        <li class="active">
+                                            <a href="#profile" data-toggle="tab">
+                                                <i class="material-icons">bug_report</i> Solicitudes por área
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="#messages" data-toggle="tab">
+                                                <i class="material-icons">code</i> Todas las solicitudes
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="profile">
+                                    <div class="material-datatables">
+                                        <table id="datatables2" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100" style="width:100%">
+                                            <thead class="text-info">
+                                                <tr>
+                                                    <th class="text-center">Número de pedido</th>
+                                                    <th class="text-center">Descripción</th>
+                                                    <th class="text-center">Área que solicita</th>
+                                                    <th class="text-center">Quien solicita</th>
+                                                    <th class="text-center">Entregado</th>
+                                                    <th class="text-center">Fecha de creación de la solicitud</th>
+                                                </tr>
+                                            </thead>
+                                            <tfoot class="text-info">
+                                                <tr>
+                                                    <th class="text-center">Número de pedido</th>
+                                                    <th class="text-center">Descripción</th>
+                                                    <th class="text-center">Área que solicita</th>
+                                                    <th class="text-center">Quien solicita</th>
+                                                    <th class="text-center">Entregado</th>
+                                                    <th class="text-center">Fecha de creación de la solicitud</th>
+                                                </tr>
+                                            </tfoot>
+
+                                            <tbody>
+                                                @foreach (Model.InvListaPedidos row in ViewBag.Listas)
+                                                {
+                                                    <tr>
+                                                        <td class="text-center" style="width:10%">
+                                                            <a class="btn btn-round btn-info" href="@Url.Action("RequestDetails","Stock", new { id = row.IdListaPedido })" rel="tooltip" data-placement="top" title="Ver detalles">
+                                                                @row.IdListaPedido
+                                                            </a>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @row.Descripcion
+                                                        </td>
+
+                                                        @switch (row.Usuarios.Id_Area)
+                                                        {
+                                                            case 1:
+                                                                <td class="text-center">TI</td>
+                                                                break;
+                                                            case 2:
+                                                                <td class="text-center">Capacidades</td>
+                                                                break;
+                                                            case 3:
+                                                                <td class="text-center">Planeación</td>
+                                                                break;
+                                                            case 4:
+                                                                <td class="text-center">Ejecución</td>
+                                                                break;
+                                                            case 5:
+                                                                <td class="text-center">Contabilidad</td>
+                                                                break;
+                                                            case 7:
+                                                                <td class="text-center">Legal</td>
+                                                                break;
+                                                            case 1007:
+                                                                <td class="text-center">R.R.H.H</td>
+                                                                break;
+                                                            case 1009:
+                                                                <td class="text-center">Vinculaciones</td>
+                                                                break;
+                                                            case 1010:
+                                                                <td class="text-center">Contraloría</td>
+                                                                break;
+                                                            case 1011:
+                                                                <td class="text-center">Tesorería</td>
+                                                                break;
+                                                            case 1013:
+                                                                <td class="text-center">Compras</td>
+                                                                break;
+                                                            case 1014:
+                                                                <td class="text-center">Dirección General</td>
+                                                                break;
+                                                            case 1015:
+                                                                <td class="text-center">Asistente de presidencia</td>
+                                                                break;
+                                                            case 1017:
+                                                                <td class="text-center">Finanzas</td>
+                                                                break;
+                                                            default:
+                                                                <td class="text-center">Otro (@row.Usuarios.Id_Area)</td>
+                                                                break;
+                                                        }
+
+                                                        <td class="text-center">
+                                                            @string.Format("{0} {1}", row.Usuarios.Nombre, row.Usuarios.Apellidos)
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @if (row.Atendido)
+                                                            {
+                                                                <div class="text-success">
+                                                                    <i class="material-icons" rel="tooltip" data-placement="top" title="Entregado">
+                                                                        check_box
+                                                                    </i>
+                                                                </div>
+                                                            }
+                                                            else
+                                                            {
+
+                                                                <div style="color:tomato">
+                                                                    <i class="material-icons" rel="tooltip" data-placement="top" title="Aún no ha sido reabastecida">
+                                                                        indeterminate_check_box
+                                                                    </i>
+                                                                </div>
+                                                            }
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @row.FAlta.ToString("dd MMMM yyyy")
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="messages">
+
+                                    <div class="material-datatables">
+                                        <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100" style="width:100%">
+                                            <thead class="text-info">
+                                                <tr>
+                                                    <th>Solicitado por</th>
+                                                    <th class="">Ítem</th>
+                                                    <th class="">Descripción</th>
+                                                    <th class="text-center">Cantidad solicitada</th>
+                                                    <th class="text-center">Estatus</th>
+                                                    <th class="text-center">Entregado</th>
+                                                    <th class="text-center">Disponibilidad</th>
+                                                    <th class="text-center">Requiere item agotado</th>
+                                                    <th class="text-center">Comentario</th>
+                                                    <th class="text-center">Fecha de solicitud</th>
+                                                </tr>
+                                            </thead>
+                                            <tfoot class="text-info">
+                                                <tr>
+                                                    <th>Solicitado por</th>
+                                                    <th class="">Ítem</th>
+                                                    <th class="">Descripción</th>
+                                                    <th class="text-center">Cantidad solicitada</th>
+                                                    <th class="text-center">Estatus</th>
+                                                    <th class="text-center">Entregado</th>
+                                                    <th class="text-center">Disponibilidad</th>
+                                                    <th class="text-center">Requiere item agotado</th>
+                                                    <th class="text-center">Comentario</th>
+                                                    <th class="text-center">Fecha de solicitud</th>
+                                                </tr>
+                                            </tfoot>
+
+                                            <tbody>
+                                                @foreach (Model.InvSolicitud row in Model)
+                                                {
+                                                    <tr>
+                                                        <td style="width:15%">
+                                                            @string.Format("{0} {1}", row.Usuarios.Nombre, row.Usuarios.Apellidos)
+                                                        </td>
+                                                        <td>
+                                                            <b>
+                                                                @row.InvInventario.Item
+                                                            </b>
+                                                        </td>
+                                                        <td style="width:15%">
+                                                            @row.InvInventario.Descripcion
+                                                        </td>
+                                                        <td class="text-center" style="width:10%">
+                                                            <a class="btn btn-round btn-info" href="#">
+                                                                @row.Cantidad
+                                                            </a>
+                                                        </td>
+                                                        <td class="text-center" style="width:5%">
+                                                            @switch (row.Estatus)
+                                                            {
+                                                                case 1: //Enviado
+                                                                    <div class="text-warning">
+                                                                        <i class="material-icons" rel="tooltip" data-placement="top" title="Solicitud enviada">
+                                                                            how_to_vote
+                                                                        </i>
+                                                                    </div>
+                                                                    break;
+                                                                case 2: //Visto
+                                                                    <div class="text-info">
+                                                                        <i class="material-icons" rel="tooltip" data-placement="top" title="Tu solicitud ha sido revisada">
+                                                                            done_all
+                                                                        </i>
+                                                                    </div>
+                                                                    break;
+                                                                case 3: //Aprobado
+                                                                    <div class="text-success">
+                                                                        <i class="material-icons" rel="tooltip" data-placement="top" title="Solicitud aprobada">
+                                                                            check_circle
+                                                                        </i>
+                                                                    </div>
+                                                                    break;
+                                                                case 4: //Rechazado
+                                                                    <div style="color:tomato">
+                                                                        <i class="material-icons" rel="tooltip" data-placement="top" title="Solcitud rechazada">
+                                                                            cancel
+                                                                        </i>
+                                                                    </div>
+                                                                    break;
+                                                                case 5: //Devuelto
+                                                                    <div class="text-primary">
+                                                                        <i class="material-icons" rel="tooltip" data-placement="top" title="Item devuelto">
+                                                                            reply
+                                                                        </i>
+                                                                    </div>
+                                                                    break;
+                                                            }
+                                                        </td>
+                                                        <td class="text-center" style="width:7%">
+
+                                                            @if (row.Entregado.Value)
+                                                            {
+                                                                if (userData.Id_Area == 1 || userData.Id_Area == 1007)
+                                                                {
+                                                                    using (Html.BeginForm("MarkAs", "Stock", new { itemID = row.IdSolicitud, entregado = false }))
+                                                                    {
+                                                                        <button type=@string.Format("{0}", (ViewBag.Permission)?"submit":"") rel="tooltip" title="Entregado (clic para marcar como no entregado)" class="btn btn-success btn-just-icon btn-round">
+                                                                            <i class="material-icons">check_box</i>
+                                                                        </button>
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="#" rel="tooltip" title="Entregado (clic para marcar como no entregado)" class="btn btn-success btn-just-icon btn-round">
+                                                                        <i class="material-icons">check_box</i>
+                                                                    </a>
+                                                                }
+
+                                                            }
+                                                            else
+                                                            {
+                                                                if (userData.Id_Area == 1 || userData.Id_Area == 1007)
+                                                                {
+                                                                    using (Html.BeginForm("MarkAs", "Stock", new { itemID = row.IdSolicitud, entregado = true }))
+                                                                    {
+                                                                        <button type=@string.Format("{0}", (ViewBag.Permission)?"submit":"") rel="tooltip" title="No Entregado (clic para marcar como entregado)" class="btn btn-danger btn-just-icon btn-round">
+                                                                            <i class="material-icons">check_box_outline_blank</i>
+                                                                        </button>
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="#" rel="tooltip" title="No entregado" class="btn btn-danger btn-just-icon btn-round">
+                                                                        <i class="material-icons">check_box_outline_blank</i>
+                                                                    </a>
+                                                                }
+
+                                                            }
+                                                        </td>
+                                                        <td class="text-center" style="width:8%">
+                                                            @if (row.NoDisponible.Value)
+                                                            {
+                                                                <div class="text-warning">
+                                                                    <i class="material-icons" rel="tooltip" data-placement="top" title="El ítem solicitado está siendo ocupado por otra(s) persona(s)">
+                                                                        check_box_outline_blank
+                                                                    </i>
+                                                                </div>
+                                                            }
+                                                            else
+                                                            {
+                                                                <div class="text-success">
+                                                                    <i class="material-icons" rel="tooltip" data-placement="top" title="El ítem solicitado puede ser entregado">
+                                                                        check_box
+                                                                    </i>
+                                                                </div>
+                                                            }
+                                                        </td>
+                                                        <td class="text-center" style="width:13%">
+                                                            @if (row.InvInventario.ReqDevolucion)
+                                                            {
+                                                                <div class="text-success">
+                                                                    <i class="material-icons" rel="tooltip" data-placement="top" title="Cuando un usuario solicite este ítem, deberá presentar los ítems agotados para reabastecer">
+                                                                        check_box
+                                                                    </i>
+                                                                </div>
+                                                            }
+                                                            else
+                                                            {
+
+                                                                <div style="color:tomato">
+                                                                    <i class="material-icons" rel="tooltip" data-placement="top" title="No se requiere de este ítem agotado para ser entregado">
+                                                                        check_box_outline_blank
+                                                                    </i>
+                                                                </div>
+                                                            }
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <q>
+                                                                @row.Comentario
+                                                            </q>
+                                                        </td>
+                                                        <td class="text-center" style="width:10%">
+                                                            @row.FechaSolicitud.Value.ToString("dd MMMM yyyy")
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- end content-->
+        </div>
+        <!--  end card  -->
+    </div>
+</div>
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#datatables').DataTable({
+                "order": [[9, "desc"]], //column,type
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "Todos"]
+                ],
+                responsive: false,
+                language: {
+                    search: "_INPUT_",
+                    lengthMenu: "Mostrar _MENU_ registros",
+                    searchPlaceholder: "Buscar", "paginate": { "previous": "Anterior", "next": "Siguiente", "first": "Primero", "last": "Último" },
+                    info: "Mostrando _START_ a _END_ registros de _TOTAL_ registros"
+                }
+            });
+
+
+            var table = $('#datatables').DataTable();
+
+            $('.card .material-datatables label').addClass('form-group');
+        });
+
+        $(document).ready(function () {
+            $('#datatables2').DataTable({
+                "order": [[5, "desc"]], //column,type
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "Todos"]
+                ],
+                responsive: false,
+                language: {
+                    search: "_INPUT_",
+                    lengthMenu: "Mostrar _MENU_ registros",
+                    searchPlaceholder: "Buscar", "paginate": { "previous": "Anterior", "next": "Siguiente", "first": "Primero", "last": "Último" },
+                    info: "Mostrando _START_ a _END_ registros de _TOTAL_ registros"
+                }
+            });
+
+
+            var table = $('#datatables2').DataTable();
+
+            $('.card .material-datatables label').addClass('form-group');
+        });
+
+    </script>
+
+}

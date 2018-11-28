@@ -1,0 +1,346 @@
+﻿@model List<Model.spSelVUltimosSaldos2_Result>
+@{
+    ViewBag.Title = "LibEstadoCuenta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    decimal total = 0;
+
+}
+<link href="~/css/carga.css" rel="stylesheet" />
+@section Scripts{
+    <script src="~/scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/scripts/Chart.min.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#datatables').DataTable({
+                "order": [[2, "asc"]],
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [20, 35, 50, -1],
+                    [20, 35, 50, "Todos"]
+                ],
+                responsive: false,
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Buscar ...",
+                    "paginate": {
+                        "previous": "Anterior",
+                        "next": "Siguiente",
+                        "first": "Inicial",
+                        "last": "Ultimo",
+
+                    },
+                    "lengthMenu": "Mostrando _MENU_ registros",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                },
+                "footerCallback": function (row, data, start, end, display) {
+                    var api = this.api(), data;
+
+                    // Remove the formatting to get integer data for summation
+                    var intVal = function (i) {
+                        return typeof i === 'string' ?
+                            i.replace(/[\$,]/g, '') * 1 :
+                            typeof i === 'number' ?
+                            i : 0;
+                    };
+
+                    // Total over all pages
+                    total = api
+                        .column(1)
+                        .data()
+                        .reduce(function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                    // Total over this page
+                    pageTotal = api
+                        .column(1, { page: 'current' })
+                        .data()
+                        .reduce(function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                    // Update footer
+                    $(api.column(1).footer()).html(
+                        '$' + total.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+                    );
+                }
+
+            });
+
+
+
+            var table = $('#datatables').DataTable();
+
+
+            $('.card .material-datatables label').addClass('form-group');
+
+
+
+
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "/Tableros/NewChart",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: { id: 0 },
+            success: function (chData) {
+                var aData = chData;
+                var aLabels = aData[0];
+                var aDatasets1 = aData[1];
+                var colors=aData[2];
+                var dataT = {
+                    labels: aLabels,
+                    datasets: [{
+                        label: "Test Data",
+                        data: aDatasets1,
+                        backgroundColor:colors,
+                    }]
+                };
+                var ctx = document.getElementById('myChart').getContext('2d');
+
+                var myNewChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: dataT,
+                    options: {
+                        responsive: true,
+                        title: { display: false, text: '%Saldo por empresa' },
+                        legend: { display: false },
+                        onAnimationComplete: function(){
+                            myNewChart.showTooltip(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index], false);
+                        },
+                        tooltips: {
+                            intersect: true,
+
+                            callbacks: {
+
+                                label: function (tooltipItem, data) {
+                                    var label = data.labels[tooltipItem.index] || '';
+                                    var formatter = new Intl.NumberFormat('es-MX', {
+                                        style: 'currency',
+                                        currency: 'MXN',
+                                        minimumFractionDigits: 2,
+                                        // the default value for minimumFractionDigits depends on the currency
+                                        // and is usually already 2
+                                    });
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    label += formatter.format(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]);
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+        LlamarPro(0);
+        LlamarMovimientos(7);
+        function llamarVistaParcial(v) {
+
+            var laURLDeLaVista = '@Url.Action("EditSolicitado", "SolicitadoPor")';
+            $.ajax({
+                cache: false,
+                async: true,
+                type: "GET",
+                url: laURLDeLaVista,
+                data: { id: v },
+                success: function (response) {
+                    $('#resultado').html('');
+                    $('#resultado').html(response);
+                }
+            });
+        }
+        function LlamarPro(v) {
+
+           $.ajax({
+            type: "GET",
+            url: "/Tableros/ProMedios",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: { id: v },
+            success: function (chData) {
+                var aData = chData;
+                var aLabels = aData[0];
+                var aDatasets1 = aData[1];
+                var colors = aData[2];
+                var dataT = {
+                    labels: aLabels,
+                    datasets: [{
+                        label: "Test Data",
+                        data: aDatasets1,
+                        backgroundColor: colors,
+                    }]
+                };
+                $('#porcent').html('');
+                $('#porcent').html(' <h4 class="card-title">% Saldo por cuenta</h4><canvas id="myChart2"></canvas>');
+                var ctx = document.getElementById('myChart2').getContext('2d');
+              
+                var myNewChart2 = new Chart(ctx, {
+                   
+                    type: 'pie',
+                    data: dataT,
+                    options: {
+                        responsive: true,
+                        title: { display: false, text: '%Saldo por empresa' },
+                        legend: { display: false },
+                        onAnimationComplete: function () {
+                            myNewChart2.showTooltip(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index], false);
+                        },
+                        tooltips: {
+                            intersect: true,
+
+                            callbacks: {
+
+                                label: function (tooltipItem, data) {
+                                    var label = data.labels[tooltipItem.index] || '';
+                                    var formatter = new Intl.NumberFormat('es-MX', {
+                                        style: 'currency',
+                                        currency: 'MXN',
+                                        minimumFractionDigits: 2,
+                                        // the default value for minimumFractionDigits depends on the currency
+                                        // and is usually already 2
+                                    });
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    label += formatter.format(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]);
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                });
+              
+            }
+        });
+        }
+        function PopupOnClosed() {
+
+            $('#myModal').modal('hide');
+            setTimeout(function () { window.location.href = '@Url.Action("LibSolicitado", "SolicitadoPor")'; }, 400);
+
+        }
+        function LlamarMovimientos(v) {
+            var Url = '@Url.Action("ListMovimientos", "Tableros")';
+            $.ajax({
+                cache: false,
+                async: true,
+                type: "GET",
+                url: Url,
+                data: { id: v },
+                success: function (response) {
+                   
+                    $('#gvMovimientos').html('');
+                    try {
+                        $('#gvMovimientos').html(response);
+                        procesar('panel_carga');
+                    } catch (err) { }
+                }
+            });
+            return false;
+        }
+
+        function onBegin(respuesta) {
+            console.log(respuesta + 'Bg');
+        }
+        function onSuccess(respuesta) {
+            console.log(respuesta + 'Sc');
+        }
+        function onComplete(respuesta) {
+            console.log(respuesta + 'Cm');
+        }
+        function onFailure(respuesta) {
+            console.log(respuesta + 'Fl');
+        }
+        
+    </script>
+}
+<div class="card" style="background-color:whitesmoke;">
+    <div class="card-content">
+        <div class="row">
+            <div class="col-sm-6">
+
+                <div class="card">
+                    <div class="card-header card-header-icon" data-background-color="green">
+                        <i class="material-icons">&#xE894;</i>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title">Saldos por empresa</h4>
+                        <div class="table-responsive table-sales">
+                            <table id="datatables" class="table table-hover">
+                                <thead class="text-danger">
+                                    <tr>
+                                        <td>Empresa</td>
+                                        <td>Saldo</td>
+                                        <td>Ultima actualización</td>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr onclick="LlamarMovimientos(@item.Id_Empresa); LlamarPro(@item.Id_Empresa);" >
+                                            <td>@item.Empresa</td>
+                                            <td>
+
+                                                @item.Tsaldo.Value.ToString("c")
+
+                                            </td>
+                                            <td>@item.FCarga.Value.ToShortDateString()</td>
+                                        </tr>
+
+                                    }
+
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="1" style="text-align:right">Total:</th>
+                                        <th></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-header card-header-icon" data-background-color="green">
+                                <i class="material-icons">&#xE894;</i>
+                            </div>
+                            <div class="card-content">
+                                <h4 class="card-title">%Saldos por empresa</h4>
+                                <canvas id="myChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-header card-header-icon" data-background-color="green">
+                                <i class="material-icons">&#xE894;</i>
+                            </div>
+                            <div id="porcent" class="card-content">
+                                <h4 class="card-title">% Saldo por cuenta</h4>
+                                <canvas id="myChart2"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div id="gvMovimientos">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+     </div>
+</div>

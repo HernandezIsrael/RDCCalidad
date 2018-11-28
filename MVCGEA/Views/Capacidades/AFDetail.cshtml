@@ -1,0 +1,341 @@
+﻿@model Model.Activo_Fijo
+
+@{
+    ViewBag.Title = "AFDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int error = ViewBag.Error;
+    string errorMessage = string.Empty;
+    if (error == 1)
+    {
+        errorMessage = ViewBag.ErrorMsg;
+    }
+}
+
+
+<div class="nav-align-center">
+    <h3>Detalles de Activo Fijo</h3>
+</div>
+
+<div class="col-sm-10 col-md-offset-1">
+    <div class="card">
+        <div class="card-header card-header-icon" data-background-color="gray" style="background:#159D93;">
+            <i class="material-icons">devices_other</i>
+        </div>
+        <div class="card-content">
+            <h4 class="card-title">Información del Producto</h4>
+
+            <a href="@Url.Action("LibActivoFijo", "Capacidades")" class="btn btn-primary btn-round">
+                <i class="material-icons">reply</i> Regresar
+            </a>
+
+            <br />
+            <br />
+
+            @using (Html.BeginForm("UpdateAFInfo", "Capacidades",@*FormMethod.Post,*@ new { id = "frm-AFFORM" }))
+{
+
+@Html.HiddenFor(x => x.Id_Activo)
+
+<p class="text-muted">
+    * Empresa a la que pertenece
+</p>
+
+if (Model.Id_Empresa != -1)
+{
+    @Html.DropDownListFor(x => x.Id_Empresa, new SelectList(ViewBag.Empresas, "Id_Empresa", "Razon_Social", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10", @required = "true" })
+    @Html.ValidationMessageFor(x => x.Id_Empresa, null, new { @class = "badge badge-danger" })
+}
+else
+{
+    @Html.DropDownListFor(x => x.Id_Empresa, new SelectList(ViewBag.Empresas, "Id_Empresa", "Razon_Social", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10", required = "true" })
+    @Html.ValidationMessageFor(x => x.Id_Empresa, "* Este campo es obligatorio", new { @class = "badge badge-danger" })
+}
+
+<br />
+<br />
+<p class="text-muted">
+    * Proveedor del producto
+</p>
+
+if (Model.Id_Proveedor != -1)
+{
+    @Html.DropDownListFor(x => x.Id_Proveedor, new SelectList(ViewBag.Proveedores, "Id_Empresa", "Razon_Social", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10", @required = "true" })
+    @Html.ValidationMessageFor(x => x.Id_Proveedor, null, new { @class = "badge badge-danger" })
+}
+else
+{
+    @Html.DropDownListFor(x => x.Id_Proveedor, new SelectList(ViewBag.Proveedores, "Id_Empresa", "Razon_Social", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10", required = "true" })
+    @Html.ValidationMessageFor(x => x.Id_Proveedor, "* Este campo es obligatorio", new { @class = "badge badge-danger" })
+}
+
+<br />
+<br />
+<p class="text-muted">
+    * Categoría del producto
+</p>
+
+if (Model.Id_Categoria != -1)
+{
+    @Html.DropDownListFor(x => x.Id_Categoria, new SelectList(ViewBag.Categorias, "Id_Categoria", "Categoria", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10", @required = "true" })
+    @Html.ValidationMessageFor(x => x.Id_Categoria, null, new { @class = "badge badge-danger" })
+}
+else
+{
+    @Html.DropDownListFor(x => x.Id_Categoria, new SelectList(ViewBag.Categorias, "Id_Categoria", "Categoria", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10", required = "true" })
+    @Html.ValidationMessageFor(x => x.Id_Categoria, "* Este campo es obligatorio", new { @class = "badge badge-danger" })
+}
+
+<br />
+<br />
+<p class="text-muted">
+    * Marca
+</p>
+
+if (Model.Id_Marca != -1)
+{
+    @Html.DropDownListFor(x => x.Id_Marca, new SelectList(ViewBag.Marcas, "Id_Marca", "Marca", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10", @required = "true" })
+    @Html.ValidationMessageFor(x => x.Id_Marca, null, new { @class = "badge badge-danger" })
+}
+else
+{
+    @Html.DropDownListFor(x => x.Id_Marca, new SelectList(ViewBag.Marcas, "Id_Marca", "Marca", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10", required = "true" })
+    @Html.ValidationMessageFor(x => x.Id_Marca, "* Este campo es obligatorio", new { @class = "badge badge-danger" })
+}
+
+<div class="input-group">
+
+    <span class="input-group-addon">
+        <i class="material-icons">
+            text_fields
+        </i>
+    </span>
+
+    <label class="control-label" for=@Model.Item> * Nombre del producto (Ej. Silla Ejecutiva)</label>
+
+    @Html.TextBoxFor(x => x.Item, new { @class = "form-control", @placeholder = "* Nombre (Ej. Silla Ejecutiva)", @required = "true" })
+    @Html.ValidationMessageFor(x => x.Item, null, new { @class = "badge badge-danger" })
+
+</div>
+
+<div class="input-group">
+
+    <span class="input-group-addon">
+        <i class="material-icons">
+            format_align_left
+        </i>
+    </span>
+
+    <label class="control-label" for=@Model.Descripcion> * Descripción</label>
+
+    @Html.TextAreaFor(x => x.Descripcion, new { @class = "form-control", @placeholder = "* Descripción", @required = "true" })
+    @Html.ValidationMessageFor(x => x.Descripcion, null, new { @class = "badge badge-danger" })
+
+</div>
+
+<div class="input-group">
+
+    <span class="input-group-addon">
+        <i class="material-icons">
+            developer_mode
+        </i>
+    </span>
+
+    <label class="control-label" for=@Model.Modelo> * Modelo</label>
+
+    @Html.TextBoxFor(x => x.Modelo, new { @class = "form-control", @placeholder = "* Modelo", @required = "true" })
+    @Html.ValidationMessageFor(x => x.Modelo, null, new { @class = "badge badge-danger" })
+
+</div>
+
+<div class="input-group">
+
+    <span class="input-group-addon">
+        <i class="material-icons">
+            filter_9_plus
+        </i>
+    </span>
+
+    <label class="control-label" for=@Model.N_Serie> * Número de serie</label>
+
+    @Html.TextBoxFor(x => x.N_Serie, new { @class = "form-control", @placeholder = "* No. De Serie", @required = "true" })
+    @Html.ValidationMessageFor(x => x.N_Serie, null, new { @class = "badge badge-danger" })
+
+</div>
+
+<div class="input-group">
+
+    <span class="input-group-addon">
+        <i class="material-icons">receipt</i>
+    </span>
+
+    <label class="control-label" for=@Model.Id_Pago>N.U.R.C</label>
+
+    @Html.TextBoxFor(x => x.Id_Pago, "{0}", new { @class = "form-control", @placeholder = "N.U.R.C", @type = "number" })
+    @Html.ValidationMessageFor(x => x.Id_Pago, null, new { @class = "badge badge-danger" })
+
+</div>
+
+<div class="input-group">
+
+    <span class="input-group-addon">
+        <i class="material-icons">attach_money</i>
+    </span>
+
+    <label class="control-label" for=@Model.Precio_Adquisicion> * Costo unitario</label>
+
+    @Html.TextBoxFor(x => x.Precio_Adquisicion, "{0:0.00}", new { @class = "form-control", @placeholder = "* Costo (Ej. $ 1500.00)", @type = "number", @required = "true" })
+    @Html.ValidationMessageFor(x => x.Precio_Adquisicion, null, new { @class = "badge badge-danger" })
+
+</div>
+
+<div class="input-group">
+
+    <span class="input-group-addon">
+        <i class="material-icons">attach_money</i>
+    </span>
+
+    <label class="control-label" for=@Model.Valor_Actual> * Valor actual</label>
+
+    @Html.TextBoxFor(x => x.Valor_Actual, "{0:0.00}", new { @class = "form-control", @placeholder = "* Valor actual (Ej. $ 1000.00)", @type = "number", @required = "true" })
+    @Html.ValidationMessageFor(x => x.Valor_Actual, null, new { @class = "badge badge-danger" })
+
+</div>
+
+<br />
+<br />
+<p class="text-muted">
+    * Divisa
+</p>
+
+if (Model.Id_Moneda != -1)
+{
+    @Html.DropDownListFor(x => x.Id_Moneda, new SelectList(ViewBag.Monedas, "Id_Moneda", "Moneda", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10", @required = "true" })
+    @Html.ValidationMessageFor(x => x.Id_Moneda, null, new { @class = "badge badge-danger" })
+}
+else
+{
+    @Html.DropDownListFor(x => x.Id_Moneda, new SelectList(ViewBag.Monedas, "Id_Moneda", "Moneda", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10", required = "true" })
+    @Html.ValidationMessageFor(x => x.Id_Moneda, "* Este campo es obligatorio", new { @class = "badge badge-danger" })
+}
+
+<div class="input-group">
+    <span class="input-group-addon">
+        <i class="material-icons">date_range</i>
+    </span>
+    <div class="form-group">
+
+        @if (Model.Id_Activo < 1)
+        {
+            <label class="control-label" for=@Model.F_Adquisicion>* Fecha de adquisición del producto:</label>
+            @Html.TextBoxFor(x => x.F_Adquisicion, new { @type = "date", @class = "form-control datetimepicker", required = "true" })
+            @*@Html.ValidationMessageFor(x => x.FPartida, null, new { @class = "badge badge-danger" })*@
+        }
+        else
+        {
+            <label class="control-label" for=@Model.F_Adquisicion>* Fecha de adquisición del producto:</label>
+            @Html.TextBoxFor(x => x.F_Adquisicion, new { @type = "text", @class = "form-control datetimepicker" })
+            @*@Html.ValidationMessageFor(x => x.FPartida, null, new { @class = "badge badge-danger" })*@
+        }
+
+    </div>
+</div>
+
+<div class="input-group">
+    <span class="input-group-addon">
+        <i class="material-icons">date_range</i>
+    </span>
+    <div class="form-group">
+
+        @if (Model.Id_Activo < 1)
+        {
+            <label class="control-label" for=@Model.F_Retiro>Fecha de retiro del producto:</label>
+            @Html.TextBoxFor(x => x.F_Retiro, new { @type = "date", @class = "form-control datetimepicker" })
+            @*@Html.ValidationMessageFor(x => x.FPartida, null, new { @class = "badge badge-danger" })*@
+        }
+        else
+        {
+            <label class="control-label" for=@Model.F_Retiro>Fecha de retiro del producto:</label>
+            @Html.TextBoxFor(x => x.F_Retiro, new { @type = "text", @class = "form-control datetimepicker" })
+            @*@Html.ValidationMessageFor(x => x.FPartida, null, new { @class = "badge badge-danger" })*@
+        }
+
+    </div>
+</div>
+
+<div class="input-group">
+
+    <span class="input-group-addon">
+        <i class="material-icons">
+            how_to_reg
+        </i>
+    </span>
+
+    <label class="control-label" for=@Model.Usuario_Asignado> Usuario al que se asignó</label>
+
+    @Html.TextBoxFor(x => x.Usuario_Asignado, new { @class = "form-control", @placeholder = "Usuario al que se asignó" })
+    @Html.ValidationMessageFor(x => x.Usuario_Asignado, null, new { @class = "badge badge-danger" })
+
+</div>
+
+if (Model.Id_Condicion != -1)
+{
+    @Html.DropDownListFor(x => x.Id_Condicion, new SelectList(ViewBag.Condiciones, "Id_Condicion", "Condicion", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10", @required = "true" })
+    @Html.ValidationMessageFor(x => x.Id_Condicion, null, new { @class = "badge badge-danger" })
+}
+else
+{
+    @Html.DropDownListFor(x => x.Id_Condicion, new SelectList(ViewBag.Condiciones, "Id_Condicion", "Condicion", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10", required = "true" })
+    @Html.ValidationMessageFor(x => x.Id_Condicion, "* Este campo es obligatorio", new { @class = "badge badge-danger" })
+}
+
+
+<br />
+<br />
+
+<p class="text-gray">* El campo es obligatorio</p>
+
+<button type="submit" class="btn btn-info btn-round">
+    <i class="material-icons">sd_card</i> Guardar
+</button>
+
+}
+
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+        var onError = @ViewBag.Error;
+        var showConfirm = @ViewBag.Confirm
+
+
+        $(document).ready(function () {
+                if (onError == 1) {
+                    swal({
+                        title: 'Ha ocurrido un error',
+                        text: '@ViewBag.ErrorMsg',
+                        type: 'error',
+                        buttonsStyling: false,
+                        confirmButtonClass: 'btn btn-success',
+                        confirmButtonText: 'Entendido'
+                    })
+                }
+                else {
+                    if (showConfirm > 0) {
+                        swal({
+                        title: 'Hecho',
+                        text: 'Se han guardado los cambios',
+                        type: 'success',
+                        buttonsStyling: false,
+                        confirmButtonClass: 'btn btn-success',
+                        confirmButtonText: 'Entendido'
+                    })
+                    }
+                }
+        });
+
+    </script>
+}

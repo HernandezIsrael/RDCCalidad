@@ -1,0 +1,98 @@
+﻿<div class="card ps-child" id="card">
+    <div class="card-header card-header-icon" data-background-color="green">
+        <i class="material-icons">&#xE894;</i>
+    </div>
+    <div class="card-content ps-child" id="cardcontent">
+        <h4 class="card-title">
+            Movimientos
+        </h4>
+        <div class="toolbar">
+
+
+        </div>
+        <div id="mate" class="material-datatables ps-child">
+
+            <table id="datatables3" class="table ps-child table-hover">
+                <thead class="text-danger">
+                    <tr>
+                        <th style="width:100px;">No Registro</th>
+                        <th style="width:150px;">Empresa</th>
+                        <th style="width:80px;">Banco</th>
+                        <th style="width:80px;">No Cuenta</th>
+                        <th style="width:200px;">Tipo de transacción</th>
+                        <th style="width:200px;">Fecha de movimiento</th>
+                        <th style="width:100px;">Monto</th>
+                        <th style="width:100px;">N.U.R.C</th>
+                        <th style="width:100px;">Saldo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.ListMov)
+                    {
+                        <tr>
+                           <td>@item.IdRegistro</td>
+                           <td>@item.Empresa</td>
+                           <td>@item.Banco</td>
+                           <td>@item.N_Cuenta</td>
+                           <td style="text-align:center;">@item.TipoTransaccion</td>
+                           <td>@string.Format("{0:dd/MM/yyyy}",item.F_Movimiento)</td>
+                           <td>@string.Format("{0:c}",item.Monto)</td>
+                           <td>@item.Id_Pago</td>
+                           <td>@string.Format("{0:c}",item.Saldo)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#datatables3').DataTable({
+            "order": [[1, "desc"]],
+            "scrollY": 350,
+            "scrollX": true,
+            "pagingType": "full_numbers",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "Todos"]
+            ],
+           
+            responsive: false,
+            language: {
+                search: "_INPUT_",
+                searchPlaceholder: "Buscar ...",
+                "paginate": {
+                    "previous": "Anterior",
+                    "next": "Siguiente",
+                    "first": "Inicial",
+                    "last": "Ultimo",
+
+                },
+                "lengthMenu": "Mostrando _MENU_ registros",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+            }
+
+        });
+
+
+        var table3 = $('#datatables3').DataTable();
+
+
+        $('.card .material-datatables label').addClass('form-group');
+
+
+
+    });
+
+
+
+</script>
+
+

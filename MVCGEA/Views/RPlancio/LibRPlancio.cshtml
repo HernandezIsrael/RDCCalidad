@@ -1,0 +1,143 @@
+﻿@model List<Model.spSelRPlancio_Result>
+@{
+    ViewBag.Title = "LibRPlancio";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts{
+    <script src="~/scripts/jquery.unobtrusive-ajax.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#datatables').DataTable({
+                "order": [[1, "desc"]],
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "Todos"]
+                ],
+                responsive: false,
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Buscar ...",
+                    "paginate": {
+                        "previous": "Anterior",
+                        "next": "Siguiente",
+                        "first": "Inicial",
+                        "last": "Ultimo",
+
+                    },
+                    "lengthMenu": "Mostrando _MENU_ registros",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                }
+
+            });
+
+
+            var table = $('#datatables').DataTable();
+
+
+            $('.card .material-datatables label').addClass('form-group');
+
+
+
+
+        });
+
+
+
+
+        function onBegin(respuesta) {
+            console.log(respuesta + 'Bg');
+        }
+        function onSuccess(respuesta) {
+            console.log(respuesta + 'Sc');
+        }
+        function onComplete(respuesta) {
+            console.log(respuesta + 'Cm');
+        }
+        function onFailure(respuesta) {
+            console.log(respuesta + 'Fl');
+        }
+
+    </script>
+}
+
+<div class="card">
+    <div class="card-header card-header-icon" data-background-color="rose" style="background:#159D93">
+        <i class="material-icons">list</i>
+
+    </div>
+    <div class="card-content">
+        <h4 class="card-title">
+           Planeación
+        </h4>
+        <div class="toolbar">
+            <!--        Here you can write extra buttons/actions for the toolbar              -->
+        </div>
+        <div class="material-datatables">
+            <table id="datatables" class="table">
+                <thead class="text-danger">
+                    <tr>
+                        <th>#</th>
+                        <th>No</th>
+                        <th>Tipo de documento</th>
+                        <th>Fecha de término</th>
+                        <th>Días de Vigencia</th>
+                        <th>Indefinido</th>
+                        <th>Empresa</th>
+                        <th>Representante</th>
+                        <th>Proyecto</th>
+                        <th>Solictado por</th>
+                        <th>Validado por</th>
+                        <th>Generado por</th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="text-primary">
+
+                                <a href=@Url.Action("EditRPlancio", "RPlancio", new {id=0}) class="btn btn-simple btn-success btn-icon new">
+                                    <i class="material-icons" rel="tooltip" data-placement="right" title="Agregar">add</i>
+                                </a>
+                                <a href=@Url.Action("EditRPlancio", "RPlancio", new {id=item.IdRPlancio}) class="btn btn-simple btn-warning btn-icon edit">
+                                    <i class="material-icons" rel="tooltip" data-placement="right" title="Modificar">create</i>
+
+                                </a>
+                            </td>
+                            <td>@item.IdRPlancio</td>
+
+                            <td>@item.TipoRPlancio</td>
+
+                            <td>@(item.F_Fin.HasValue ? item.F_Fin.Value.ToShortDateString() : "" )</td>
+                            <td>@item.Dias_Vigencia</td>
+                            <td>
+                                <div class="togglebutton">
+                                    <label>
+
+                                        @Html.CheckBoxFor(modelitem => item.Indefinido.Value, new { Value = item.Indefinido.HasValue ? item.Indefinido.Value : false, disabled = "disabled" })
+                                    </label>
+                                </div>
+                            </td>
+                            <td>@item.Empresa</td>
+                            <td>@item.Encargado_Firmas</td>
+                            <td>@item.Nombre_Proyecto</td>
+                            <td>@item.Solicitado_por</td>
+                            <td>@item.Validado_por</td>
+                            <td>@item.Generado_por</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+
+

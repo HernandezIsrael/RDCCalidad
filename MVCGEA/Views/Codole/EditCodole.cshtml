@@ -1,0 +1,335 @@
+﻿@model Model.CODOLE
+@{
+    ViewBag.Title = "EditCodole";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section Scripts{
+    <script src="~/scripts/jquery.unobtrusive-ajax.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#datatables').DataTable({
+                "order": [[0, "desc"]],
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "Todos"]
+                ],
+                responsive: false,
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Buscar ...",
+                    "paginate": {
+                        "previous": "Anterior",
+                        "next": "Siguiente",
+                        "first": "Inicial",
+                        "last": "Ultimo",
+
+                    },
+                    "lengthMenu": "Mostrando _MENU_ registros",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                }
+
+            });
+
+
+            var table = $('#datatables').DataTable();
+
+
+            $('.card .material-datatables label').addClass('form-group');
+
+            var Url = '@Url.Action("GetProyectos")';
+            CallProjects(Url);
+
+        });
+        function downloadFile(v,s)
+        {
+            
+            window.location = "@Url.Action("Download", "Codole")" + "?name="+v+"&name2="+s;
+            //console.log("@Url.Action("Download", "Codole", new { name= "CapturaFortnite1.jpg" })" );
+            return false;
+        }
+        function llamarVistaParcial(v) {
+
+            var laURLDeLaVista = '@Url.Action("EditTipoVinculaciones", "TipoVinculacion")';
+            $.ajax({
+                cache: false,
+                async: true,
+                type: "GET",
+                url: laURLDeLaVista,
+                data: { id: v },
+                success: function (response) {
+                    $('#resultado').html('');
+                    $('#resultado').html(response);
+                }
+            });
+        }
+        function PopupOnClosed() {
+
+            $('#myModal').modal('hide');
+            setTimeout(function () { window.location.href = '@Url.Action("LibTipoVinculaciones", "TipoVinculacion")'; }, 400);
+
+        }
+
+        function onBegin(respuesta) {
+            console.log(respuesta + 'Bg');
+        }
+        function onSuccess(respuesta) {
+            console.log(respuesta + 'Sc');
+        }
+        function onComplete(respuesta) {
+            console.log(respuesta + 'Cm');
+        }
+        function onFailure(respuesta) {
+            console.log(respuesta + 'Fl');
+        }
+        function CallProjects(Url) {
+            $("#Id_Empresa").change(function () {
+                $("#Id_Proyecto").empty();
+              
+                $.ajax({
+                    type: 'POST',
+                    url: Url,
+
+                    dataType: 'json',
+
+                    data: { id: $("#Id_Empresa").val() },
+                    success: function (states) {
+
+                        $.each(states, function (i, state) {
+
+
+                            if (state.Value == -1) {
+                                $("#Id_Proyecto").append('<option selected = "selected" value="' + state.Value + '">' +
+                                 state.Text + '</option>');
+
+
+                            } else {
+                                $("#Id_Proyecto").append('<option value="' + state.Value + '">' +
+                                     state.Text + '</option>');
+                            }
+
+
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve .' + ex);
+                    }
+                });
+
+                return false;
+            });
+        }
+    </script>
+}
+
+
+<div class="col-sm-10 col-md-offset-1">
+    <div class="card">
+        <div class="card-header card-header-icon" data-background-color="rose" style="background:#159D93">
+            <i class="material-icons">receipt</i>
+        </div>
+        <div class="card-content">
+            <h4 class="card-title">C.O.D.O.L.E @(Model.Id_Codole > 0 ? ":" + Model.Id_Codole.ToString() : "")</h4>
+
+
+            @using (Html.BeginForm("Save", "Codole", FormMethod.Post, new { id = "frm-nurc" }))
+            {
+                @Html.HiddenFor(x => x.Id_Codole)
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">code</i>
+                    </span>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="Codigo_Codole">Codigo:</label>
+                        @Html.TextBoxFor(x => x.Codigo_Codole, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Codigo_Codole, null, new { @class = "badge badge-danger" })
+                    </div>
+                </div>
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">book</i>
+                    </span>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="Id_Tipo_Codole">Tipo de documento:</label>
+                        @Html.DropDownListFor(x => x.Id_Tipo_Codole, new SelectList(ViewBag.Tipos, "Id", "NombreCompleto", -1), new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">date_range</i>
+                    </span>
+                    <div class="form-group">
+                        <label class="control-label" for="F_Init">Fecha de inicio:</label>
+                        @Html.TextBoxFor(x => x.F_Init, new { @class = "form-control ", @type = "date", @Value = Model.F_Init.HasValue ? Model.F_Init.Value.ToString("yyyy-MM-dd") : "" })
+                    </div>
+                </div>
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">date_range</i>
+                    </span>
+                    <div class="form-group">
+                        <label class="control-label" for="F_Fin">Fecha de fin:</label>
+                        @Html.TextBoxFor(x => x.F_Fin, new { @class = "form-control ", @type = "date", @Value = Model.F_Fin.HasValue ? Model.F_Fin.Value.ToString("yyyy-MM-dd") : "" })
+                    </div>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        Indefinido:
+                    </span>
+                    <div class="form-group">
+
+                        <div class="togglebutton">
+                            <label>
+                                @Html.CheckBoxFor(x => x.Indefinido)
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">assignment_ind</i>
+                    </span>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="Encargado_Firmas">Representante:</label>
+                        @Html.TextBoxFor(x => x.Encargado_Firmas, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Encargado_Firmas, null, new { @class = "badge badge-danger" })
+                    </div>
+                </div>
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">business</i>
+                    </span>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="Id_Empresa">Empresa:</label>
+                        @Html.DropDownListFor(x => x.Id_Empresa, new SelectList(ViewBag.Empresas, "Id", "NombreCompleto", -1), new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">folder_special</i>
+                    </span>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="Id_Proyecto">Proyecto:</label>
+                        @Html.DropDownListFor(x => x.Id_Proyecto, new SelectList(ViewBag.Proyectos, "Id", "NombreCompleto", -1), new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">account_circle</i>
+                    </span>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="Id_Solicitado_por">Solicitado por:</label>
+                        @Html.DropDownListFor(x => x.Id_Solicitado_por, new SelectList(ViewBag.Solicitado, "Id", "NombreCompleto", -1), new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">person_add</i>
+                    </span>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="Id_Generado_por">Creado por:</label>
+                        @Html.DropDownListFor(x => x.Id_Generado_por, new SelectList(ViewBag.Creadopor, "Id", "NombreCompleto", -1), new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <i class="material-icons">thumb_up</i>
+                    </span>
+                    <div class="form-group label-floating">
+                        <label class="control-label" for="Id_Valido_por">Validado por:</label>
+                        @Html.DropDownListFor(x => x.Id_Valido_por, new SelectList(ViewBag.Validado, "Id", "NombreCompleto", -1), new { @class = "form-control" })
+                    </div>
+                </div>
+
+
+                <button type="submit" class="btn btn-info btn-round" id="btnSave" name="btnSave" value="Send" style="background:#159D93">
+                    <i class="material-icons">save</i> Enviar
+                </button>
+                <a href=@Url.Action("LibCodole", "Codole")  class="btn btn-info btn-round" style="background:#159D93">
+                    <i class="material-icons">home</i>   REGRESAR
+
+                </a>
+
+            }
+
+            @if (Model.Id_Codole > 0)
+            {
+                <br />
+                using (Html.BeginForm("Subir", "CapturaNurc", FormMethod.Post, new { id = "frm-nurc-docto", enctype = "multipart/form-data" }))
+                {
+                    @Html.HiddenFor(x => x.Id_Codole)
+                    <input type="file" name="file" /><button class="btn btn-info btn-round" type="submit" style="background:#159D93">
+                        <i class="material-icons">cloud_upload</i> Subir
+                    </button>
+                }
+                <br />
+                <div class="card">
+                    <div class="card-header card-header-icon" data-background-color="rose" style="background:#159D93">
+                        <i class="material-icons">list</i>
+
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title">
+                            Documentos
+                        </h4>
+                        <div class="toolbar">
+                            <!--        Here you can write extra buttons/actions for the toolbar              -->
+                        </div>
+                        <div class="material-datatables">
+                            <table id="datatables" class="table">
+                                <thead class="text-danger">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Documento</th>
+                                        <th>Visor</th>
+                                    
+                                        <th>Subido por</th>
+                                        <th>Fecha de alta</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.Documentos)
+                                    {
+                                        <tr>
+                                            <td class="text-primary">
+
+                                                @*<a href=@Url.Action("EditCodole", "Codole",new {id=0}) class="btn btn-simple btn-success btn-icon new">
+                                                    <i class="material-icons" rel="tooltip" data-placement="right" title="Agregar">add</i>
+                                                </a>
+                                                <a href=@Url.Action("EditCodole", "Codole", new {id=item.Id_Documento_Codole }) class="btn btn-simple btn-warning btn-icon edit">
+                                                    <i class="material-icons" rel="tooltip" data-placement="right" title="Modificar">create</i>
+
+                                                </a>*@
+                                            </td>
+                                            <td>@item.Nombre</td>
+                                            <td>
+                                                <a href='#' onclick="downloadFile('@item.Nombre_Virtual','@item.Nombre'); return false;" target="_blank" class="btn btn-info btn-just-icon btn-round">
+                                                    <i class="material-icons">
+                                                        file_copy
+                                                    </i>
+                                                </a>
+                                            </td>
+                                           
+                                          
+                                            <td>@item.Usuario_Creo</td>
+                                            <td>@string.Format("{0:dd/MM/yyyy}",item.F_Alta)</td>
+                                            
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            }
+
+
+        </div>
+    </div>
+</div>

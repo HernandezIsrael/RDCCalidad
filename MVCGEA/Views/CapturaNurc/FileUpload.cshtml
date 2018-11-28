@@ -1,0 +1,130 @@
+﻿@*@model Model.Documentos*@
+
+@*@using (Ajax.BeginForm("SaveDoctos", "CapturaNurc", new AjaxOptions()
+{
+    HttpMethod = "POST",
+    UpdateTargetId = "Tdocos",
+    InsertionMode = InsertionMode.Replace,
+    OnBegin = "onBegin",
+    OnComplete = "onComplete",
+    OnSuccess = "onSuccess",
+    OnFailure = "onFailure"
+}, new { @enctype = "multipart/form-data", id = "frm-upload" }))
+{
+<div class="input-group ">
+    <span class="input-group-addon">
+        <i class="material-icons">book</i>
+    </span>
+    <div class="form-group ">
+        <label class="control-label" for=@Model.Id_Tipo_Documento>Tipo de documento:</label>
+        @Html.DropDownListFor(x => x.Id_Tipo_Documento, new SelectList(ViewBag.ListaDocumento, "Id", "Tipo", -1), new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Id_Tipo_Documento, null, new { @class = "badge badge-danger" })
+    </div>
+</div>
+<div class="fileinput fileinput-new text-center" data-provides="fileinput">
+    <div class="fileinput-new thumbnail">
+        <img src="~/Image/image_placeholder.jpg" alt="...">
+    </div>
+    <div class="fileinput-preview fileinput-exists thumbnail"></div>
+    <div>
+        <span class="btn btn-rose btn-round btn-file" style="background:#159D93;">
+            <span class="fileinput-new" >Seleccionar</span>
+            <span class="fileinput-exists">Cambiar</span>
+            <input type="file" name="file" id="file" />
+        </span>
+        <a href="#" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i>Eliminar</a>
+    </div>
+</div>
+<input type="submit" class="btn btn-rose btn-round btn-file" style="background:#159D93;"  value="Subir" />
+
+<br><br>
+@ViewBag.Message
+}*@
+
+
+<div class="card ps-child" id="card">
+    <div class="card-header card-header-icon ps-child" data-background-color="rose" style="background:#159D93">
+        <i class="material-icons">list</i>
+
+    </div>
+    <div class="card-content ps-child" id="cardcontent">
+        <h4 class="card-title">
+            Documentos
+        </h4>
+        <div class="toolbar">
+        
+
+        </div>
+        <div id="mate" class="material-datatables ps-child">
+
+            <table id="datatables" class="table ps-child">
+                <thead class="text-danger">
+                    <tr>
+                        <th>#</th>
+                        <th>Tipo</th>
+                        <th>Documento</th>
+                        <th>Descarga</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.Doctos)
+                    {
+                        <tr>
+                            <td class="text-primary">
+                                <a href="#Id_Tipo_Pago" onclick="CallDel(@item.Id_Documento,@item.Id_Pago)"  class="btn btn-simple btn-danger btn-icon remove">
+                                    <i class="material-icons" rel="tooltip" data-placement="right" title="Eliminar">clear</i>
+                                </a>
+                             
+                            </td>
+                            <td>@item.Tipo_Documento</td>
+                            <td>@item.Nombre</td>
+                            <td>@item.Id_Documento</td>
+                        </tr>
+                        }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#datatables').DataTable({
+            "order": [[2, "asc"]],
+            "pagingType": "full_numbers",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "Todos"]
+            ],
+            responsive: false,
+            language: {
+                search: "_INPUT_",
+                searchPlaceholder: "Buscar ...",
+                "paginate": {
+                    "previous": "Anterior",
+                    "next": "Siguiente",
+                    "first": "Inicial",
+                    "last": "Ultimo",
+
+                },
+                "lengthMenu": "Mostrando _MENU_ registros",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+            }
+
+        });
+
+
+        var table = $('#datatables').DataTable();
+
+
+        $('.card .material-datatables label').addClass('form-group');
+
+
+
+    });
+
+
+
+</script>

@@ -1,0 +1,1188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3AB36DB6-7059-43FE-942B-4A4741E5E66C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Model</RootNamespace>
+    <AssemblyName>Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ionic.Zip.1.9.1.8\lib\Ionic.Zip.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itextsharp.xmlworker.5.5.13\lib\itextsharp.xmlworker.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xtra, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itextsharp.xtra.5.5.13\lib\itextsharp.xtra.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Actividades_Areas.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Activo_Fijo.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AF_Comentarios.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Amex.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Anticipos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AreasHelper.cs" />
+    <Compile Include="asistencias.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AuditoriaDocs.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AutoIngresosHelper.cs" />
+    <Compile Include="Autorizaciones_Pago.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Avances_Actividades.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BancoHelper.cs" />
+    <Compile Include="CaCFDI.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="caFormaPago.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CalidadHelper.cs" />
+    <Compile Include="CaMetodoPago.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CapacidadesHelper.cs" />
+    <Compile Include="Capacidades_Servicios.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CaReqFacturas.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CargaTempPagos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CaSistemasSh.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="caStatusFactura.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CaStatusRequisicion.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CaTablasDocumentos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CategoriaHelper.cs" />
+    <Compile Include="CaTipoRConta.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CaTipoREjecucion.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CaTipoRPlancio.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CaTipoRProcesos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CaTipoRRHHD.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CaTipoRVinculaciones.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CaTipoTesoreria.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CaUrlSharepoint.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Archivero.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CA_Areas.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Bancos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Bloque.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Calidad_Servicio.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Categoria.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Clabe.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Clasificacion.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Condicion.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Contratos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_CS.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Disponible.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Estado.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Estatus_Actividades.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Estatus_Cobro.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Estatus_Oficina.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Estatus_Pago.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Estatus_Servicios.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_FTP.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Instituciones.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Iva.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Lapso.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Marca.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Medio_Entrega.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Modalidad.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Moneda.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Monto_Pagos_Contrato.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Nivel.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Nivel1.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Nivel2.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Nivel3.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_N_Cuenta.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Oficinas.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Pais.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Progamas.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Referencia.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Rubros.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Solicitado_por.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Status_Requisicion.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Status_Ticket.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Tiempo.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Tipo_Cambio.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Tipo_Codole.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Tipo_Contrato.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Tipo_Documento.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Tipo_Documento_Codole.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Tipo_Documento_Pago.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Tipo_Empresa.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Tipo_FTP.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Tipo_Movimiento.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Tipo_Oficina.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Tipo_Pago.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Tipo_Parte.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Tipo_Servicio.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Tipo_Usuario.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ca_Unidad_Medida.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cfdv33.cs" />
+    <Compile Include="CImpuesto.cs" />
+    <Compile Include="ClaveUnidad.cs" />
+    <Compile Include="CMetodoPago.cs" />
+    <Compile Include="CMoneda.cs" />
+    <Compile Include="CobroxServiciosxEmpresa.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Cobro_Planeacion.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CODOLE.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CodoleHelper.cs" />
+    <Compile Include="Codole_Documentos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Comparacion_Proveedor_Temp.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ComparativaProveedores.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Comparativo_Proveedor.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CompraTipoDocumento.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CompressHelper.cs" />
+    <Compile Include="Conceptos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CondicionHelper.cs" />
+    <Compile Include="Contratos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="correoReqCompra.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Correos_Servicios.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Costos_Planeacion.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Co_Entrada_Salidas.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CPais.cs" />
+    <Compile Include="CSHelper.cs" />
+    <Compile Include="Csv.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsvAmex.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsvPCuentas.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsvPosicion.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CuccHelper.cs" />
+    <Compile Include="C__MigrationHistory.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentoActividades.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Documentos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentosRConta.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentosREjecucion.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentosRPlancio.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentosRProcesos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentosRRHHD.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentosRTesoreria.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentosRVinculaciones.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Documentos_Codole.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Empresas.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmpresasHelper.cs" />
+    <Compile Include="EmpresasProveedorHelper.cs" />
+    <Compile Include="EmpresasV2.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entregables_Pago.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entregables_Proyectos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EnviadorCorreos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FinanciamientosHerlper.cs" />
+    <Compile Include="FormaPago.cs" />
+    <Compile Include="FTPHelper.cs" />
+    <Compile Include="GrupoMenuHelper.cs" />
+    <Compile Include="Grupos_Menu.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HomeHelper.cs" />
+    <Compile Include="IngresosHelper.cs" />
+    <Compile Include="InvEstatus.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvInventario.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvListaPedidos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvPedidos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvSolicitud.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvSubTipo.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvTipo.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvUMedida.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LogEventosSh.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LogRConta.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LogREjecucion.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LogRRHHD.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LogRTesoreria.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LogRVinculaciones.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LogSharepoint.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LogSyncSharepoint.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LogTrvAcompaniante.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LogTrvDoctos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Log_Capacidades_Servicios.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Log_CODOLE.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Log_Correos_Codole.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Log_Correos_Contratos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Log_Correos_Entregables.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Log_Documentos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Log_Pagos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Log_Re_Documento_Pago.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Manuales.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ManualesHelper.cs" />
+    <Compile Include="ManualesTipoUsuarios.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MarcaHelper.cs" />
+    <Compile Include="MCVGea.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MCVGea.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MCVGea.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MCVGea.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MCVGea.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="MedioEntregaHelper.cs" />
+    <Compile Include="Menu.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MenuHelper.cs" />
+    <Compile Include="Meses_Proyecto.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Metadata.cs" />
+    <Compile Include="MonedaHelper.cs" />
+    <Compile Include="Monto_Pagos_Contrato.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MovimientosBancosCsv.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NewsFeed.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NomenclaturaCalidad.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NotificationHelper.cs" />
+    <Compile Include="Notifications.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NotificationsStatus.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NURCCPHelper.cs" />
+    <Compile Include="NurcDGHelper.cs" />
+    <Compile Include="NurcEgresosHelper.cs" />
+    <Compile Include="OrCompraDetalle.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrdenCompra.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Orden_Compra.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Orden_Compra_Autorizacion.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Orden_Compra_Detalle.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pagos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PaisHelper.cs" />
+    <Compile Include="PAmex.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Partes.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PartialClasses.cs" />
+    <Compile Include="Patrones_Bancos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PlancioHelper.cs" />
+    <Compile Include="Presupuesto_Proyectos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proyectos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProyectosHelper.cs" />
+    <Compile Include="Pruebas_Pagos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RConta.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RContaHelper.cs" />
+    <Compile Include="RDC.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RegimenFiscal.cs" />
+    <Compile Include="RegistroActividades.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="REjecucion.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Relacion_Usuario_Empresa.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Reporte_Factura.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReqCompra.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReqCompraDetalle.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReqComprasHelper.cs" />
+    <Compile Include="ReqDocumentosCompra.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReqFacturaAutorizacion.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReqFacturaDocumentos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReqFacturas.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="reqFacturasDetalle.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReqStatusFactura.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Requisicion_Autorizacion.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Requisicion_Compra.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Requisicion_Compra_Detalle.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Requisicion_Compra_Proveedor.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Requisicion_Evaluacion_Proveedor.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Requisicion_Preguntas_Proveedor.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Responsable_Proyecto.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ResponseModel.cs" />
+    <Compile Include="Re_Bancos_Empresa.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Re_Codole_Empresas.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Re_Contratos_Empresas.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Re_Documento_AF.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Re_Documento_Contrato.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Re_Documento_Pago.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Re_Empresa_Logo.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Re_Permisos_Pago.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Re_Proveedores_Empresa.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Re_Requisicion_Preguntas_Proveedor.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Re_Rubros_Pago.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Re_Servicios_CUCC.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Re_Servicios_NURC.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Re_Tipo_Contrato_Tipo_Parte.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Re_Usuario_Empresa.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RHCaDiasAnos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RhCaEventos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RhCalendario.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RhCalendarioLog.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RhCaParentesco.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RhCaTipoCorreo.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RhConfiguraExcel.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RhDocumentosImpuesto.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RHExpedienteEmpleado.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RHExpedienteEmpleadoLog.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RhImpuestoNomina.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RhLogConfiguracionCorreos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RhLogConfiguraExcel.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RHLogDocumentos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RhLogDocumentosImpuesto.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RhLogNomina.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RhLogNominaAdicional.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RhLogTotalNomina.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RhLogVacaciones.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RhLogVacacionesAutorizacion.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RhLogVacantes.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RhNomina.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RhNominaAdicional.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RhTipoDocumento.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RhTotalNomina.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RhVacaciones.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RhVacacionesAutorizacion.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RhVacantes.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RH_Documentos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RH_Expediente.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RH_ExpedienteLog.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RPlancio.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RProcesos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RRHHD.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RRRHHHelper.cs" />
+    <Compile Include="RTesoreria.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rubros_Proyectos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RVinculaciones.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RVinculacionesHelper.cs" />
+    <Compile Include="SEDirecciones.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEDocumentosServicios.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEEstatusServicios.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SELogServicios.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Servicios.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SETipoDocumento.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SolicitadoPorHelper.cs" />
+    <Compile Include="spSelBancos_Empresa_V2_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelClabe_Banco_Empresa_V2_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelContratos_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelContrato_Id_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelDashSaldoProyectos_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelDocumentosConta_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelDocumentosProcs_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelDocumentosRPlancio_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelDocumentosRRHHD_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelDocumentosVinculaciones_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelDocumentos_Pago_Id_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelEmpresas_Usuario_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelHistoricoPagos_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelMonedas_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelMoneda_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelMovimientos2_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelMovimientos_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelNCuenta_Banco_Empresa_V2_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelPagosAutoTesoreria_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelPagos_Autorizacion_DG_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelPagos_Captura_UsuarioI_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelPagos_Captura_Usuario_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelPagos_Id_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelPagos_Procesados_UsuarioI_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelPagos_Procesados_Usuario_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelPagos_Programados_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelPromedioSaldos2_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelPromedioSaldos_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelProveedores_Empresa_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelProyectos_Empresas_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelRConta_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelReporteServicios_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SpSelReqCompra_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelRPlancio_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelRProcesos_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelRRHH_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelRubros_Proyecto_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelRVinculaciones_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelTipo_Documento_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelTipo_Pago_Activo_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelUsuariosConta_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelUsuariosProc_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelUsuariosRRHHD_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelUsuariosVinculaciones_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelVUltimosSaldos2_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelVUltimosSaldos_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelVUsuariosPlaneacion_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelV_Contratos_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSelV_Usuarios_Legal_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSel_Codole_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSel_Conceptos_Pago_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSel_Documentos_Codole_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSel_Empresas_Usuario_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSel_Solicitado_por_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spSel_V_Re_Documento_Contrato_Id_Result.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StockHelper.cs" />
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TablerosHelper.cs" />
+    <Compile Include="TaksAdmon.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TaksAtencion.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TaksComentarios.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TaksDocumentos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TaksDocumentosComentarios.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TaksEstatus.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TaksPertenencia.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TaksTipo.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TaksTipoDocumento.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TaskNotifiComentario.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Temp_Actividades_Reporte.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="temp_cs.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TicketsHelper.cs" />
+    <Compile Include="Ticket_Ti.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoCodoleHelper.cs" />
+    <Compile Include="TipoDContaHelper.cs" />
+    <Compile Include="TipoContratoHelper.cs" />
+    <Compile Include="TipoDeComprobante.cs" />
+    <Compile Include="TipoDocCompra.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoEjecucionHelper.cs" />
+    <Compile Include="TipoFactor.cs" />
+    <Compile Include="TipoNoticia.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoPagoHelper.cs" />
+    <Compile Include="TipoProcesosHelper.cs" />
+    <Compile Include="TipoRelacion.cs" />
+    <Compile Include="TipoRPlaneacionHelper.cs" />
+    <Compile Include="TipoRRHHHelper.cs" />
+    <Compile Include="TipoServHelper.cs" />
+    <Compile Include="TipoTesoreriaHelper.cs" />
+    <Compile Include="TipoTransaccion.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoVinculacionesHelper.cs" />
+    <Compile Include="TravelHelper.cs" />
+    <Compile Include="TrvAcompaniante.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TrvConceptos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TrvDoctos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TrvEstatus.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TrvRepConceptos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TrvReq.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TrvTransporte.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TrvTurno.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsersHelper.cs" />
+    <Compile Include="UsoCFDI.cs" />
+    <Compile Include="UsuarioEmpresaHelper.cs" />
+    <Compile Include="Usuarios.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsuariosHelper.cs" />
+    <Compile Include="VPagosHelper.cs" />
+    <Compile Include="V_Pagos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_Proyectos.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_Rubros_Proyecto.cs">
+      <DependentUpon>MCVGea.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="MCVGea.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MCVGea.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MCVGea.edmx.diagram">
+      <DependentUpon>MCVGea.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\PagedList.css" />
+    <Content Include="MCVGea.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MCVGea.Context.cs</LastGenOutput>
+      <DependentUpon>MCVGea.edmx</DependentUpon>
+    </Content>
+    <Content Include="MCVGea.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MCVGea.edmx</DependentUpon>
+      <LastGenOutput>MCVGea.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,49 @@
+﻿@model Model.Ca_Estado
+
+
+@using (Ajax.BeginForm("SaveState", "Pais", new AjaxOptions()
+{
+    HttpMethod = "POST",
+    UpdateTargetId = "resultado",
+    InsertionMode = InsertionMode.Replace,
+    OnBegin = "onBegin",
+    OnComplete = "onComplete",
+    OnSuccess = "onSuccess",
+    OnFailure = "onFailure"
+
+
+}))
+{
+    @Html.HiddenFor(x => x.Id_Estado)
+    @Html.HiddenFor(x => x.Id_Pais)
+    <h4 class="card-title">Estado</h4>
+    <div class="input-group">
+        <span class="input-group-addon">
+            <i class="material-icons">add_location</i>
+        </span>
+        <div class="form-group">
+            <label for="Estado">Estado:</label>
+            @Html.TextBoxFor(x => x.Estado, new { @class = "form-control", @placeholder = "Estado" })
+            @Html.ValidationMessageFor(x => x.Estado, null, new { @class = "badge badge-danger" })
+
+        </div>
+    </div>
+   
+    <div class="input-group">
+        <span class="input-group-addon">
+            Activo:
+        </span>
+        <div class="form-group">
+
+            <div class="togglebutton">
+                <label>
+                    @Html.CheckBoxFor(x => x.Activo)
+                </label>
+            </div>
+
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-fill btn-rose">Guardar</button>
+}
+

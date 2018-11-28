@@ -1,0 +1,284 @@
+﻿
+@model Model.InvSolicitud
+
+@{
+    ViewBag.Title = "RequestDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Model.InvListaPedidos listInfo = ViewBag.ListInfo;
+    int error = ViewBag.Error;
+    string errorMessage = string.Empty;
+    if (error == 1)
+    {
+        errorMessage = ViewBag.ErrorMsg;
+    }
+}
+
+<div class="col-sm-10 col-md-offset-1">
+    <div class="card">
+        <div class="card-header card-header-icon" data-background-color="gray" style="background:#159D93;">
+            <i class="material-icons">content_cut</i>
+        </div>
+        <div class="card-content">
+            <h4 class="card-title">Información del pedido</h4>
+
+            <a href="@Url.Action("LibReqsPapeleria", "Stock")" class="btn btn-primary btn-round">
+                <i class="material-icons">reply</i> Regresar
+            </a>
+
+            <br />
+            <br />
+
+            <div class="col-lg-12 col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-tabs" data-background-color="purple">
+                        <div class="nav-tabs-navigation">
+                            <div class="nav-tabs-wrapper">
+                                <ul class="nav nav-tabs" data-tabs="tabs">
+                                    <li class="active">
+                                        <a href="#profile" data-toggle="tab">
+                                            <i class="material-icons">playlist_add_check</i> Pedidos
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="profile">
+                                <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100" style="width:100%">
+
+                                    @if (ViewBag.ID > 0)
+                                    {
+                                        <thead class="text-info">
+                                            <tr>
+                                                <th class="disabled-sorting text-center">Imagen</th>
+                                                <th class="text-center">Cantidad</th>
+                                                <th class="text-center">Unidad de medida</th>
+                                                <th class="text-center">Producto</th>
+                                                <th class="text-center">Código interno</th>
+                                                <th class="text-center">Requiere item agotado</th>
+                                                <th class="text-center">Entregado</th>
+                                                <th class="text-center">Remover</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot class="text-info">
+                                            <tr>
+                                                <th class="text-center">Imagen</th>
+                                                <th class="text-center">Cantidad</th>
+                                                <th class="text-center">Unidad de medida</th>
+                                                <th class="text-center">Producto</th>
+                                                <th class="text-center">Código interno</th>
+                                                <th class="text-center">Requiere item agotado</th>
+                                                <th class="text-center">Entregado</th>
+                                                <th class="text-center">Remover</th>
+                                            </tr>
+                                        </tfoot>
+                                    }
+
+                                    <tbody>
+                                        @if (ViewBag.ID > 0)
+                                        {
+                                            foreach (Model.InvSolicitud row in ViewBag.Lista)
+                                            {
+                                                <tr>
+                                                    <td class="text-center" style="width:7%">
+                                                        @if (row.InvInventario.Imagen != null)
+                                                        {
+                                                            <img src='@string.Format("{0}", row.InvInventario.Imagen)' style="resize:both" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <img src="~/Image/noimage.png" style="resize:both" />
+                                                        }
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @row.Cantidad
+                                                    </td>
+                                                    @switch (row.InvInventario.IdUnidadMedida)
+                                                    {
+                                                        case 1:
+                                                            <td>Kilogramo(s)</td>
+                                                            break;
+                                                        case 2:
+                                                            <td class="text-center">Pieza(s)</td>
+                                                            break;
+                                                        case 3:
+                                                            <td class="text-center">Caja(s)</td>
+                                                            break;
+                                                        case 4:
+                                                            <td class="text-center">Litro(s)</td>
+                                                            break;
+                                                        case 5:
+                                                            <td class="text-center">Metro(s)</td>
+                                                            break;
+                                                        case 6:
+                                                            <td class="text-center">Centimetro(s)</td>
+                                                            break;
+                                                    }
+                                                    <td class="text-center">
+                                                        @row.Descripcion
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @row.InvInventario.Codigo
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @if (row.InvInventario.ReqDevolucion)
+                                                        {
+                                                            <div class="text-success">
+                                                                <i class="material-icons" rel="tooltip" data-placement="top" title="Recuerda que debes entregar este producto agotado para que se te haga entrega del nuevo">
+                                                                    check_box
+                                                                </i>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+
+                                                            <div style="color:tomato">
+                                                                <i class="material-icons" rel="tooltip" data-placement="top" title="No requiere del producto anterior agotado">
+                                                                    indeterminate_check_box
+                                                                </i>
+                                                            </div>
+                                                        }
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @if (row.Entregado.Value)
+                                                        {
+                                                            using (Html.BeginForm("MarkAs", "Stock", new { idDelFormulario = "frm-NewStockReq", listID = ViewBag.ID, itemID = row.IdSolicitud, entregado = false }))
+                                                            {
+                                                                <button type=@string.Format("{0}", (ViewBag.Permission)?"submit":"") rel="tooltip" title="Entregado (clic para marcar como no entregado)" class="btn btn-success btn-just-icon btn-round">
+                                                                    <i class="material-icons">check_box</i>
+                                                                </button>
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            using (Html.BeginForm("MarkAs", "Stock", new { idDelFormulario = "frm-NewStockReq", listID = ViewBag.ID, itemID = row.IdSolicitud, entregado = true }))
+                                                            {
+                                                                <button type=@string.Format("{0}", (ViewBag.Permission)?"submit":"") rel="tooltip" title="Entregado (clic para marcar como no entregado)" class="btn btn-danger btn-just-icon btn-round">
+                                                                    <i class="material-icons">check_box_outline_blank</i>
+                                                                </button>
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td class="td-actions text-center">
+                                                        @using (Html.BeginForm("RemoveFromList", "Stock", new { idDelFormulario = "frm-NewStockReq", reqID = ViewBag.ID, itemID = row.IdSolicitud }))
+                                                        {
+                                                            <button type="submit" rel="tooltip" title="Quitar de la solicitud" class="btn btn-danger btn-simple btn-xs">
+                                                                <i class="material-icons">close</i>
+                                                            </button>
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td>
+                                                    No has agregado nada a tu solicitud aún
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+
+                @if (listInfo == null || !listInfo.Atendido)
+                {
+                    if (DateTime.Now.Day > 22)
+                    {
+                        using (Html.BeginForm("EditReqInfo", "Stock", new { idDelFormulario = "frm-NewStockReq", idLista = ViewBag.ID }))
+                        {
+
+                            if (ViewBag.ID > 0)
+                            {
+                                @Html.DropDownListFor(x => x.IdInventario, new SelectList(ViewBag.Papeleria, "IdInventario", "Item", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10", @required = "true" })
+                                @Html.ValidationMessageFor(x => x.IdInventario, null, new { @class = "badge badge-danger" })
+                            }
+                            else
+                            {
+                                @Html.DropDownListFor(x => x.IdInventario, new SelectList(ViewBag.Papeleria, "IdInventario", "Item", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10", @required = "true" })
+                                @Html.ValidationMessageFor(x => x.IdInventario, "El campo es obligatorio", new { @class = "badge badge-danger" })
+                            }
+
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="material-icons">filter_9_plus</i>
+                                </span>
+
+                                <label class="control-label" for=@Model.Cantidad> * Unidades requeridas (Ej.2)</label>
+
+                                @Html.TextBoxFor(x => x.Cantidad, new { @class = "form-control", @placeholder = "* Unidades requeridas (Ej.2)", @required = "true", @type = "number" })
+                                @Html.ValidationMessageFor(x => x.Cantidad, null, new { @class = "badge badge-danger" })
+
+                            </div>
+
+                            @*<div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="material-icons">filter_9_plus</i>
+                                    </span>
+
+                                    <label class="control-label" for=@Model.Cantidad> * Unidades requeridas (Ej.2)</label>
+
+                                    @Html.TextBoxFor(x => x.Cantidad, new { @class = "form-control", @placeholder = "* Unidades requeridas (Ej.2)", @required = "true", @type = "number" })
+                                    @Html.ValidationMessageFor(x => x.Cantidad, null, new { @class = "badge badge-danger" })
+
+                                </div>*@
+
+                            <p class="text-gray">* El campo es obligatorio</p>
+
+                            <button type="submit" class="btn btn-info btn-round">
+                                <i class="material-icons">sd_card</i> Guardar en la soliciud
+                            </button>
+
+                        }
+                    }
+                    else
+                    {
+                        <q>No puedes solicitar papelería en este momento</q>
+                    }
+                }
+                else
+                {
+                    <q>La solicitud ya ha sido atendida. No puedes agregar más productos a esta lista</q>
+                }
+
+                <br />
+                <br />
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+    var onError = @ViewBag.Error;
+
+
+        $(document).ready(function () {
+            if (onError == 1){
+                swal({
+                    title: 'Ha ocurrido un error',
+                    text: '@ViewBag.ErrorMsg',
+                    type: 'error',
+                    buttonsStyling: false,
+                    confirmButtonClass: 'btn btn-success',
+                    confirmButtonText: 'Ok'
+                })
+            }
+        });
+
+    </script>
+}
+

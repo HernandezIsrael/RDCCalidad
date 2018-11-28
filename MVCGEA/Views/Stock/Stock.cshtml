@@ -1,0 +1,181 @@
+﻿
+@{
+    ViewBag.Title = "Stock";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-icon" data-background-color="gray" style="background:#159D93;">
+                <i class="material-icons">
+                    important_devices
+                </i>
+            </div>
+            <div class="card-content">
+                <h4 class="card-title">Inventario de Clusmext</h4>
+                <div class="toolbar">
+                    <!--        Here you can write extra buttons/actions for the toolbar              -->
+                </div>
+                <a href="@Url.Action("ItemDetail","Stock")" class="btn btn-primary btn-round">Nuevo ítem <i class="material-icons">add</i></a>
+                <div class="material-datatables">
+
+                    <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100" style="width:100%">
+                        <thead class="text-info">
+                            <tr>
+                                @*<th class="disabled-sorting text-center">Editar</th>*@
+                                <th class="disabled-sorting text-center">Imagen</th>
+                                <th class="">Nombre</th>
+                                <th class="">Descripción</th>
+                                <th class="text-center">Categoría</th>
+                                <th class="text-center">Sub-categoría</th>
+                                <th class="text-center">Código interno</th>
+                                <th class="text-center">Disponibilidad</th>
+                                <th class="text-center">Unidad de medida</th>
+                                <th class="text-center">Costo unitario</th>
+                                <th class="text-center">Requiere item agotado</th>
+                                <th class="text-center">Fecha de creación</th>
+                            </tr>
+                        </thead>
+                        <tfoot class="text-info">
+                            <tr>
+                                @*<th class="text-center">Editar</th>*@
+                                <th class="text-center">Imagen</th>
+                                <th class="text-center">Nombre</th>
+                                <th class="text-center">Descripción</th>
+                                <th class="text-center">Categoría</th>
+                                <th class="text-center">Sub-categoría</th>
+                                <th class="text-center">Código interno</th>
+                                <th class="text-center">Disponibilidad</th>
+                                <th class="text-center">Unidad de medida</th>
+                                <th class="text-center">Costo unitario</th>
+                                <th class="text-center">Requiere item agotado</th>
+                                <th class="text-center">Fecha de creación</th>
+                            </tr>
+                        </tfoot>
+
+                        <tbody>
+                            @foreach (Model.InvInventario row in Model)
+                            {
+                                <tr>
+                                    <td style="width:7%">
+
+                                        @if (row.Imagen != null)
+                                        {
+                                            <a href="@Url.Action("ItemDetail", "Stock", new { id = row.IdInventario })" class="btn btn-simple btn-icon view" rel="tooltip" data-placement="right" title="Ver detalle">
+                                                @*<img src='@string.Format("{0}", row.Imagen)' style="resize:both" />*@
+                                                <img src='@string.Format("{0}", row.Imagen)' style="resize:both" />
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="@Url.Action("ItemDetail", "Stock", new { id = row.IdInventario })" class="btn btn-simple btn-icon view" rel="tooltip" data-placement="right" title="No se ha seleccionado ninguna imagen">
+                                                <img src="~/Image/noimage.png" style="resize:both" />
+                                            </a>
+                                        }
+
+                                    </td>
+                                    <td style="width:10%">
+                                        <a href="@Url.Action("ItemDetail", "Stock", new { id = row.IdInventario })" class="text-info">
+                                            <u>@row.Item</u>
+                                        </a>
+                                    </td>
+                                    <td style="width:15%">
+                                        @row.Descripcion
+                                    </td>
+                                    <td class="text-center">
+                                        @row.InvTipo.Descripcion
+                                    </td>
+                                    <td class="text-center">
+                                        @row.InvSubTipo.Descripcion
+                                    </td>
+                                    <td class="text-center">
+                                        @row.Codigo
+                                    </td>
+                                    @if (row.InvMin > 0 || row.InvMin != null)
+                                    {
+                                        <td class="text-center">
+                                            <a class="btn btn-round" href="#" style="@string.Format("{0}",(row.Dispobibles.Value < row.InvMin.Value && row.Dispobibles.Value > 0)?"background-color:tomato":(row.Dispobibles.Value >= row.InvMin.Value && row.Dispobibles.Value < row.InvMin.Value + 10)?"background-color:orange":(row.Dispobibles.Value <= 0)?"background-color:#0F0F0F":"background-color:#4CAF50")" rel="tooltip" data-placement="right" title="@string.Format("{0}",(row.Dispobibles.Value < row.InvMin.Value && row.Dispobibles.Value > 0)?"Se requiere reabastecimiento del producto":(row.Dispobibles.Value >= row.InvMin.Value && row.Dispobibles.Value < row.InvMin.Value + 10)?"El producto está próximo a agotarse":(row.Dispobibles.Value <= 0)?"Esto ha ocurrido porque se ha agotado el producto y [o] no se ha actualizado el inventario con las cifras correctas y se han entregado productos que sobrepasan su disponibilidad. Para mas información sobre este problema acércate con el área de TI":"Disponible")">
+                                                @row.Dispobibles.Value
+                                            </a>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td class="text-center">
+                                            <a class="btn btn-round" href="#" style="@string.Format("{0}",(row.Dispobibles.Value < 4 && row.Dispobibles.Value > 0)?"background-color:tomato":(row.Dispobibles.Value >= 4 && row.Dispobibles.Value < 10)?"background-color:orange":(row.Dispobibles.Value <= 0)?"background-color:#0F0F0F":"background-color:#4CAF50")" rel="tooltip" data-placement="right" title="@string.Format("{0}",(row.Dispobibles.Value < 4 && row.Dispobibles.Value > 0)?"Se requiere reabastecimiento del producto":(row.Dispobibles.Value >= 4 && row.Dispobibles.Value < 10)?"El producto está próximo a agotarse":(row.Dispobibles.Value <= 0)?"Esto ha ocurrido porque se ha agotado el producto y [o] no se ha actualizado el inventario con las cifras correctas y se han entregado productos que sobrepasan su disponibilidad. Para mas información sobre este problema acércate con el área de TI":"Disponible")">
+                                                @row.Dispobibles.Value
+                                            </a>
+                                        </td>
+                                    }
+                                    <td class="text-center">
+                                        @row.InvUMedida.UnidadMedida
+                                    </td>
+                                    <td class="text-center">
+                                        @string.Format("{0:C2}", row.CostoUnitario)
+                                    </td>
+                                    <td class="text-center">
+                                        @if (row.ReqDevolucion)
+                                        {
+                                            <div class="text-success">
+                                                <i class="material-icons" rel="tooltip" data-placement="top" title="Cuando un usuario solicite este ítem, deberá presentar los ítems agotados para reabastecer">
+                                                    check_box
+                                                </i>
+                                            </div>
+                                        }
+                                        else
+                                        {
+
+                                            <div class="text-rose">
+                                                <i class="material-icons" rel="tooltip" data-placement="top" title="No se requiere de este ítem agotado para ser entregado">
+                                                    indeterminate_check_box
+                                                </i>
+                                            </div>
+                                        }
+                                    </td>
+                                    <td class="text-center">
+                                        @row.FAlta.Value.ToString("dd MMMM yyyy")
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+
+                </div>
+            </div>
+            <!-- end content-->
+        </div>
+        <!--  end card  -->
+    </div>
+</div>
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#datatables').DataTable({
+            "order": [[0, "desc"]], //column,type
+            "pagingType": "full_numbers",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "Todos"]
+            ],
+            responsive: false,
+            language: {
+                search: "_INPUT_",
+                lengthMenu: "Mostrar _MENU_ registros",
+                searchPlaceholder: "Buscar", "paginate": { "previous": "Anterior", "next": "Siguiente", "first": "Primero", "last": "Último" },
+                info: "Mostrando _START_ a _END_ registros de _TOTAL_ registros"
+            }
+        });
+
+
+        var table = $('#datatables').DataTable();
+
+        $('.card .material-datatables label').addClass('form-group');
+    });
+
+    </script>
+}

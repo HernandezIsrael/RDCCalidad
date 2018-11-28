@@ -1,0 +1,72 @@
+﻿
+@model Model.Ca_Clabe
+@using (Ajax.BeginForm("SaveClabe", "Proveedores", new AjaxOptions()
+{
+    HttpMethod = "POST",
+    UpdateTargetId = "resultado",
+    InsertionMode = InsertionMode.Replace,
+    OnBegin = "onBegin",
+    OnComplete = "onComplete",
+    OnSuccess = "onSuccess",
+    OnFailure = "onFailure"
+
+
+}))
+{
+    @Html.HiddenFor(x => x.Id_Clabe)
+    @Html.HiddenFor(x => x.Id_Empresa)
+    @Html.HiddenFor(x => x.Id_Proyecto)
+    <h4 class="card-title">No Clabe</h4>
+   
+    <div class="input-group">
+        <span class="input-group-addon">
+            <i class="material-icons">list</i>
+        </span>
+        <div class="form-group label-floating">
+            <label class="control-label" for=@Model.Id_Banco>Banco</label>
+            @Html.DropDownListFor(x => x.Id_Banco, new SelectList(ViewBag.ListBancos, "Id_Banco", "Banco", 0), new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Id_Banco, null, new { @class = "badge badge-danger" })
+
+        </div>
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">
+            <i class="material-icons">book</i>
+        </span>
+        <div class="form-group label-floating">
+            <label class="control-label" for=@Model.N_Clabe>No Clabe</label>
+            @Html.TextBoxFor(x => x.N_Clabe, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.N_Clabe, null, new { @class = "badge badge-danger" })
+
+        </div>
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">
+            <i class="material-icons">list</i>
+        </span>
+        <div class="form-group label-floating">
+            <label class="control-label" for=@Model.Id_Moneda>Moneda</label>
+            @Html.DropDownListFor(x => x.Id_Moneda, new SelectList(ViewBag.ListMoneda, "Id_Moneda", "Moneda", 1), new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Id_Moneda, null, new { @class = "badge badge-danger" })
+
+        </div>
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">
+            Activo:
+        </span>
+        <div class="form-group">
+
+            <div class="togglebutton">
+                <label>
+                    @Html.CheckBoxFor(x => x.Activo)
+                </label>
+            </div>
+
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-info btn-round" style="background:#159D93">
+        Guardar
+    </button>
+}

@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="43afdf27b17746adb3c92c5dbad39f74" Name="Diagram1" ZoomLevel="60">
+        <EntityTypeShape EntityType="ClusMextModel.CA_Areas" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Tipo_Usuario" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClusMextModel.Grupos_Menu" Width="1.5" PointX="0.875" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClusMextModel.Menu" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClusMextModel.Usuarios" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="ClusMextModel.FK_Usuarios_Ca_Tipo_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="ClusMextModel.FK_Menu_Grupos_Menu" ManuallyRouted="false" />
+        <AssociationConnector Association="ClusMextModel.FK_Menu_Usuarios" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Categoria" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Condicion" Width="1.5" PointX="8.375" PointY="3.75" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_CS" Width="1.5" PointX="5.25" PointY="8.75" />
+        <AssociationConnector Association="ClusMextModel.FK_Ca_CS_Usuarios" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Estado" Width="1.5" PointX="10.625" PointY="7" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Pais" Width="1.5" PointX="8.375" PointY="7" />
+        <AssociationConnector Association="ClusMextModel.FK_Ca_Estado_Ca_Pais" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Bancos" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ClusMextModel.Empresas" Width="1.5" PointX="12.875" PointY="5.75" />
+        <AssociationConnector Association="ClusMextModel.FK_Empresas_Ca_Estado" />
+        <AssociationConnector Association="ClusMextModel.FK_Empresas_Ca_Pais" />
+        <EntityTypeShape EntityType="ClusMextModel.TaksAdmon" Width="1.5" PointX="15.5" PointY="1.5" />
+        <EntityTypeShape EntityType="ClusMextModel.TaksComentarios" Width="1.5" PointX="17.75" PointY="3.125" />
+        <EntityTypeShape EntityType="ClusMextModel.TaksDocumentos" Width="1.5" PointX="10" PointY="11" />
+        <EntityTypeShape EntityType="ClusMextModel.TaksDocumentosComentarios" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="ClusMextModel.TaksEstatus" Width="1.5" PointX="13.25" PointY="12.375" />
+        <EntityTypeShape EntityType="ClusMextModel.TaksPertenencia" Width="1.5" PointX="17.75" PointY="6.375" />
+        <EntityTypeShape EntityType="ClusMextModel.TaksTipo" Width="1.5" PointX="13.25" PointY="2.5" />
+        <EntityTypeShape EntityType="ClusMextModel.TaksTipoDocumento" Width="1.5" PointX="7.75" PointY="11.375" />
+        <EntityTypeShape EntityType="ClusMextModel.TaksAtencion" Width="1.5" PointX="2.75" PointY="9.75" />
+        <AssociationConnector Association="ClusMextModel.FK_TaksAdmon_CA_Areas" />
+        <AssociationConnector Association="ClusMextModel.FK_TaksAdmon_Empresas" />
+        <AssociationConnector Association="ClusMextModel.FK_TaksAdmon_TaksEstatus" />
+        <AssociationConnector Association="ClusMextModel.FK_TaksAdmon_TaksTipo" />
+        <AssociationConnector Association="ClusMextModel.FK_TaksAdmon_Usuarios" />
+        <AssociationConnector Association="ClusMextModel.FK_TaksComentarios_TaksAdmon" />
+        <AssociationConnector Association="ClusMextModel.FK_TaksPertenencia_TaksAdmon" />
+        <AssociationConnector Association="ClusMextModel.FK_TaksDocumentos_TaksTipoDocumento" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Instituciones" Width="1.5" PointX="3.375" PointY="12.75" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Marca" Width="1.5" PointX="0.75" PointY="13.75" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Medio_Entrega" Width="1.5" PointX="5.375" PointY="14.75" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Moneda" Width="1.5" PointX="7.375" PointY="14.75" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Rubros" Width="1.5" PointX="9.375" PointY="14.75" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Solicitado_por" Width="1.5" PointX="15.375" PointY="11.75" />
+        <AssociationConnector Association="ClusMextModel.FK_TaksComentarios_Usuarios" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Tipo_Codole" Width="1.5" PointX="11.375" PointY="15.75" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Tipo_Contrato" Width="1.5" PointX="13.375" PointY="15.75" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Tipo_Pago" Width="1.5" PointX="15.375" PointY="14.75" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Tipo_Servicio" Width="1.5" PointX="0.75" PointY="16.75" />
+        <EntityTypeShape EntityType="ClusMextModel.CaTipoRConta" Width="1.5" PointX="3.375" PointY="17.75" />
+        <EntityTypeShape EntityType="ClusMextModel.CaTipoREjecucion" Width="1.5" PointX="5.375" PointY="17.75" />
+        <EntityTypeShape EntityType="ClusMextModel.CaTipoRPlancio" Width="1.5" PointX="8" PointY="17.875" />
+        <EntityTypeShape EntityType="ClusMextModel.CaTipoRProcesos" Width="1.5" PointX="10.375" PointY="18.375" />
+        <EntityTypeShape EntityType="ClusMextModel.CaTipoRRHHD" Width="1.5" PointX="12.375" PointY="18.625" />
+        <EntityTypeShape EntityType="ClusMextModel.CaTipoRVinculaciones" Width="1.5" PointX="14.75" PointY="19.875" />
+        <EntityTypeShape EntityType="ClusMextModel.CaTipoTesoreria" Width="1.5" PointX="10.375" PointY="20.875" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_N_Cuenta" Width="1.5" PointX="1.875" PointY="20.75" />
+        <AssociationConnector Association="ClusMextModel.FK_Ca_N_Cuenta_Ca_Bancos" />
+        <AssociationConnector Association="ClusMextModel.FK_Ca_N_Cuenta_Ca_Moneda" />
+        <AssociationConnector Association="ClusMextModel.FK_Ca_N_Cuenta_Empresas" />
+        <EntityTypeShape EntityType="ClusMextModel.Proyectos" Width="1.5" PointX="18.125" PointY="10.5" />
+        <AssociationConnector Association="ClusMextModel.FK_Proyectos_Ca_Bancos" />
+        <AssociationConnector Association="ClusMextModel.FK_Proyectos_Ca_Instituciones" />
+        <AssociationConnector Association="ClusMextModel.FK_Ca_N_Cuenta_Proyectos" />
+        <AssociationConnector Association="ClusMextModel.FK_Proyectos_Empresas" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Clabe" Width="1.5" PointX="12.5" PointY="24.625" />
+        <AssociationConnector Association="ClusMextModel.FK_Ca_Clabe_Ca_Bancos" />
+        <AssociationConnector Association="ClusMextModel.FK_Ca_Clabe_Ca_Moneda" />
+        <AssociationConnector Association="ClusMextModel.FK_Ca_Clabe_Empresas" />
+        <AssociationConnector Association="ClusMextModel.FK_Ca_Clabe_Proyectos" />
+        <EntityTypeShape EntityType="ClusMextModel.Re_Bancos_Empresa" Width="1.5" PointX="17.375" PointY="16.75" />
+        <EntityTypeShape EntityType="ClusMextModel.Re_Usuario_Empresa" Width="3.125" PointX="1.125" PointY="25.75" />
+        <AssociationConnector Association="ClusMextModel.FK_Re_Usuario_Empresa_Empresas" />
+        <AssociationConnector Association="ClusMextModel.FK_Re_Usuario_Empresa_Usuarios" />
+        <AssociationConnector Association="ClusMextModel.FK_TaksAdmon_Usuarios1" />
+        <EntityTypeShape EntityType="ClusMextModel.Re_Proveedores_Empresa" Width="3.375" PointX="15.125" PointY="22.625" />
+        <AssociationConnector Association="ClusMextModel.FK_Re_Proveedores_Empresa_Empresas" />
+        <AssociationConnector Association="ClusMextModel.FK_Re_Proveedores_Empresa_Empresas1" />
+        <AssociationConnector Association="ClusMextModel.FK_Ca_Rubros_Ca_Instituciones" />
+        <AssociationConnector Association="ClusMextModel.FK_Proyectos_Ca_N_Cuenta" />
+        <AssociationConnector Association="ClusMextModel.FK_Proyectos_Ca_Moneda" />
+        <EntityTypeShape EntityType="ClusMextModel.V_Pagos" Width="1.5" PointX="19.375" PointY="16.75" />
+        <EntityTypeShape EntityType="ClusMextModel.Notifications" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="ClusMextModel.NotificationsStatus" Width="1.5" PointX="3" PointY="34.5" />
+        <AssociationConnector Association="ClusMextModel.FK_Notifications_NotificationsStatus" />
+        <AssociationConnector Association="ClusMextModel.FK_Notifications_Usuarios" />
+        <AssociationConnector Association="ClusMextModel.FK_Notifications_Usuarios1" />
+        <EntityTypeShape EntityType="ClusMextModel.C__MigrationHistory" Width="1.5" PointX="4.75" PointY="25.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Actividades_Areas" Width="1.5" PointX="6.75" PointY="25.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Activo_Fijo" Width="1.5" PointX="23.5" PointY="0.75" />
+        <EntityTypeShape EntityType="ClusMextModel.AF_Comentarios" Width="1.5" PointX="8.75" PointY="28.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Amex" Width="1.5" PointX="5.75" PointY="31.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Anticipos" Width="1.5" PointX="7.75" PointY="31.25" />
+        <EntityTypeShape EntityType="ClusMextModel.AuditoriaDocs" Width="1.5" PointX="15.75" PointY="31.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Autorizaciones_Pago" Width="1.5" PointX="30.25" PointY="6" />
+        <EntityTypeShape EntityType="ClusMextModel.Avances_Actividades" Width="1.5" PointX="0.75" PointY="34.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Archivero" Width="1.5" PointX="2.75" PointY="34.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Bloque" Width="1.5" PointX="7.75" PointY="34.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Calidad_Servicio" Width="1.5" PointX="9.75" PointY="31.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Clasificacion" Width="1.5" PointX="29.75" PointY="20.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Contratos" Width="1.5" PointX="4.75" PointY="35.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Estatus_Cobro" Width="1.5" PointX="30.75" PointY="10.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Estatus_Oficina" Width="1.5" PointX="13.75" PointY="36.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Estatus_Pago" Width="1.5" PointX="31.75" PointY="20.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Estatus_Servicios" Width="1.5" PointX="20.25" PointY="44.125" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_FTP" Width="1.5" PointX="27.75" PointY="27.625" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Iva" Width="1.5" PointX="15.75" PointY="36.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Lapso" Width="1.5" PointX="18.25" PointY="3.875" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Modalidad" Width="1.5" PointX="29.75" PointY="36.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Monto_Pagos_Contrato" Width="1.5" PointX="31.75" PointY="36.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Nivel" Width="1.5" PointX="32.75" PointY="5.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Nivel1" Width="1.5" PointX="32.75" PointY="8.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Nivel2" Width="1.5" PointX="32.75" PointY="11.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Nivel3" Width="1.5" PointX="6.75" PointY="37.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Oficinas" Width="1.5" PointX="21.25" PointY="55.5" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Progamas" Width="1.5" PointX="8.75" PointY="37.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Referencia" Width="1.5" PointX="32.75" PointY="15.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Status_Requisicion" Width="1.5" PointX="22.75" PointY="40.625" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Status_Ticket" Width="1.5" PointX="10.75" PointY="37.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Tipo_Cambio" Width="1.5" PointX="32.75" PointY="31.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Tipo_Documento" Width="1.5" PointX="33.75" PointY="18.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Tipo_Documento_Codole" Width="1.5" PointX="33.75" PointY="21.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Tipo_Documento_Pago" Width="1.5" PointX="33.75" PointY="35.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Tipo_Empresa" Width="1.5" PointX="11" PointY="33.875" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Tipo_FTP" Width="1.5" PointX="25.5" PointY="28" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Tipo_Movimiento" Width="1.5" PointX="33.75" PointY="38.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Tipo_Oficina" Width="1.5" PointX="34.75" PointY="5.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Tipo_Parte" Width="1.5" PointX="34.75" PointY="8.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Capacidades_Servicios" Width="1.5" PointX="22.5" PointY="14.5" />
+        <EntityTypeShape EntityType="ClusMextModel.CaSistemasSh" Width="1.5" PointX="18.25" PointY="54.875" />
+        <EntityTypeShape EntityType="ClusMextModel.CaUrlSharepoint" Width="1.5" PointX="20.5" PointY="1.875" />
+        <EntityTypeShape EntityType="ClusMextModel.Co_Entrada_Salidas" Width="1.5" PointX="34.75" PointY="11.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Cobro_Planeacion" Width="1.5" PointX="12.75" PointY="39.25" />
+        <EntityTypeShape EntityType="ClusMextModel.CobroxServiciosxEmpresa" Width="1.5" PointX="14.75" PointY="39.25" />
+        <EntityTypeShape EntityType="ClusMextModel.CODOLE" Width="1.5" PointX="24.75" PointY="14.625" />
+        <EntityTypeShape EntityType="ClusMextModel.Codole_Documentos" Width="1.5" PointX="34.75" PointY="30.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Comparativo_Proveedor" Width="1.5" PointX="23.5" PointY="7.875" />
+        <EntityTypeShape EntityType="ClusMextModel.Conceptos" Width="1.5" PointX="34.75" PointY="15.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Contratos" Width="1.5" PointX="27.75" PointY="15" />
+        <EntityTypeShape EntityType="ClusMextModel.Correos_Servicios" Width="1.5" PointX="8.75" PointY="40.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Costos_Planeacion" Width="1.5" PointX="35.75" PointY="18.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Csv" Width="1.5" PointX="20.25" PointY="47.625" />
+        <EntityTypeShape EntityType="ClusMextModel.CsvAmex" Width="1.5" PointX="29.75" PointY="40.25" />
+        <EntityTypeShape EntityType="ClusMextModel.CsvPCuentas" Width="1.5" PointX="35.75" PointY="35.25" />
+        <EntityTypeShape EntityType="ClusMextModel.CsvPosicion" Width="1.5" PointX="35.75" PointY="39.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Documentos" Width="1.5" PointX="36.75" PointY="5.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Documentos_Codole" Width="1.5" PointX="30" PointY="15" />
+        <EntityTypeShape EntityType="ClusMextModel.DocumentosRConta" Width="1.5" PointX="36.75" PointY="9.25" />
+        <EntityTypeShape EntityType="ClusMextModel.DocumentosREjecucion" Width="1.5" PointX="5.75" PointY="41.25" />
+        <EntityTypeShape EntityType="ClusMextModel.DocumentosRPlancio" Width="1.5" PointX="36.75" PointY="22.25" />
+        <EntityTypeShape EntityType="ClusMextModel.DocumentosRProcesos" Width="1.5" PointX="36.75" PointY="14.25" />
+        <EntityTypeShape EntityType="ClusMextModel.DocumentosRRHHD" Width="1.5" PointX="36.75" PointY="27.25" />
+        <EntityTypeShape EntityType="ClusMextModel.DocumentosRTesoreria" Width="1.5" PointX="31.75" PointY="41.25" />
+        <EntityTypeShape EntityType="ClusMextModel.DocumentosRVinculaciones" Width="1.5" PointX="0.75" PointY="42.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Entregables_Pago" Width="1.5" PointX="36.75" PointY="32.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Entregables_Proyectos" Width="1.5" PointX="2.75" PointY="42.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Log_Correos_Contratos" Width="1.5" PointX="37.75" PointY="18.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Log_Correos_Entregables" Width="1.5" PointX="35.75" PointY="42.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Log_Documentos" Width="1.5" PointX="38.75" PointY="5.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Log_Pagos" Width="1.5" PointX="7.75" PointY="43.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Log_Re_Documento_Pago" Width="1.5" PointX="38.75" PointY="9.25" />
+        <EntityTypeShape EntityType="ClusMextModel.LogEventosSh" Width="1.5" PointX="38.75" PointY="13.25" />
+        <EntityTypeShape EntityType="ClusMextModel.LogSharepoint" Width="1.5" PointX="9.75" PointY="43.25" />
+        <EntityTypeShape EntityType="ClusMextModel.LogSyncSharepoint" Width="1.5" PointX="25.75" PointY="4.5" />
+        <EntityTypeShape EntityType="ClusMextModel.LogTrvAcompaniante" Width="1.5" PointX="11.75" PointY="43.25" />
+        <EntityTypeShape EntityType="ClusMextModel.LogTrvDoctos" Width="1.5" PointX="38.75" PointY="22.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Meses_Proyecto" Width="1.5" PointX="38.75" PointY="26.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Monto_Pagos_Contrato" Width="1.5" PointX="38.75" PointY="30.25" />
+        <EntityTypeShape EntityType="ClusMextModel.MovimientosBancosCsv" Width="1.5" PointX="22.5" PointY="23.375" />
+        <EntityTypeShape EntityType="ClusMextModel.Orden_Compra" Width="1.5" PointX="27.25" PointY="43.875" />
+        <EntityTypeShape EntityType="ClusMextModel.Pagos" Width="1.5" PointX="28" PointY="0.875" />
+        <EntityTypeShape EntityType="ClusMextModel.PAmex" Width="1.5" PointX="39.75" PointY="18.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Partes" Width="1.5" PointX="13.75" PointY="44.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Patrones_Bancos" Width="1.5" PointX="15.75" PointY="44.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Presupuesto_Proyectos" Width="1.5" PointX="39.75" PointY="34.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Pruebas_Pagos" Width="1.5" PointX="39.75" PointY="38.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Re_Codole_Empresas" Width="1.5" PointX="40.75" PointY="5.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Re_Contratos_Empresas" Width="1.5" PointX="40.75" PointY="8.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Re_Documento_AF" Width="1.5" PointX="40.75" PointY="11.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Re_Documento_Contrato" Width="1.5" PointX="40.75" PointY="14.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Re_Documento_Pago" Width="1.5" PointX="40.75" PointY="21.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Re_Permisos_Pago" Width="1.5" PointX="40.75" PointY="24.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Re_Rubros_Pago" Width="1.5" PointX="40.75" PointY="27.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Re_Servicios_CUCC" Width="1.5" PointX="22.75" PointY="45.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Re_Servicios_NURC" Width="1.5" PointX="40.75" PointY="30.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Re_Tipo_Contrato_Tipo_Parte" Width="1.5" PointX="2.75" PointY="46.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Reporte_Factura" Width="1.5" PointX="4.75" PointY="46.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Requisicion_Compra" Width="1.5" PointX="25" PointY="39.125" />
+        <EntityTypeShape EntityType="ClusMextModel.Requisicion_Compra_Detalle" Width="1.5" PointX="27.25" PointY="40" />
+        <EntityTypeShape EntityType="ClusMextModel.Requisicion_Compra_Proveedor" Width="1.5" PointX="27.25" PointY="36.875" />
+        <EntityTypeShape EntityType="ClusMextModel.Responsable_Proyecto" Width="1.5" PointX="25.75" PointY="11" />
+        <EntityTypeShape EntityType="ClusMextModel.RProcesos" Width="1.5" PointX="41.75" PointY="33.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RTesoreria" Width="1.5" PointX="41.75" PointY="39.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Rubros_Proyectos" Width="1.5" PointX="27.75" PointY="22.75" />
+        <EntityTypeShape EntityType="ClusMextModel.SEDirecciones" Width="1.5" PointX="25.5" PointY="23.875" />
+        <EntityTypeShape EntityType="ClusMextModel.SEDocumentosServicios" Width="1.5" PointX="30" PointY="31.125" />
+        <EntityTypeShape EntityType="ClusMextModel.SEEstatusServicios" Width="1.5" PointX="18.25" PointY="40.875" />
+        <EntityTypeShape EntityType="ClusMextModel.SELogServicios" Width="1.5" PointX="35.75" PointY="46.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Servicios" Width="1.5" PointX="20.5" PointY="6.5" />
+        <EntityTypeShape EntityType="ClusMextModel.SETipoDocumento" Width="1.5" PointX="27.75" PointY="51" />
+        <EntityTypeShape EntityType="ClusMextModel.sysdiagrams" Width="1.5" PointX="41.75" PointY="18.25" />
+        <EntityTypeShape EntityType="ClusMextModel.TaskNotifiComentario" Width="1.5" PointX="41.75" PointY="45.25" />
+        <EntityTypeShape EntityType="ClusMextModel.TipoTransaccion" Width="1.5" PointX="20.25" PointY="52" />
+        <EntityTypeShape EntityType="ClusMextModel.TrvAcompaniante" Width="1.5" PointX="42.75" PointY="5.25" />
+        <EntityTypeShape EntityType="ClusMextModel.TrvConceptos" Width="1.5" PointX="42.75" PointY="9.25" />
+        <EntityTypeShape EntityType="ClusMextModel.TrvDoctos" Width="1.5" PointX="42.75" PointY="12.25" />
+        <EntityTypeShape EntityType="ClusMextModel.TrvEstatus" Width="1.5" PointX="21.75" PointY="64.625" />
+        <EntityTypeShape EntityType="ClusMextModel.TrvRepConceptos" Width="1.5" PointX="9.75" PointY="47.25" />
+        <EntityTypeShape EntityType="ClusMextModel.TrvReq" Width="1.5" PointX="24" PointY="31.625" />
+        <EntityTypeShape EntityType="ClusMextModel.TrvTransporte" Width="1.5" PointX="21.75" PointY="61.75" />
+        <EntityTypeShape EntityType="ClusMextModel.TrvTurno" Width="1.5" PointX="21.75" PointY="33.25" />
+        <EntityTypeShape EntityType="ClusMextModel.asistencias" Width="1.5" PointX="42.75" PointY="21.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Disponible" Width="1.5" PointX="42.75" PointY="24.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Estatus_Actividades" Width="1.5" PointX="42.75" PointY="27.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Tiempo" Width="1.5" PointX="21.75" PointY="38.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Ca_Unidad_Medida" Width="1.5" PointX="42.75" PointY="30.25" />
+        <EntityTypeShape EntityType="ClusMextModel.CaCFDI" Width="1.5" PointX="31.75" PointY="47.25" />
+        <EntityTypeShape EntityType="ClusMextModel.caFormaPago" Width="1.5" PointX="43.75" PointY="16.25" />
+        <EntityTypeShape EntityType="ClusMextModel.CaMetodoPago" Width="1.5" PointX="15.75" PointY="48.25" />
+        <EntityTypeShape EntityType="ClusMextModel.CaReqFacturas" Width="1.5" PointX="22.75" PointY="48.25" />
+        <EntityTypeShape EntityType="ClusMextModel.CargaTempPagos" Width="1.5" PointX="43.75" PointY="33.25" />
+        <EntityTypeShape EntityType="ClusMextModel.caStatusFactura" Width="1.5" PointX="43.75" PointY="45.25" />
+        <EntityTypeShape EntityType="ClusMextModel.CaStatusRequisicion" Width="1.5" PointX="43.75" PointY="48.25" />
+        <EntityTypeShape EntityType="ClusMextModel.CaTablasDocumentos" Width="1.5" PointX="44.75" PointY="5.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Comparacion_Proveedor_Temp" Width="1.5" PointX="0.75" PointY="49.25" />
+        <EntityTypeShape EntityType="ClusMextModel.ComparativaProveedores" Width="1.5" PointX="2.75" PointY="49.25" />
+        <EntityTypeShape EntityType="ClusMextModel.CompraTipoDocumento" Width="1.5" PointX="44.75" PointY="8.25" />
+        <EntityTypeShape EntityType="ClusMextModel.correoReqCompra" Width="1.5" PointX="4.75" PointY="49.25" />
+        <EntityTypeShape EntityType="ClusMextModel.DocumentoActividades" Width="1.5" PointX="44.75" PointY="11.25" />
+        <EntityTypeShape EntityType="ClusMextModel.EmpresasV2" Width="1.5" PointX="11.75" PointY="49.25" />
+        <EntityTypeShape EntityType="ClusMextModel.EnviadorCorreos" Width="1.5" PointX="44.75" PointY="19.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Log_Capacidades_Servicios" Width="1.5" PointX="37.75" PointY="49.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Log_CODOLE" Width="1.5" PointX="39.75" PointY="49.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Log_Correos_Codole" Width="1.5" PointX="44.75" PointY="27.25" />
+        <EntityTypeShape EntityType="ClusMextModel.LogRConta" Width="1.5" PointX="45.75" PointY="31.25" />
+        <EntityTypeShape EntityType="ClusMextModel.LogREjecucion" Width="1.5" PointX="45.75" PointY="38.25" />
+        <EntityTypeShape EntityType="ClusMextModel.LogRRHHD" Width="1.5" PointX="45.75" PointY="44.25" />
+        <EntityTypeShape EntityType="ClusMextModel.LogRTesoreria" Width="1.5" PointX="46.75" PointY="5.25" />
+        <EntityTypeShape EntityType="ClusMextModel.LogRVinculaciones" Width="1.5" PointX="46.75" PointY="12.25" />
+        <EntityTypeShape EntityType="ClusMextModel.NomenclaturaCalidad" Width="1.5" PointX="46.75" PointY="18.25" />
+        <EntityTypeShape EntityType="ClusMextModel.OrCompraDetalle" Width="1.5" PointX="46.75" PointY="21.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Orden_Compra_Autorizacion" Width="1.5" PointX="46.75" PointY="25.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Orden_Compra_Detalle" Width="1.5" PointX="22.75" PointY="51.25" />
+        <EntityTypeShape EntityType="ClusMextModel.OrdenCompra" Width="1.5" PointX="24.75" PointY="51.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RConta" Width="1.5" PointX="29.75" PointY="51.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RDC" Width="1.5" PointX="31.75" PointY="51.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Re_Empresa_Logo" Width="1.5" PointX="41.75" PointY="51.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Re_Requisicion_Preguntas_Proveedor" Width="1.5" PointX="43.75" PointY="51.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RegistroActividades" Width="1.5" PointX="45.75" PointY="51.25" />
+        <EntityTypeShape EntityType="ClusMextModel.REjecucion" Width="1.5" PointX="4.75" PointY="52.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Relacion_Usuario_Empresa" Width="1.5" PointX="13.75" PointY="52.25" />
+        <EntityTypeShape EntityType="ClusMextModel.ReqCompra" Width="1.5" PointX="47.75" PointY="29.25" />
+        <EntityTypeShape EntityType="ClusMextModel.ReqCompraDetalle" Width="1.5" PointX="47.75" PointY="36.25" />
+        <EntityTypeShape EntityType="ClusMextModel.ReqDocumentosCompra" Width="1.5" PointX="47.75" PointY="41.25" />
+        <EntityTypeShape EntityType="ClusMextModel.ReqFacturaAutorizacion" Width="1.5" PointX="47.75" PointY="45.25" />
+        <EntityTypeShape EntityType="ClusMextModel.ReqFacturaDocumentos" Width="1.5" PointX="47.75" PointY="48.25" />
+        <EntityTypeShape EntityType="ClusMextModel.ReqFacturas" Width="1.5" PointX="47.75" PointY="52.25" />
+        <EntityTypeShape EntityType="ClusMextModel.reqFacturasDetalle" Width="1.5" PointX="48.75" PointY="5.25" />
+        <EntityTypeShape EntityType="ClusMextModel.ReqStatusFactura" Width="1.5" PointX="15.75" PointY="52.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Requisicion_Autorizacion" Width="1.5" PointX="27.25" PointY="33.125" />
+        <EntityTypeShape EntityType="ClusMextModel.Requisicion_Evaluacion_Proveedor" Width="1.5" PointX="48.75" PointY="9.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Requisicion_Preguntas_Proveedor" Width="1.5" PointX="6.75" PointY="53.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RH_Documentos" Width="1.5" PointX="48.75" PointY="13.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RH_Expediente" Width="1.5" PointX="8.75" PointY="53.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RH_ExpedienteLog" Width="1.5" PointX="48.75" PointY="18.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RHCaDiasAnos" Width="1.5" PointX="48.75" PointY="24.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RhCaEventos" Width="1.5" PointX="33.75" PointY="53.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RhCalendario" Width="1.5" PointX="49.75" PointY="27.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RhCalendarioLog" Width="1.5" PointX="49.75" PointY="31.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RhCaParentesco" Width="1.5" PointX="26.75" PointY="54.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RhCaTipoCorreo" Width="1.5" PointX="49.75" PointY="35.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RhConfiguraExcel" Width="1.5" PointX="49.75" PointY="38.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RhDocumentosImpuesto" Width="1.5" PointX="49.75" PointY="42.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RHExpedienteEmpleado" Width="1.5" PointX="49.75" PointY="46.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RHExpedienteEmpleadoLog" Width="1.5" PointX="41.75" PointY="54.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RhImpuestoNomina" Width="1.5" PointX="49.75" PointY="52.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RhLogConfiguracionCorreos" Width="1.5" PointX="50.75" PointY="5.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RhLogConfiguraExcel" Width="1.5" PointX="0.75" PointY="55.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RHLogDocumentos" Width="1.5" PointX="50.75" PointY="9.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RhLogDocumentosImpuesto" Width="1.5" PointX="50.75" PointY="14.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RhLogNomina" Width="1.5" PointX="10.75" PointY="55.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RhLogNominaAdicional" Width="1.5" PointX="50.75" PointY="18.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RhLogTotalNomina" Width="1.5" PointX="12.75" PointY="56.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RhLogVacaciones" Width="1.5" PointX="50.75" PointY="22.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RhLogVacacionesAutorizacion" Width="1.5" PointX="14.75" PointY="56.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RhLogVacantes" Width="1.5" PointX="51.75" PointY="27.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RhNomina" Width="1.5" PointX="51.75" PointY="32.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RhNominaAdicional" Width="1.5" PointX="31.75" PointY="56.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RhTipoDocumento" Width="1.5" PointX="33.75" PointY="56.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RhTotalNomina" Width="1.5" PointX="51.75" PointY="40.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RhVacaciones" Width="1.5" PointX="51.75" PointY="47.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RhVacacionesAutorizacion" Width="1.5" PointX="43.75" PointY="56.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RhVacantes" Width="1.5" PointX="51.75" PointY="52.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RPlancio" Width="1.5" PointX="52.75" PointY="5.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RRHHD" Width="1.5" PointX="52.75" PointY="13.25" />
+        <EntityTypeShape EntityType="ClusMextModel.RVinculaciones" Width="1.5" PointX="52.75" PointY="19.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Temp_Actividades_Reporte" Width="1.5" PointX="26.75" PointY="57.25" />
+        <EntityTypeShape EntityType="ClusMextModel.temp_cs" Width="1.5" PointX="28.75" PointY="57.25" />
+        <EntityTypeShape EntityType="ClusMextModel.Ticket_Ti" Width="1.5" PointX="35.75" PointY="57.25" />
+        <EntityTypeShape EntityType="ClusMextModel.TipoDocCompra" Width="1.5" PointX="37.75" PointY="57.25" />
+        <AssociationConnector Association="ClusMextModel.FK_Activo_Fijo_Ca_Categoria" />
+        <AssociationConnector Association="ClusMextModel.FK_Activo_Fijo_Ca_Condicion" />
+        <AssociationConnector Association="ClusMextModel.FK_Activo_Fijo_Ca_Marca" />
+        <AssociationConnector Association="ClusMextModel.FK_Activo_Fijo_Ca_Oficinas" />
+        <AssociationConnector Association="ClusMextModel.FK_Activo_Fijo_Empresas" />
+        <AssociationConnector Association="ClusMextModel.FK_Activo_Fijo_Empresas1" />
+        <AssociationConnector Association="ClusMextModel.FK_Autorizaciones_Pago_Pagos" />
+        <AssociationConnector Association="ClusMextModel.FK_MovimientosBancosCsv_Ca_Bancos" />
+        <AssociationConnector Association="ClusMextModel.FK_Pagos_Ca_Bancos" />
+        <AssociationConnector Association="ClusMextModel.FK_Pagos_Ca_Bancos1" />
+        <AssociationConnector Association="ClusMextModel.FK_Capacidades_Servicios_Ca_Estatus_Servicios" />
+        <AssociationConnector Association="ClusMextModel.FK_Ca_FTP_Ca_Tipo_FTP" />
+        <AssociationConnector Association="ClusMextModel.FK_Documentos_Codole_Ca_FTP" />
+        <AssociationConnector Association="ClusMextModel.FK_SEDocumentosServicios_Ca_FTP" />
+        <AssociationConnector Association="ClusMextModel.FK_Capacidades_Servicios_Ca_Lapso" />
+        <AssociationConnector Association="ClusMextModel.FK_Servicios_Ca_Lapso" />
+        <AssociationConnector Association="ClusMextModel.FK_Capacidades_Servicios_Ca_Moneda" />
+        <AssociationConnector Association="ClusMextModel.FK_Comparativo_Proveedor_Ca_Moneda" />
+        <AssociationConnector Association="ClusMextModel.FK_MovimientosBancosCsv_Ca_Moneda" />
+        <AssociationConnector Association="ClusMextModel.FK_Pagos_Ca_Moneda" />
+        <AssociationConnector Association="ClusMextModel.FK_Rubros_Proyectos_Ca_Moneda" />
+        <AssociationConnector Association="ClusMextModel.FK_Servicios_Ca_Moneda" />
+        <AssociationConnector Association="ClusMextModel.FK_MovimientosBancosCsv_Ca_N_Cuenta" />
+        <AssociationConnector Association="ClusMextModel.FK_Pagos_Ca_N_Cuenta" />
+        <AssociationConnector Association="ClusMextModel.FK_Pagos_Ca_N_Cuenta1" />
+        <AssociationConnector Association="ClusMextModel.FK_Pagos_Ca_Rubros" />
+        <AssociationConnector Association="ClusMextModel.FK_Rubros_Proyectos_Ca_Rubros" />
+        <AssociationConnector Association="ClusMextModel.FK_Pagos_Ca_Solicitado_por" />
+        <AssociationConnector Association="ClusMextModel.FK_Responsable_Proyecto_Ca_Solicitado_por" />
+        <AssociationConnector Association="ClusMextModel.FK_Requisicion_Compra_Ca_Status_Requisicion" />
+        <AssociationConnector Association="ClusMextModel.FK_CODOLE_Ca_Tipo_Codole" />
+        <AssociationConnector Association="ClusMextModel.FK_Documentos_Codole_Ca_Tipo_Codole" />
+        <AssociationConnector Association="ClusMextModel.FK_Contratos_Ca_Tipo_Contrato" />
+        <AssociationConnector Association="ClusMextModel.FK_Empresas_Ca_Tipo_Empresa" />
+        <AssociationConnector Association="ClusMextModel.FK_Capacidades_Servicios_Ca_Tipo_Servicio" />
+        <AssociationConnector Association="ClusMextModel.FK_SEDirecciones_Ca_Tipo_Servicio" />
+        <AssociationConnector Association="ClusMextModel.FK_Servicios_Ca_Tipo_Servicio" />
+        <AssociationConnector Association="ClusMextModel.FK_Capacidades_Servicios_Empresas" />
+        <AssociationConnector Association="ClusMextModel.FK_Capacidades_Servicios_Empresas1" />
+        <AssociationConnector Association="ClusMextModel.FK_CaSistemasSh_Usuarios" />
+        <AssociationConnector Association="ClusMextModel.FK_CaUrlSharepoint_CaSistemasSh" />
+        <AssociationConnector Association="ClusMextModel.FK_LogSyncSharepoint_CaSistemasSh" />
+        <AssociationConnector Association="ClusMextModel.FK_CaUrlSharepoint_Empresas" />
+        <AssociationConnector Association="ClusMextModel.FK_CaUrlSharepoint_Usuarios" />
+        <AssociationConnector Association="ClusMextModel.FK_LogSyncSharepoint_CaUrlSharepoint" />
+        <AssociationConnector Association="ClusMextModel.FK_CODOLE_Empresas" />
+        <AssociationConnector Association="ClusMextModel.FK_CODOLE_Empresas1" />
+        <AssociationConnector Association="ClusMextModel.FK_CODOLE_Proyectos" />
+        <AssociationConnector Association="ClusMextModel.FK_Documentos_Codole_CODOLE" />
+        <AssociationConnector Association="ClusMextModel.FK_Comparativo_Proveedor_Empresas" />
+        <AssociationConnector Association="ClusMextModel.FK_Contratos_Empresas" />
+        <AssociationConnector Association="ClusMextModel.FK_Contratos_Proyectos" />
+        <AssociationConnector Association="ClusMextModel.FK_MovimientosBancosCsv_Csv" />
+        <AssociationConnector Association="ClusMextModel.FK_Documentos_Codole_Usuarios" />
+        <AssociationConnector Association="ClusMextModel.FK_MovimientosBancosCsv_Empresas" />
+        <AssociationConnector Association="ClusMextModel.FK_Rubros_Proyectos_Empresas" />
+        <AssociationConnector Association="ClusMextModel.FK_SEDirecciones_Empresas" />
+        <AssociationConnector Association="ClusMextModel.FK_Servicios_Empresas" />
+        <AssociationConnector Association="ClusMextModel.FK_Servicios_Empresas1" />
+        <AssociationConnector Association="ClusMextModel.FK_LogSyncSharepoint_Usuarios" />
+        <AssociationConnector Association="ClusMextModel.FK_LogSyncSharepoint_Usuarios1" />
+        <AssociationConnector Association="ClusMextModel.FK_MovimientosBancosCsv_TipoTransaccion" />
+        <AssociationConnector Association="ClusMextModel.FK_Orden_Compra_Requisicion_Compra" />
+        <AssociationConnector Association="ClusMextModel.FK_Responsable_Proyecto_Proyectos" />
+        <AssociationConnector Association="ClusMextModel.FK_Rubros_Proyectos_Proyectos" />
+        <AssociationConnector Association="ClusMextModel.FK_Requisicion_Autorizacion_Requisicion_Compra" />
+        <AssociationConnector Association="ClusMextModel.FK_Requisicion_Compra_Detalle_Requisicion_Compra" />
+        <AssociationConnector Association="ClusMextModel.FK_Requisicion_Compra_Proveedor_Requisicion_Compra" />
+        <AssociationConnector Association="ClusMextModel.FK_Responsable_Proyecto_Usuarios" />
+        <AssociationConnector Association="ClusMextModel.FK_SEDocumentosServicios_SETipoDocumento" />
+        <AssociationConnector Association="ClusMextModel.FK_Servicios_SEEstatusServicios" />
+        <AssociationConnector Association="ClusMextModel.FK_Servicios_Usuarios" />
+        <AssociationConnector Association="ClusMextModel.FK_TrvReq_TrvEstatus" />
+        <AssociationConnector Association="ClusMextModel.FK_TrvReq_TrvTransporte" />
+        <AssociationConnector Association="ClusMextModel.FK_TrvReq_TrvTurno" />
+        <AssociationConnector Association="ClusMextModel.FK_TrvRepConceptos_Ca_Moneda" />
+        <AssociationConnector Association="ClusMextModel.FK_TrvReq_Empresas" />
+        <AssociationConnector Association="ClusMextModel.FK_TrvRepConceptos_TrvConceptos" />
+        <AssociationConnector Association="ClusMextModel.FK_TrvRepConceptos_TrvReq" />
+        <AssociationConnector Association="ClusMextModel.FK_TrvReq_Usuarios" />
+        <AssociationConnector Association="ClusMextModel.FK_Servicios_SEDirecciones" />
+        <AssociationConnector Association="ClusMextModel.FK_SEDocumentosServicios_Servicios" />
+        <AssociationConnector Association="ClusMextModel.FK_TaksDocumentos_TaksAdmon" />
+        <EntityTypeShape EntityType="ClusMextModel.Manuales" Width="1.5" PointX="12" PointY="0.75" />
+        <EntityTypeShape EntityType="ClusMextModel.ManualesTipoUsuarios" Width="1.5" PointX="9.75" PointY="27.5" />
+        <AssociationConnector Association="ClusMextModel.FK_Manuales_CA_Areas" />
+        <AssociationConnector Association="ClusMextModel.FK_Manuales_ManualesTipoUsuarios" />
+        <AssociationConnector Association="ClusMextModel.FK_Manuales_Menu" />
+        <AssociationConnector Association="ClusMextModel.FK_Manuales_Usuarios" />
+        <AssociationConnector Association="ClusMextModel.FK_TaksComentarios_Usuarios1" />
+        <EntityTypeShape EntityType="ClusMextModel.InvInventario" Width="1.5" PointX="58.875" PointY="31" />
+        <EntityTypeShape EntityType="ClusMextModel.InvListaPedidos" Width="1.5" PointX="58.875" PointY="17.375" />
+        <EntityTypeShape EntityType="ClusMextModel.InvPedidos" Width="1.5" PointX="30.375" PointY="24" />
+        <EntityTypeShape EntityType="ClusMextModel.InvSolicitud" Width="1.5" PointX="61.125" PointY="16.5" />
+        <EntityTypeShape EntityType="ClusMextModel.InvSubTipo" Width="1.5" PointX="56.625" PointY="35.25" />
+        <EntityTypeShape EntityType="ClusMextModel.InvTipo" Width="1.5" PointX="54.375" PointY="29.5" />
+        <EntityTypeShape EntityType="ClusMextModel.InvUMedida" Width="1.5" PointX="56.625" PointY="31.5" />
+        <EntityTypeShape EntityType="ClusMextModel.InvEstatus" Width="1.5" PointX="4.375" PointY="21" />
+        <AssociationConnector Association="ClusMextModel.FK_InvInventario_InvSubTipo" />
+        <AssociationConnector Association="ClusMextModel.FK_InvInventario_InvTipo" />
+        <AssociationConnector Association="ClusMextModel.FK_InvInventario_InvUMedida" />
+        <AssociationConnector Association="ClusMextModel.FK_InvSolicitud_InvInventarioBeta" />
+        <AssociationConnector Association="ClusMextModel.FK_InvListaPedidos_Usuarios" />
+        <AssociationConnector Association="ClusMextModel.FK_InvSolicitud_InvListaPedidos" />
+        <AssociationConnector Association="ClusMextModel.FK_InvSolicitud_Usuarios" />
+        <AssociationConnector Association="ClusMextModel.FK_InvSubTipo_InvTipo" />
+        <EntityTypeShape EntityType="ClusMextModel.V_Proyectos" Width="1.5" PointX="54.375" PointY="38.875" />
+        <EntityTypeShape EntityType="ClusMextModel.V_Rubros_Proyecto" Width="1.5" PointX="54.375" PointY="45.75" />
+        <AssociationConnector Association="ClusMextModel.FK_Activo_Fijo_Ca_Moneda" />
+        <EntityTypeShape EntityType="ClusMextModel.NewsFeed" Width="1.5" PointX="32.625" PointY="1.25" />
+        <EntityTypeShape EntityType="ClusMextModel.TipoNoticia" Width="1.5" PointX="30.375" PointY="1.875" />
+        <AssociationConnector Association="ClusMextModel.FK_NewsFeed_TipoNoticia" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

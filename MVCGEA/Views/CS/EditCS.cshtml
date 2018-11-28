@@ -1,0 +1,64 @@
+﻿@model Model.Ca_CS
+
+
+@using (Ajax.BeginForm("Save", "CS", new AjaxOptions()
+{
+    HttpMethod = "POST",
+    UpdateTargetId = "resultado",
+    InsertionMode = InsertionMode.Replace,
+    OnBegin = "onBegin",
+    OnComplete = "onComplete",
+    OnSuccess = "onSuccess",
+    OnFailure = "onFailure"
+
+
+}))
+{
+    @Html.HiddenFor(x => x.Id_CS)
+    <h4 class="card-title">CS</h4>
+    <div class="input-group">
+        <span class="input-group-addon">
+            <i class="material-icons">fingerprint</i>
+        </span>
+        <div class="form-group">
+            <label for="CS">CS:</label>
+            @Html.TextBoxFor(x => x.CS, new { @class = "form-control", @placeholder = "CS" })
+            @Html.ValidationMessageFor(x => x.CS, null, new { @class = "badge badge-danger" })
+
+        </div>
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">
+            <i class="material-icons">perm_identity</i>
+        </span>
+        <div class="form-group">
+            <label for=@Model.Id_Usuario>Socio:</label>
+
+            @if (Model.Id_CS > 0)
+            {  @Html.DropDownListFor(x => x.Id_Usuario, new SelectList(ViewBag.Listpartner, "Id_Usuario", "Nombre", Model.Id_Usuario), new { @class = "form-control" })
+            }
+            else
+            {
+                @Html.DropDownListFor(x => x.Id_Usuario, new SelectList(ViewBag.Listpartner, "Id_Usuario", "Nombre",-1), new { @class = "form-control" })
+            }
+
+        </div>
+
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">
+            Activo:
+        </span>
+        <div class="form-group">
+
+            <div class="togglebutton">
+                <label>
+                    @Html.CheckBoxFor(x => x.Activo)
+                </label>
+            </div>
+
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-fill btn-rose">Guardar</button>
+}

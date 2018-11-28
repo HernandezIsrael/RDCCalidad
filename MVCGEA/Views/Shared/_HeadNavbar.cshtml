@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Model.Menu>
+
+
+<div class="sidebar" style="overflow-x:hidden;" data-active-color="purple" data-image=@string.Format("/Imagebar/{0}", ViewBag.image) data-background-color="black">
+
+    <div class="logo">
+        <a href="#" class="simple-text logo-mini">
+
+            <img src="~/Image/ClusmextC.svg" />
+        </a>
+        <a href="#" class="simple-text logo-normal">
+            Clusmext
+        </a>
+    </div>
+    <div class="sidebar-wrapper ps-container" style="overflow-x: hidden;">
+        <ul class="nav">
+            @foreach (var group in Model.OrderBy(x => x.Grupos_Menu.Orden).GroupBy(x => new { x.Grupos_Menu.Id_Menu_Grupo, x.Grupos_Menu.Grupo, x.Grupos_Menu.Icon }))
+            {
+                <li>
+                    <a data-toggle="collapse" href="#@group.Key.Grupo" class="collapsed" aria-expanded="false">
+                        <i class="material-icons">@group.Key.Icon</i>
+                        <p>
+                            @group.Key.Grupo
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    @if (Model.Where(x => x.Id_Menu_Grupo == group.Key.Id_Menu_Grupo).Count() > 0)
+                    {
+                        <div class="collapse" aria-expanded="false" id="@group.Key.Grupo" style="">
+                            <ul class="nav">
+                                @foreach (var item in Model.Where(x => x.Id_Menu_Grupo == group.Key.Id_Menu_Grupo).OrderBy(x => x.Orden))
+                                {
+                                    <li>
+                                        <a href=@Url.Action(@item.URL,@item.Controlador)>
+                                            <i class="material-icons">@item.Icon</i>
+                                            <span class="sidebar-mini"> @string.Format("{0}{1}", item.Menu1[0], item.Menu1[1]) </span>
+                                            <span class="sidebar-normal"> @item.Menu1 </span>
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                </li>
+            }
+            <li >
+                <a href=@Url.Action("Logout")>
+                    <i class="material-icons" style="color:tomato;">power_settings_new</i>
+                    <p>Exit</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+

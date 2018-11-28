@@ -1,0 +1,227 @@
+﻿@model  Model.TrvReq
+
+@{
+    ViewBag.Title = "Nueva solicitud";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts{
+    <script src="~/scripts/jquery.unobtrusive-ajax.js"></script>
+    <script type="text/javascript">
+
+        function ReturnToLib() {
+             window.location = '@Url.Action("LibRequest","Travel")';
+         }
+
+    </script>
+}
+
+
+<div class="nav-align-center">
+    @if (Model.IdTrvReq == 0)
+    {
+        <h3>Nueva solicitud</h3>
+    }
+    else
+    {
+        <h3>Modificar solicitud</h3>
+    }
+</div>
+
+<div class="col-sm-10 col-md-offset-1">
+    <div class="card">
+        <div class="card-header card-header-icon" data-background-color="gray" style="background:#159D93;">
+            <i class="material-icons">directions_car</i>
+        </div>
+        <div class="card-content">
+            <h4 class="card-title">Completa los datos de tu solicitud.</h4>
+
+            <button class="btn btn-primary btn-round" onclick="ReturnToLib()">
+                <i class="material-icons">reply</i> Regresar
+            </button>
+
+            <br />
+            <br />
+
+            @using (Html.BeginForm("AddRequest", "Travel", new { idDelFormulario = "frm-newRequest" }))
+            {
+
+                @Html.HiddenFor(x => x.IdTrvReq)
+
+                if (Model.Id_Empresa != -1)
+                {
+                    @Html.DropDownListFor(x => x.Id_Empresa, new SelectList(ViewBag.Empresas, "Id_Empresa", "Razon_Social", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10" })
+                    @Html.ValidationMessageFor(x => x.Id_Empresa, null, new { @class = "badge badge-danger" })
+                }
+                else
+                {
+                    @Html.DropDownListFor(x => x.Id_Empresa, new SelectList(ViewBag.Empresas, "Id_Empresa", "Razon_Social", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10" })
+                    @Html.ValidationMessageFor(x => x.Id_Empresa, "* Este campo es obligatorio", new { @class = "badge badge-danger" })
+                }
+
+                <br />
+                <br />
+
+                <div class="input-group">
+
+                    <span class="input-group-addon">
+                        <i class="material-icons">location_on</i>
+                    </span>
+
+                    @Html.TextBoxFor(x => x.Origen, new { @class = "form-control", @placeholder = "* Origen" })
+                    @Html.ValidationMessageFor(x => x.Origen, null, new { @class = "badge badge-danger" })
+
+                </div>
+
+                <div class="input-group">
+
+                    <span class="input-group-addon">
+                        <i class="material-icons">flag</i>
+                    </span>
+
+                    @Html.TextBoxFor(x => x.PaisDes, new { @class = "form-control", @placeholder = "* País destino" })
+                    @Html.ValidationMessageFor(x => x.PaisDes, null, new { @class = "badge badge-danger" })
+
+                </div>
+
+                <div class="input-group">
+
+                    <span class="input-group-addon">
+                        <i class="material-icons">terrain</i>
+                    </span>
+
+                    @Html.TextBoxFor(x => x.Destino, new { @class = "form-control", @placeholder = "* Lugar destino" })
+                    @Html.ValidationMessageFor(x => x.Destino, null, new { @class = "badge badge-danger" })
+
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">date_range</i>
+                    </span>
+                    <div class="form-group">
+
+                        @if (Model.IdTrvReq == 0)
+                        {
+                            <label class="control-label" for=@Model.FPartida>* Fecha de partida:</label>
+                            @Html.TextBoxFor(x => x.FPartida, new { @type = "date", @class = "form-control datetimepicker" })
+                            @*@Html.ValidationMessageFor(x => x.FPartida, null, new { @class = "badge badge-danger" })*@
+                        }
+                        else
+                        {
+                            <label class="control-label" for=@Model.FPartida>* Fecha de partida:</label>
+                            @Html.TextBoxFor(x => x.FPartida, new { @type = "text", @class = "form-control datetimepicker" })
+                            @*@Html.ValidationMessageFor(x => x.FPartida, null, new { @class = "badge badge-danger" })*@
+                        }
+
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">date_range</i>
+                    </span>
+                    <div class="form-group">
+
+                        @if (Model.IdTrvReq == 0)
+                        {
+                            <label class="control-label" for=@Model.FRetorno>* Fecha de retorno:</label>
+                            @Html.TextBoxFor(x => x.FRetorno, new { @type = "date", @class = "form-control datetimepicker" })
+                            @*@Html.ValidationMessageFor(x => x.FRetorno, null, new { @class = "badge badge-danger" })*@
+                        }
+                        else
+                        {
+                            <label class="control-label" for=@Model.FRetorno>* Fecha de retorno:</label>
+                            @Html.TextBoxFor(x => x.FRetorno, new { @type = "text", @class = "form-control datetimepicker" })
+                            @*@Html.ValidationMessageFor(x => x.FPartida, null, new { @class = "badge badge-danger" })*@
+                        }
+
+                    </div>
+                </div>
+
+                if (Model.IdTransporte != -1)
+                {
+
+                    @Html.DropDownListFor(x => x.IdTransporte, new SelectList(ViewBag.Transporte, "IdTransporte", "Transporte", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10" })
+                    @Html.ValidationMessageFor(x => x.IdTransporte, null, new { @class = "badge badge-danger" })
+                }
+                else
+                {
+                    @Html.DropDownListFor(x => x.IdTransporte, new SelectList(ViewBag.Transporte, "IdTransporte", "Transporte", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10" })
+                    @Html.ValidationMessageFor(x => x.IdTransporte, "* Este campo es obligatorio", new { @class = "badge badge-danger" })
+                }
+
+                if (Model.IdTrvTurno != -1)
+                {
+
+                    @Html.DropDownListFor(x => x.IdTrvTurno, new SelectList(ViewBag.Turnos, "IdTrvTurno", "Turno", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10" })
+                    @Html.ValidationMessageFor(x => x.IdTrvTurno, null, new { @class = "badge badge-danger" })
+                }
+                else
+                {
+                    @Html.DropDownListFor(x => x.IdTrvTurno, new SelectList(ViewBag.Turnos, "IdTrvTurno", "Turno", -1), new { @class = "selectpicker", data_style = "btn btn-info btn-round", data_size = "10" })
+                    @Html.ValidationMessageFor(x => x.IdTrvTurno, "* Este campo es obligatorio", new { @class = "badge badge-danger" })
+                }
+
+                <br />
+                <br />
+
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">text_fields</i>
+                    </span>
+
+                    @Html.TextAreaFor(x => x.Motivo, new { @class = "form-control", @placeholder = "* Motivo del viaje." })
+                    @Html.ValidationMessageFor(x => x.Motivo, null, new { @class = "badge badge-danger" })
+
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">transfer_within_a_station</i>
+                    </span>
+
+                    @Html.TextAreaFor(x => x.Necesidades, new { @class = "form-control", @placeholder = "* Necesidades específicas del viaje (Comida, hospedaje, acompañante, etc.)." })
+                    @Html.ValidationMessageFor(x => x.Necesidades, null, new { @class = "badge badge-danger" })
+
+                </div>
+
+                <div class="input-group">
+
+                    <span class="input-group-addon">
+                        <i class="material-icons">local_atm</i>
+                    </span>
+                    <label class="control-label" for=@Model.MViaticos> *Monto estimado:</label>
+
+                    @Html.TextBoxFor(x => x.MViaticos, "{0:0.00}", new { @class = "form-control", @type = "number" })
+                    @Html.ValidationMessageFor(x => x.MViaticos, null, new { @class = "badge badge-danger" })
+
+                </div>
+
+                <br />
+
+                <p class="text-gray">* El campo es obligatorio.</p>
+                <p class="text-gray">** Recuerda agregar posteriormente los conceptos que justifiquen el monto solicitado.</p>
+
+                if (Model.IdTrvReq > 0)
+                {
+                    if (int.Parse(Session["IdUser"].ToString()) == Model.Creadopor)
+                    {
+                        <button type="submit" class="btn btn-info btn-round">
+                            <i class="material-icons">sd_card</i> Guardar
+                        </button>
+                    }
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-info btn-round">
+                        <i class="material-icons">sd_card</i> Guardar
+                    </button>
+                }
+
+            }
+
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,48 @@
+﻿@model Model.Ca_Tipo_Pago
+
+
+@using (Ajax.BeginForm("Save", "TipoPago", new AjaxOptions()
+{
+    HttpMethod = "POST",
+    UpdateTargetId = "resultado",
+    InsertionMode = InsertionMode.Replace,
+    OnBegin = "onBegin",
+    OnComplete = "onComplete",
+    OnSuccess = "onSuccess",
+    OnFailure = "onFailure"
+
+
+}))
+{
+    @Html.HiddenFor(x => x.Id_Tipo_Pago)
+    <h4 class="card-title">Tipo de pago</h4>
+    <div class="input-group">
+        <span class="input-group-addon">
+            <i class="material-icons">class</i>
+        </span>
+        <div class="form-group">
+
+            @Html.TextBoxFor(x => x.Tipo_Pago, new { @class = "form-control", @placeholder = "Tipo de pago" })
+            @Html.ValidationMessageFor(x => x.Tipo_Pago, null, new { @class = "badge badge-danger" })
+
+        </div>
+    </div>
+
+    <div class="input-group">
+        <span class="input-group-addon">
+            Activo:
+        </span>
+        <div class="form-group">
+
+            <div class="togglebutton">
+                <label>
+                    @Html.CheckBoxFor(x => x.Activo)
+                </label>
+            </div>
+
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-fill btn-rose">Guardar</button>
+}
+

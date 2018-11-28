@@ -1,0 +1,107 @@
+﻿@model List<Model.TrvReq>
+
+@{
+    List<string> eventos = new List<string>();
+    // string aux = string.Empty;
+    // string[] colors = new string[] { "event-azure", "event-rose", "event-orange", "event-green" };
+    // foreach (var item in Model)
+    // {
+    //     aux = "{" + string.Format("title: {0} {1}. {2}, {3}", item.Usuarios.Nombre, item.Usuarios.Apellidos, item.PaisDes, item.Destino) + "," + string.Format(" start: new Date({0},{1},{2})", item.FPartida.Year, item.FPartida.Month - 1, item.FPartida.Day) + "," + string.Format(" end: new Date({0},{1},{2})", item.FRetorno.Year, item.FRetorno.Month - 1, item.FRetorno.Day) + "," + string.Format(" className: {0}", colors[new Random().Next(0,colors.Length)]) + "}";
+    //     eventos.Add(aux);
+    // }
+
+    //aux = "[";
+
+    // for (int i = 0; i< eventos.Count; i++)
+    // {
+    //     if (i != eventos.Count-1)
+    //     {
+    //         aux += eventos[i] + ",";
+    //     }
+    //     else
+    //     {
+    //         aux += eventos[i]+ "]";
+    //     }
+    // }
+
+    ViewBag.Title = "Calendar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="header text-center">
+    <h3 class="title">Calendario de viajes</h3>
+    <p class="category">
+        Proximos eventos
+    </p>
+</div>
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="card card-calendar">
+            <div class="card-content ps-child">
+                <div id="fullCalendar"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+<script type="text/javascript">
+
+        var today = new Date();
+        var y = today.getFullYear();
+        var m = today.getMonth();
+        var d = today.getDate();
+        var data;
+        var val;
+        console.log(JSON.parse($.parseHTML('@ViewBag.ListCalendar')[0].data));
+        val = JSON.parse($.parseHTML('@ViewBag.ListCalendar')[0].data);
+        $('#fullCalendar').fullCalendar({
+
+
+
+
+            viewRender: function (view, element) {
+                // We make sure that we activate the perfect scrollbar when the view isn't on Month
+                if (view.name != 'month') {
+                    $(element).find('.fc-scroller').perfectScrollbar();
+                }
+            },
+            header: {
+                left: 'title',
+                center: 'month,agendaWeek,agendaDay',
+                right: 'prev,next,today'
+            },
+
+            defaultDate: today,
+            selectable: true,
+            selectHelper: true,
+            views: {
+                month: { // name of view
+                    titleFormat: 'MMMM YYYY'
+                    // other view-specific options here
+                },
+                week: {
+                    titleFormat: " MMMM D YYYY"
+                },
+                day: {
+                    titleFormat: 'D MMM, YYYY'
+                }
+            },
+
+            // color classes: [ event-blue | event-azure | event-green | event-orange | event-rose ]
+            events: val
+            @*[
+
+                {
+                    title: '@string.Format("{0} {1}. {2}, {3}", Model[0].Usuarios.Nombre, Model[0].Usuarios.Apellidos, Model[0].PaisDes, Model[0].Destino)',
+                    start: new Date(@Model[0].FPartida.Year, @Model[0].FPartida.Month-1, @Model[0].FPartida.Day),
+                    end: new Date(@Model[0].FRetorno.Year, @Model[0].FRetorno.Month-1, @Model[0].FRetorno.Day),
+                    className: "event-azure"
+                }
+
+            ]*@
+        });
+</script>
+}
+

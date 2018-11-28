@@ -1,0 +1,130 @@
+﻿@model List<Model.Proyectos>
+<div class="card">
+    <div class="card-header card-header-icon" data-background-color="rose" style="background:#159D93">
+        <i class="material-icons">list</i>
+
+    </div>
+    <div class="card-content">
+        <h4 class="card-title">
+            Proyectos
+        </h4>
+        <div class="toolbar">
+            <!--        Here you can write extra buttons/actions for the toolbar              -->
+        </div>
+        <div class="material-datatables">
+            <table id="datatables" class="table">
+                <thead class="text-danger">
+                    <tr>
+                        <th>
+                            <a href="#" onclick="LlamrPr(0)" class="btn btn-simple btn-success btn-icon new" data-toggle="modal" data-target="#myModal">
+                                Nuevo
+                            </a>
+
+                        </th>
+                        <th>Proyecto</th>
+
+                        <th>Codigo</th>
+                        <th>Programa</th>
+                        <th>Fecha fin</th>
+                        <th>Banco</th>
+                        <th>Cuenta</th>
+                        <th>Financiamiento</th>
+                        <th>Moneda</th>
+                        <th>Activo</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="text-primary" >
+                                <a href="#" onclick="LlamrPr(0)" class="btn btn-simple btn-success btn-icon new" data-toggle="modal" data-target="#myModal">
+                                    <i class="material-icons" rel="tooltip" data-placement="right" title="Agregar">add</i>
+                                </a>
+                                <a href="#" onclick="LlamrPr(@item.Id_Proyecto)" class="btn btn-simple btn-warning btn-icon edit" data-toggle="modal" data-target="#myModal">
+                                    <i class="material-icons" rel="tooltip" data-placement="right" title="Modificar">create</i>
+
+                                </a>
+                              
+
+                            </td>
+                            <td style="width:20%" >@item.Proyecto</td>
+
+                            <td>@item.Codigo</td>
+                            <td>@item.Ca_Instituciones.Institucion</td>
+                            <td>
+                                @if (!item.Fecha_Fin.HasValue)
+                                {
+                                   
+                                }
+                                else
+                                { @item.Fecha_Fin.Value.ToShortDateString();
+                                }
+
+                            </td>
+                            <td>@item.Ca_Bancos.Banco</td>
+                            <td>@item.Ca_N_Cuenta1.N_Cuenta</td>
+                            <td>
+                                @item.Financiamiento.Value.ToString("C")
+                               
+                            </td>
+                            <td>@item.Ca_Moneda.Moneda</td>
+                            <td >
+                                <div class="togglebutton">
+                                    <label>
+
+                                        @Html.CheckBoxFor(modelitem => item.Activo, new { Value = item.Activo, disabled = "disabled" })
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#datatables').DataTable({
+                "order": [[1, "asc"]],
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "Todos"]
+                ],
+                responsive: false,
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Buscar ...",
+                    "paginate": {
+                        "previous": "Anterior",
+                        "next": "Siguiente",
+                        "first": "Inicial",
+                        "last": "Ultimo",
+
+                    },
+                    "lengthMenu": "Mostrando _MENU_ registros",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                }
+
+            });
+
+
+            var table = $('#datatables').DataTable();
+
+
+            $('.card .material-datatables label').addClass('form-group');
+
+
+
+
+        });
+
+
+</script>

@@ -1,0 +1,109 @@
+﻿@model List<Model.Manuales>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-icon" data-background-color="gray" style="background:#159D93;">
+                <i class="material-icons">
+                    import_contacts
+                </i>
+            </div>
+            <div class="card-content">
+                <h4 class="card-title">Manuales de los sistemas de RDC</h4>
+                <div class="toolbar">
+                    <!--        Here you can write extra buttons/actions for the toolbar              -->
+                </div>
+                <a href="@Url.Action("FileRegistration","Manuales")" class="btn btn-primary btn-round">Crear manual</a>
+                <div class="material-datatables">
+
+                    <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100" style="width:100%">
+                        <thead class="text-info">
+                            <tr>
+                                <th class="disabled-sorting text-center">Editar</th>
+                                <th class="text-center">Documento</th>
+                                <th class="text-center">Descripción</th>
+                                <th class="text-center">Área al que va dirigido</th>
+                                <th class="text-center">Sistema al que aplca</th>
+                                <th class="text-center">Tipo de usuario al que va dirigido</th>
+                                <th class="text-center">Fecha de pubilcación</th>
+                                <th class="text-center">Versión más reciente</th>
+                                <th class="text-center">Creado por</th>
+                                <th class="text-center">Descargar</th>
+                            </tr>
+                        </thead>
+                        <tfoot class="text-info">
+                            <tr>
+                                <th class="text-center">Editar</th>
+                                <th class="text-center">Documento</th>
+                                <th class="text-center">Descripción</th>
+                                <th class="text-center">Área al que va dirigido</th>
+                                <th class="text-center">Sistema al que aplca</th>
+                                <th class="text-center">Tipo de usuario al que va dirigido</th>
+                                <th class="text-center">Fecha de pubilcación</th>
+                                <th class="text-center">Versión más reciente</th>
+                                <th class="text-center">Creado por</th>
+                                <th class="text-center">Descargar</th>
+                            </tr>
+                        </tfoot>
+
+                        <tbody>
+                            @foreach (var row in Model)
+                            {
+                                <tr>
+                                    <td class="text-center">
+                                        <a href="@Url.Action("FileRegistration", "Manuales", new { id = row.IdManual })" class="btn btn-simple btn-info btn-icon view">
+                                            <i class="material-icons">
+                                                border_color
+                                            </i>
+                                        </a>
+                                    </td>
+                                    <td class="text-center">
+                                        @row.Nombre
+                                    </td>
+                                    <td class="text-center" style="width:20%">
+                                        @row.Descripcion
+                                    </td>
+                                    <td class="text-center">
+                                        @row.CA_Areas.Nombre_Area
+                                    </td>
+                                    <td class="text-center">
+                                        @row.Menu.Menu1
+                                    </td>
+                                    <td class="text-center">
+                                        @row.ManualesTipoUsuarios.TipoUsuario
+                                    </td>
+                                    <td class="text-center">
+                                        @row.FAlta.ToString("dd MMMM yyyy")
+                                    </td>
+                                    <td class="text-center">
+                                        @row.FActualizacion.ToString("dd MMMM yyyy")
+                                    </td>
+                                    <td class="text-center">
+                                        @string.Format("{0} {1}", row.Usuarios.Nombre, row.Usuarios.Apellidos)
+                                    </td>
+                                    <td class="text-center" rel="tooltip" data-placement="top" title="@string.Format("{0}", (row.NombreVirtual != "0")?"Descargar":"Aún no se ha cargado este archivo")">
+                                        <a href="@string.Format("{0}", (row.NombreVirtual == "0" ? "#" : Url.Action("Download", "Manuales", new { name = row.NombreVirtual, name2= row.NombreDoc })))">
+                                            <i class="material-icons @string.Format("{0}", (row.NombreVirtual == "0") ? "text-rose" : "text-info")">
+                                                file_copy
+                                            </i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+
+                </div>
+            </div>
+            <!-- end content-->
+        </div>
+        <!--  end card  -->
+    </div>
+</div>
+
+

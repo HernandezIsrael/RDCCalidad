@@ -1,0 +1,45 @@
+﻿@model Model.CaTipoRProcesos
+@using (Ajax.BeginForm("Save", "TipoProc", new AjaxOptions()
+{
+    HttpMethod = "POST",
+    UpdateTargetId = "resultado",
+    InsertionMode = InsertionMode.Replace,
+    OnBegin = "onBegin",
+    OnComplete = "onComplete",
+    OnSuccess = "onSuccess",
+    OnFailure = "onFailure"
+
+
+}))
+{
+    @Html.HiddenFor(x => x.IdTipoRProcesos)
+    <h4 class="card-title">Tipo de documento proceso.</h4>
+    <div class="input-group">
+        <span class="input-group-addon">
+            <i class="material-icons">book</i>
+        </span>
+        <div class="form-group">
+
+            @Html.TextBoxFor(x => x.TipoRProcesos, new { @class = "form-control", @placeholder = "Tipo de documento." })
+            @Html.ValidationMessageFor(x => x.TipoRProcesos, null, new { @class = "badge badge-danger" })
+
+        </div>
+    </div>
+
+    <div class="input-group">
+        <span class="input-group-addon">
+            Activo:
+        </span>
+        <div class="form-group">
+
+            <div class="togglebutton">
+                <label>
+                    @Html.CheckBoxFor(x => x.Activo)
+                </label>
+            </div>
+
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-fill btn-rose">Guardar</button>
+}
